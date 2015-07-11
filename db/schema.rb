@@ -162,6 +162,8 @@ ActiveRecord::Schema.define(version: 20150711202922) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "Profile_Image_Url"
+    t.string   "user_name"
+    t.string   "blog"
   end
 
   add_foreign_key "github_repos", "github_users"
