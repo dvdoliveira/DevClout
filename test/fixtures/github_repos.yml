@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  github_user_id: 
+  gh_owner_name: MyString
+  owner_id: MyString
+  name: MyString
+  full_name: MyString
+  private: false
+  html_url: MyString
+  description: MyString
+  fork: false
+  url: MyString
+  gh_created_at: 2015-07-11
+  gh_updated_at: 2015-07-11
+  gh_pushed_at: 2015-07-11
+  git_url: MyString
+  ssh_url: 
+  svn_url: MyString
+  homepage: MyString
+  size: 1
+  stars_count: 1
+  watchers_count: 1
+  forks_count: 1
+  language: MyString
+  has_issues: false
+  has_downloads: false
+  mirror_url: MyString
+  open_issues_count: 1
+  watchers: 1
+  default_branch: MyString
+  created_at: 2015-07-11 18:37:37
+  updated_at: 2015-07-11 18:37:37
+
+two:
+  github_user_id: 
+  gh_owner_name: MyString
+  owner_id: MyString
+  name: MyString
+  full_name: MyString
+  private: false
+  html_url: MyString
+  description: MyString
+  fork: false
+  url: MyString
+  gh_created_at: 2015-07-11
+  gh_updated_at: 2015-07-11
+  gh_pushed_at: 2015-07-11
+  git_url: MyString
+  ssh_url: 
+  svn_url: MyString
+  homepage: MyString
+  size: 1
+  stars_count: 1
+  watchers_count: 1
+  forks_count: 1
+  language: MyString
+  has_issues: false
+  has_downloads: false
+  mirror_url: MyString
+  open_issues_count: 1
+  watchers: 1
+  default_branch: MyString
+  created_at: 2015-07-11 18:37:37
+  updated_at: 2015-07-11 18:37:37

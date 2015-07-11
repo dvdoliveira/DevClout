@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  login: MyString
+  gh_id: MyString
+  avatar_url: MyString
+  gravatar_id: MyString
+  url: MyString
+  html_url: MyString
+  followers_url: MyString
+  gists_url: MyString
+  subscriptions_url: MyString
+  organizations_url: MyString
+  repos_url: MyString
+  events_url: MyString
+  received_events_url: 
+  type: 
+  site_admin: MyString
+  name: MyString
+  company: MyString
+  blog: MyString
+  location: MyString
+  email: MyString
+  hireable: false
+  public_repos: 1
+  public_gists: 1
+  followers: 1
+  following: 1
+  gh_created: 2015-07-11
+  gh_updated: 2015-07-11
+  created_at: 2015-07-11 15:43:42
+  updated_at: 2015-07-11 15:43:42
+
+two:
+  user_id: 
+  login: MyString
+  gh_id: MyString
+  avatar_url: MyString
+  gravatar_id: MyString
+  url: MyString
+  html_url: MyString
+  followers_url: MyString
+  gists_url: MyString
+  subscriptions_url: MyString
+  organizations_url: MyString
+  repos_url: MyString
+  events_url: MyString
+  received_events_url: 
+  type: 
+  site_admin: MyString
+  name: MyString
+  company: MyString
+  blog: MyString
+  location: MyString
+  email: MyString
+  hireable: false
+  public_repos: 1
+  public_gists: 1
+  followers: 1
+  following: 1
+  gh_created: 2015-07-11
+  gh_updated: 2015-07-11
+  created_at: 2015-07-11 15:43:42
+  updated_at: 2015-07-11 15:43:42
