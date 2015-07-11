@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  score: 1
+  score_type: MyString
+  created_at: 2015-07-11 16:34:48
+
+two:
+  user_id: 
+  score: 1
+  score_type: MyString
+  created_at: 2015-07-11 16:34:48
