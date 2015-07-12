@@ -51,6 +51,8 @@ GEM
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
+    chart-js-rails (0.0.9)
+      railties (> 3.1)
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
@@ -69,6 +71,9 @@ GEM
     execjs (2.5.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    foundation-rails (5.5.2.1)
+      railties (>= 3.1.0)
+      sass (>= 3.3.0, < 3.5)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     hashie (3.4.2)
@@ -185,8 +190,10 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  chart-js-rails
   coffee-rails (~> 4.1.0)
   dotenv-rails
+  foundation-rails
   jbuilder (~> 2.0)
   jquery-rails
   octokit (~> 3.0)

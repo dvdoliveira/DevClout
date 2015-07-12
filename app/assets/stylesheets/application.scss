@@ -1,0 +1,195 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require foundation_and_overrides
+
+ */
+
+ /*THIS FILE INCLUDES ALL STYLING FOR BASIC ASSESTS SUCH AS HEADERS/LINKS/BUTTONS/TEXT-ALIGNING/RESPONSIVE MEDIA*/
+
+ body h1,h2,h3,h4,h5,h6,p,ul,ol,li,div,a, span{
+     font-family: 'lato', 'helvetica', 'arial', 'sans-serif';
+     color: #222222;
+     font-weight: 300;
+ }
+ body{
+     /** Document Font-Size for rem **/
+     font-size:16px;
+     font-weight: 300;
+ }
+
+ .main{
+     margin:0px 50px;
+     @media (max-width: 480px){
+        margin: 0px 20px;
+     }
+ }
+
+ /****** font *********/
+ h1,h2,h3,h4,p{
+     padding-bottom:15px;
+ }
+ h1{
+     font-size: 4.375rem;
+     line-height:5rem;
+ }
+
+ h2{
+     font-size: 2.5rem;
+     line-height:3rem;
+     text-transform: uppercase;
+     letter-spacing: .3rem;
+ }
+ h3{
+     font-size: 1.875rem;
+     line-height: 2.5rem;
+     margin-bottom:10px;
+ }
+ h4{
+     font-size: 1.688rem;
+     line-height: 2.1rem;
+ }
+ p{
+     font-size: 1rem;
+     line-height: 1.5rem;
+ }
+
+     /** Mobile View When window is smaller 767px  **/
+ @media (max-width: 767px){
+     h1{
+         font-size: 3.125rem;
+         line-height:3.625rem;
+     }
+     h2{
+         font-size: 1.875rem;
+         line-height: 2.375rem;
+         text-transform: uppercase;
+         letter-spacing: .3rem;
+     }
+     h3{
+         font-size: 1.563rem;
+         line-height: 2.063rem;
+     }
+     h4{
+         font-size: 1.375rem;
+         line-height: 1.575rem;
+     }
+ }
+
+ /************ BUTTONS + LINKS ****************/
+ a{
+     color:#2c87c1;
+     text-decoration: underline;
+ }
+ a:hover{
+     color:#2c87c1;
+     text-decoration: none;
+ }
+ a.secondary{
+     color:#8abf67;
+     text-decoration: underline;
+ }
+ a.secondary:hover{
+     color:#719c54;
+     text-decoration: none;
+ }
+ a.btn {
+     display: inline-block;
+     -webkit-border-radius: 3;
+     -moz-border-radius: 3;
+     border-radius: 3px;
+     color: #ffffff;
+     font-size: 20px;
+     padding: 20px 0px;
+     width:250px;
+     text-align: center;
+     text-decoration: none;
+     background: #8abf67;
+     margin-bottom:15px;
+ }
+
+ .btn:hover {
+     text-decoration: none;
+     background: #719c54;
+ }
+ a.btn-secondary{
+     background: #2c87c1;
+ }
+ a.btn-secondary:hover{
+     background: #287aae;
+ }
+
+ /************ LIST /************/
+ ul, ol{
+     margin-left:40px;
+ }
+
+ ul li{
+     list-style-type: disc;
+ }
+
+ ol li{
+     list-style-type: decimal;
+ }
+ /************ MISC ****************/
+ hr{
+   border-top: 1px solid #ccc;
+   margin: 0px;
+ }
+ .inline-desktop{
+     display:inline;
+ }
+ .text-align-left{
+     text-align: left;
+ }
+ .text-align-center{
+     text-align: center;
+ }
+ .text-align-right{
+     text-align: right;
+ }
+ .spacer-primary{
+     height:60px;
+ }
+ .spacer-secondary{
+     height:40px;
+ }
+ .spacer-teritary{
+     height:30px;
+ }
+
+ /** Mobile View When window is smaller 767px  **/
+ @media (max-width: 767px){
+     .inline-desktop{
+         display:block;
+     }
+     .spacer-primary{
+         height:40px;
+     }
+     .spacer-secondary{
+         height:30px;
+     }
+     .spacer-teritary{
+         height:30px;
+     }
+     .text-mobile-align-left{
+         text-align: left;
+     }
+     .text-mobile-align-center{
+         text-align: center;
+     }
+     .text-mobile-align-right{
+         text-align: right;
+     }
+ }
