@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'stack_users/auth'
+
   root 'static_pages#home'
 
   get 'help' => 'static_pages#help'
