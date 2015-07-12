@@ -1,0 +1,6 @@
+<h2>Hello,
+  <% if @user %>
+    <%= @user.full_name%>
+  <% else %>
+    <span style="color: red">Welcome to DevStack New User</span>
+  <% end %>
