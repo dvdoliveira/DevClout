@@ -2,12 +2,7 @@
 <div class="homepage-hero-module">
         <div class="video-container">
             <div class="filter"></div>
-            <%= video_tag(["Hello-World.webm"], poster: "Hello-World.jpg", :autobuffer => true, :autoplay => true, :loop => true,) %>
-            <!-- <video autoplay poster="assets/images/Hello-World.jpg" loop>
-                <% video_tag(["Hello-World.webm", "Hello-World.mp4"]) %>
-                <source src="assets/images/Hello-World.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
-                <source src="/images/Hello-World.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
-            </video> -->
+            <%= video_tag(["Hello-World.webm", "Hello-World.mp4"], poster: "Hello-World.jpg", :autobuffer => true, :autoplay => true, :loop => true,) %>
             <div class="title">
                 <h1>DevStack</h1>
                 <%= image_tag("beta.png", class: "beta-img") %>
@@ -27,7 +22,7 @@
                 <h2>Thousands of people already use DevStack</h2>
                 <div class="spacer-secondary"></div>
                 <div class="large-9 columns">
-                    <canvas id="myChart"></canvas>
+                    <canvas id="myChart" class="chartset1"></canvas>
                 </div>
                 <!-- <div class="medium-1 columns"></div> -->
                 <div class="large-3 columns side-text">
@@ -47,7 +42,7 @@
     <div class="spacer-primary"></div>
 
     <div class="homepage-section-module">
-        <div class="row mod2">
+        <div class="row">
             <h2>Review your own analytics & compare</h2>
             <div class="spacer-secondary"></div>
             <div class="medium-4 columns text-align-center chartset2-animation-column">

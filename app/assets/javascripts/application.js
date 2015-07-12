@@ -14,8 +14,8 @@
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
-//= require_tree .
 //= require Chart
+//= require_tree .
 
 $(function(){
     $(document).foundation();
@@ -131,7 +131,7 @@ $(function(){
     }
 
     $(window).scroll(function() {
-        if (isScrolledIntoView('#myChart')) {
+        if (isScrolledIntoView('.chartset1')) {
             if (myChartinView) { return; }
                 myChartinView = true;
                 var ctx = $("#myChart").get(0).getContext("2d");
