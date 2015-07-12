@@ -7,6 +7,11 @@ Rails.application.routes.draw do
 
   get 'contact' => 'static_pages#contact'
 
+  get '/signin' => 'sessions#new', :as => :signin
+  get '/auth/:provider/callback', to: 'sessions#create'
+
+  get '/auth/failure', to: 'sessions#failure'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
