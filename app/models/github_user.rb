@@ -1,4 +1,4 @@
 class GithubUser < ActiveRecord::Base
   belongs_to :user
-  has_many :github_repo
+  has_many :github_repos
 end
