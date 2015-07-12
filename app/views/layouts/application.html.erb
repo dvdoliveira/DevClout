@@ -6,14 +6,36 @@
 
     <title>DevStack | <%= yield(:title) %></title>
 
-    <%= stylesheet_link_tag    "application", media: 'all', 'data-turbolinks-track' => true  %>
+    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Lato:100,200,300,400,700" %>
+    <%= stylesheet_link_tag "http://cdn.jsdelivr.net/jquery.slick/1.5.0/slick.css" %>
+    <%= stylesheet_link_tag "http://cdn.jsdelivr.net/jquery.slick/1.5.0/slick-theme.css" %>
+    <%= stylesheet_link_tag "http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" %>
+    <%= stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track' => true  %>
+
     <%= javascript_include_tag "vendor/modernizr" %>
+
+    <%= javascript_include_tag "http://cdn.jsdelivr.net/jquery.slick/1.5.0/slick.min.js" %>
     <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
+
   </head>
 
   <body>
-      <h1>Hello world</h1>
+      <nav class="top-bar" data-topbar role="navigation">
+          <ul class="title-area">
+              <li class="name">
+                  <h2><a href="#">DevStack</a></h2>
+              </li>
+              <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+          </ul>
+
+          <section class="top-bar-section">
+            <ul class="right">
+              <li class="name" style="list-style-type: none;"><h2><a href="#">Contact Us</a></h2></li>
+            </ul>
+          </section>
+      </nav>
+
     <%= yield %>
 
   </body>

@@ -1,7 +1,163 @@
 <% provide(:title, "Home") %>
-<h1>DevStack - Home</h1>
-<p>This is the home page for the DevStack project</p>
-<br>
-<a href="/help">Help</a> | 
-<a href="/about">About</a> | 
-<a href="/contact">Contact</a>
+<div class="homepage-hero-module">
+        <div class="video-container">
+            <div class="filter"></div>
+            <%= video_tag(["Hello-World.webm"], poster: "Hello-World.jpg", :autobuffer => true, :autoplay => true, :loop => true,) %>
+            <!-- <video autoplay poster="assets/images/Hello-World.jpg" loop>
+                <% video_tag(["Hello-World.webm", "Hello-World.mp4"]) %>
+                <source src="assets/images/Hello-World.webm" type="video/webm" />Your browser does not support the video tag. I suggest you upgrade your browser.
+                <source src="/images/Hello-World.mp4" type="video/mp4" />Your browser does not support the video tag. I suggest you upgrade your browser.
+            </video> -->
+            <div class="title">
+                <h1>DevStack</h1>
+                <%= image_tag("beta.png", class: "beta-img") %>
+
+                <h2>Compare yourself with your friends</h2>
+                <a class="btn" href="#">I'm a Developer</a>
+                <a class="btn btn-secondary" href="#">I'm a Recruiter</a>
+                <a href="#main" class="down-arrow hide-for-small-down"></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="main" class="main" name="content">
+        <div class="spacer-primary"></div>
+        <div class="homepage-section-module">
+            <div class="row">
+                <h2>Thousands of people already use DevStack</h2>
+                <div class="spacer-secondary"></div>
+                <div class="large-9 columns">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <!-- <div class="medium-1 columns"></div> -->
+                <div class="large-3 columns side-text">
+                    <h3> We are growing fast!</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt leo ex, quis congue elit feugiat a. Sed scelerisque congue dolor, sed cursus neque ornare at. Fusce ac mauris nunc. Vestibulum nec eleifend erat.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt leo ex, quis congue elit feugiat a. Sed scelerisque congue dolor, sed cursus neque ornare at. Fusce ac mauris nunc. Vestibulum nec eleifend erat.</p>
+                </div>
+            </div>
+            <div class="spacer-primary hide-for-medium-down"></div>
+            <div class="text-align-center">
+                <a class="btn" href="#">Get Started</a>
+            </div>
+        </div>
+        <div class="spacer-primary"></div>
+        <hr/>
+
+    <div class="spacer-primary"></div>
+
+    <div class="homepage-section-module">
+        <div class="row mod2">
+            <h2>Review your own analytics & compare</h2>
+            <div class="spacer-secondary"></div>
+            <div class="medium-4 columns text-align-center chartset2-animation-column">
+                <h3>Subtitle 1</h3>
+                <canvas id="myPie1" class="chartset2"></canvas>
+            </div>
+            <div class="medium-4 columns text-align-center chartset2-animation-column">
+                <h3 class="chartset-scroll">Subtitle 2</h3>
+                <canvas id="myPie3" class="chartset2"></canvas>
+            </div>
+            <div class="medium-4 columns text-align-center chartset2-animation-column">
+                <h3>Subtitle 3</h3>
+                <canvas id="myPie2" class="chartset2"></canvas>
+            </div>
+        </div>
+        <div class="spacer-primary "></div>
+        <div class="text-align-center">
+            <a class="btn" href="#">Get Started</a>
+        </div>
+        <div class="spacer-primary"></div>
+        <hr/>
+    </div>
+    <div class="spacer-primary"></div>
+
+    <div class="homepage-section-module">
+        <div class="row">
+            <h2>Developers love us</h2>
+            <div class="medium-12 columns">
+                <div class="reviews">
+          	    <!-- Review Item -->
+          	    <div class="review">
+          	      <div class="review-photo">
+          	        <img src="https://secure.gravatar.com/avatar/5bd6cfbcaa40b78971e9a89f29e9b537.jpg?s=192&d=https%3A%2F%2Fslack.global.ssl.fastly.net%2F3654%2Fimg%2Favatars%2Fava_0006.png" alt="David Photo" />
+          	      </div>
+          	      <div class="review-comment">
+          	        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel enim et nibh interdum efficitur. Mauris fermentum eros orci, id venenatis purus maximus non. Proin sit amet purus tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel enim et nibh interdum efficitur. Mauris fermentum eros orci, id venenatis purus maximus non. Proin sit amet purus tortor.
+          	      </div>
+          	      <div class="review-name">
+          	        <span class="name">Deivide Oliveira</span>
+          	      </div>
+          	      <div class="review-twitter">
+          	        <span class="handle"><a href="#">@DVDOliverira</a></span>
+          	      </div>
+          	    </div>
+          	    <!-- Review Item -->
+          	    <!-- Review Item -->
+          	    <div class="review">
+          	      <div class="review-photo">
+          	        <img src="https://secure.gravatar.com/avatar/5bd6cfbcaa40b78971e9a89f29e9b537.jpg?s=192&d=https%3A%2F%2Fslack.global.ssl.fastly.net%2F3654%2Fimg%2Favatars%2Fava_0006.png" alt="David Photo" />
+          	      </div>
+          	      <div class="review-comment">
+          	        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel enim et nibh interdum efficitur. Mauris fermentum eros orci, id venenatis purus maximus non. Proin sit amet purus tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel enim et nibh interdum efficitur. Mauris fermentum eros orci, id venenatis purus maximus non. Proin sit amet purus tortor.
+          	      </div>
+          	      <div class="review-name">
+          	        <span class="name">Deivide Oliveira</span>
+          	      </div>
+          	      <div class="review-twitter">
+          	        <span class="handle"><a href="#">@DVDOliverira</a></span>
+          	      </div>
+          	    </div>
+          	    <!-- Review Item -->
+          	    <!-- Review Item -->
+          	    <div class="review">
+          	      <div class="review-photo">
+          	        <img src="https://secure.gravatar.com/avatar/5bd6cfbcaa40b78971e9a89f29e9b537.jpg?s=192&d=https%3A%2F%2Fslack.global.ssl.fastly.net%2F3654%2Fimg%2Favatars%2Fava_0006.png" alt="David Photo" />
+          	      </div>
+          	      <div class="review-comment">
+          	        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel enim et nibh interdum efficitur. Mauris fermentum eros orci, id venenatis purus maximus non. Proin sit amet purus tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel enim et nibh interdum efficitur. Mauris fermentum eros orci, id venenatis purus maximus non. Proin sit amet purus tortor.
+          	      </div>
+          	      <div class="review-name">
+          	        <span class="name">Deivide Oliveira</span>
+          	      </div>
+          	      <div class="review-twitter">
+          	        <span class="handle"><a href="#">@DVDOliverira</a></span>
+          	      </div>
+          	    </div>
+          	    <!-- Review Item -->
+          	    <!-- Review Item -->
+          	    <div class="review">
+          	      <div class="review-photo">
+          	        <img src="https://secure.gravatar.com/avatar/5bd6cfbcaa40b78971e9a89f29e9b537.jpg?s=192&d=https%3A%2F%2Fslack.global.ssl.fastly.net%2F3654%2Fimg%2Favatars%2Fava_0006.png" alt="David Photo" />
+          	      </div>
+          	      <div class="review-comment">
+          	        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel enim et nibh interdum efficitur. Mauris fermentum eros orci, id venenatis purus maximus non. Proin sit amet purus tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel enim et nibh interdum efficitur. Mauris fermentum eros orci, id venenatis purus maximus non. Proin sit amet purus tortor.
+          	      </div>
+          	      <div class="review-name">
+          	        <span class="name">Deivide Oliveira</span>
+          	      </div>
+          	      <div class="review-twitter">
+          	        <span class="handle"><a href="#">@DVDOliverira</a></span>
+          	      </div>
+          	    </div>
+          	    <!-- Review Item -->
+          	  </div>
+            </div>
+            <div class="spacer-primary"></div>
+            <div class="text-mobile-align-center">
+                <a class="btn" href="#">Get Started</a>
+            </div>
+        </div>
+        <div class="spacer-primary"></div>
+    </div>
+</div>
+
+
+
+
+<footer>
+    <span style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;DevStack Copyright &copy; 2015</span>
+    <a href="/help">Help</a> |
+    <a href="/about">About</a> |
+    <a href="/contact">Contact</a>
+</footer>
