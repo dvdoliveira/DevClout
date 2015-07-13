@@ -5,5 +5,6 @@ class StackUsersController < ApplicationController
 
   def create
     @auth = request.env["omniauth.auth"]
+    binding.pry
   end
 end
