@@ -17,13 +17,14 @@
 //= require Chart
 //= require_tree .
 
-$(function(){
+$(document).on("ready page:load", function(){
     $(document).foundation();
     $(".down-arrow").click(function() {
         $('html, body').animate({
             scrollTop: $("#main").offset().top
         }, 1500);
     });
+    
     $('.reviews').slick({
       dots: true,
       infinite: true,
@@ -124,8 +125,8 @@ $(function(){
         var viewportBottom = viewportTop + $(window).height();
 
         // Get the position of the element on the page.
-        var elemTop = Math.round( $elem.offset().top );
-        var elemBottom = elemTop + $elem.height();
+        var elemTop = Math.round( $(elem).offset().top );
+        var elemBottom = elemTop + $(elem).height();
 
         return ((elemTop < viewportBottom) && (elemBottom > viewportTop));
     }
@@ -153,7 +154,7 @@ $(function(){
     });
 
     /** testing for profile page **/
-    var ctx5 = $("#myPie4").get(0).getContext("2d");
+    var ctx5 = $("#myPie5").get(0).getContext("2d");
     var myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
 
     var ctx6 = $("#myPie6").get(0).getContext("2d");
