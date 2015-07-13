@@ -1,11 +1,12 @@
 <% provide(:title, "Home") %>
-<div class="homepage-hero-module">
+<div class="homepage-hero-module <%= controller_name%> <%= action_name %>">
         <div class="video-container">
             <div class="filter"></div>
             <%= video_tag(["Hello-World.webm", "Hello-World.mp4"], poster: "Hello-World.jpg", :autobuffer => true, :autoplay => true, :loop => true,) %>
             <div class="title">
                 <h1>DevStack</h1>
                 <%= image_tag("beta.png", class: "beta-img") %>
+
                 <h2>Compare yourself with your friends</h2>
                 <a class="btn" href="/signin">I'm a Developer</a>
                 <a class="btn btn-secondary" href="#">I'm a Recruiter</a>

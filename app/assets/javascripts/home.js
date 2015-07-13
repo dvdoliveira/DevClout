@@ -1,4 +1,5 @@
-$(".static_pages.home").ready(function(){
+$(function(){
+  if ($(".static_pages.home").length == 0) return;
   $(".down-arrow").click(function() {
         $('html, body').animate({
             scrollTop: $("#main").offset().top

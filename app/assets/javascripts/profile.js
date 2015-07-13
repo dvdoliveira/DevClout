@@ -1,4 +1,5 @@
-$(".pages.contact").ready(function(){
+$(function(){
+  if ($(".sessions.profile").length == 0) return;
   Chart.defaults.global.responsive = true;
   var Line = {}
   var linedata = {
