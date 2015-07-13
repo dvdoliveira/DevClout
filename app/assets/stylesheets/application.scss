@@ -222,3 +222,13 @@
     text-decoration: none;
     color: #222222;
  }
+
+/** Solving Menu Problem for Profile Page **/
+@media (max-width: 640px){
+    nav{
+        z-index:1;
+    }
+    .profile{padding-top:45px;
+        z-index:-1
+    }
+}
