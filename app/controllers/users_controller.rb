@@ -9,4 +9,9 @@ before_filter :authenticate_user!
   def profile
   end
 
+  def logout
+    session.clear
+    redirect root_path
+  end
+
 end
