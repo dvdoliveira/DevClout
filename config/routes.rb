@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'contact' => 'static_pages#contact'
 
   get '/signin' => 'sessions#new', :as => :signin
+  get '/stackoverflow' => 'stack_users#new', :as => :stackoverflow
   get '/auth/:provider/callback', to: 'sessions#create'
 
   get '/auth/failure', to: 'sessions#failure'
