@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'stack_users/auth'
+
   root 'static_pages#home'
 
   get 'help' => 'static_pages#help'
@@ -7,10 +9,12 @@ Rails.application.routes.draw do
 
   get 'contact' => 'static_pages#contact'
 
-  get 'profile' => 'static_pages#profile'
+  get '/signin' => 'sessions#new', :as => :signin
+  get '/auth/:provider/callback', to: 'sessions#create'
 
-  get 'leaderboard' => 'static_pages#leaderboard'
+  get '/auth/failure', to: 'sessions#failure'
 
+  get 'profile', to: 'sessions#profile', :as => :profile
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
