@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
   get '/signin' => 'sessions#new', :as => :signin
   get '/stackoverflow' => 'stack_users#new', :as => :stackoverflow
-  get '/auth/:provider/callback', to: 'sessions#create'
+  get '/auth/stackexchange/callback', to: 'stack_users#create'
+  get '/auth/github/callback', to: 'sessions#create'
 
   get '/auth/failure', to: 'sessions#failure'
 
