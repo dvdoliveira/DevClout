@@ -130,6 +130,14 @@
      background: #287aae;
  }
 
+ a.black{
+    color: #222222;
+    text-decoration: underline;
+    &:hover{
+        ext-decoration: none;
+    }
+ }
+
  /************ LIST /************/
  ul, ol{
      margin-left:40px;
@@ -192,4 +200,25 @@
      .text-mobile-align-right{
          text-align: right;
      }
+ }
+
+ .fa-long-arrow-down{
+    color:#e12c2b;
+ }
+  .fa-long-arrow-up{
+    color:#8ABF67;
+ }
+ .fa-question-circle{
+    color:#cdcdcd;
+    cursor: pointer;
+    padding-left:10px;
+ }
+ .has-tip, .has-tip:hover{
+    border-bottom: none;
+ }
+.reveal-modal .close-reveal-modal{
+    font-family: 'lato', 'sans-serif';
+    font-weight: 300;
+    text-decoration: none;
+    color: #222222;
  }

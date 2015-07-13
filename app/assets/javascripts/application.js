@@ -152,5 +152,17 @@ $(function(){
         }
     });
 
+    /** testing for profile page **/
+    var ctx5 = $("#myPie4").get(0).getContext("2d");
+    var myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
+
+    var ctx6 = $("#myPie6").get(0).getContext("2d");
+    var myRadarChart = new Chart(ctx6).Radar(radardata, {animateScale: true});
+
+    var ctx7 = $("#myPie7").get(0).getContext("2d");
+    var myLineChart = new Chart(ctx7).Line(linedata);
+
+    var ctx8 = $("#myPie8").get(0).getContext("2d");
+    var myLineChart = new Chart(ctx8).Line(linedata);
 
 });
