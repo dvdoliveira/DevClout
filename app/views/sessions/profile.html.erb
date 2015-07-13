@@ -8,11 +8,11 @@
 				    	<div class="profile-image-name">
 					    	<div class="row centered-text">
 							    <div class="large-3 medium-3 small-3 columns">
-							      <img src="https://placeholdit.imgix.net/~text?txtsize=19&txt=200%C3%97200&w=200&h=200" alt="profile-image" />
+                    <%=image_tag(@user.profile_image_url, alt: "profile-image")%>
 							    </div>
 							    <div class="large-8 medium-8 small-8 columns">
-							      <h3>David B</h3>
-							      <h4>Web Developer & Designer</h4>
+							      <h3><%=@user.full_name%></h3>
+							      <h4><%=@user.user_type%></h4>
 							      <a class="edit-profile" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Edit Profile</a>
 							    </div>
 							  </div>
@@ -23,6 +23,7 @@
 			    	<!-- Profile Extra Info -->
 			    	<div class="profile-extra-info">
 			    		<p>Full Stack Developer who is very passionate about what I am doing. I am very passionate. Passion is my first name and nate is my second. I live, breath, and eat fashion.</p>
+              <span><a class="black" href="#"><%=@user.email%></a></span></br>
 			    		<span><a class="black" href="#">http://passionate.ca</a></span>
 			    		<span class="phone-number">604-218-9556</span>
 			    	</div>

@@ -60,6 +60,7 @@ class SessionsController < ApplicationController
   end
 
   def profile
+    @user = User.first
   end
 
   def  failure
