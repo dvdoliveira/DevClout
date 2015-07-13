@@ -91,4 +91,9 @@ $(function(){
 
     var ctx8 = $("#myPie8").get(0).getContext("2d");
     var myLineChart = new Chart(ctx8).Line(linedata);
+
+    // JS for button to switch from GitHub to StackOverflow
+    $(".stackoverflow-btn").on('click', function(){
+      $(this).css("background-color: blue;")
+    })
 })
