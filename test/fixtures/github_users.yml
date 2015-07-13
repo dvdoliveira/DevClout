@@ -15,7 +15,7 @@ one:
   repos_url: MyString
   events_url: MyString
   received_events_url: 
-  type: 
+  user_type: MyString 
   site_admin: MyString
   name: MyString
   company: MyString
@@ -47,7 +47,7 @@ two:
   repos_url: MyString
   events_url: MyString
   received_events_url: 
-  type: 
+  user_type: MyString 
   site_admin: MyString
   name: MyString
   company: MyString
