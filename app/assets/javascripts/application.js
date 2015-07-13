@@ -16,4 +16,6 @@
 //= require Chart
 //= require_tree .
 
-$(document).foundation();
+$(function() {
+    $(document).foundation();
+});
