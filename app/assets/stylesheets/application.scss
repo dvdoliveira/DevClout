@@ -138,6 +138,19 @@
     }
  }
 
+ a.white{
+    color: #fff;
+    text-decoration: underline;
+    &:hover{
+        text-decoration: none;
+    }
+ }
+
+ /************ NAV **************/
+ nav.top-bar{
+    z-index: 10;
+ }
+
  /************ LIST /************/
  ul, ol{
      margin-left:40px;
@@ -222,6 +235,36 @@
     text-decoration: none;
     color: #222222;
  }
+
+ /** FOOTER **/
+footer{
+    .row{
+        width: 100%;
+        max-width: 100%;
+        padding: 20px 20px 0px 20px;
+        background-color: #333333;
+        color: #fff;
+
+        .columns{
+            margin-bottom:20px;
+        }
+    }
+    a, .company-name-text, .quick-links{
+        font-size: 15px;
+        font-weight: 100;
+        text-decoration: none;
+        color: #fff;
+
+        &:hover, &:active{
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+    .quick-links a:hover{
+        text-decoration: underline;
+    }
+
+}
 
 /** Solving Menu Problem for Profile Page **/
 @media (max-width: 640px){
