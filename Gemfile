@@ -1,9 +1,13 @@
 source 'https://rubygems.org'
 
-#omniauth gem
+# omniauth gem
 gem 'omniauth'
+
 # omniauth-github gem
 gem 'omniauth-github', :github => 'intridea/omniauth-github'
+
+# omniauth-stackexchange gem
+gem 'omniauth-stackexchange'
 
 gem "octokit", "~> 3.0"
 
