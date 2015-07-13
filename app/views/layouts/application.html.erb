@@ -18,24 +18,36 @@
     <%= csrf_meta_tags %>
 
   </head>
-
   <body>
-      <nav class="top-bar" data-topbar role="navigation">
-          <ul class="title-area">
-              <li class="name">
-                  <h2><a href="#">DevStack</a></h2>
-              </li>
-              <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
-          </ul>
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h2><a href="/">DevStack</a></h2>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+      </ul>
 
-          <section class="top-bar-section">
-            <ul class="right">
-              <li class="name" style="list-style-type: none;"><h2><a href="#">Contact Us</a></h2></li>
-            </ul>
-          </section>
-      </nav>
-
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="name" style="list-style-type: none;"><h2><a href="#">About</a></h2></li>
+          <li class="name" style="list-style-type: none;"><h2><a href="#">Contact Us</a></h2></li>
+        </ul>
+      </section>
+    </nav>
     <%= yield %>
-
+    <footer>
+      <div class="row">
+        <div class="medium-6 large-6 columns text-mobile-align-center">
+          <span class="company-name-text"><a href="/">DevStack</a> Copyright &copy; 2015</span>
+        </div>
+        <div class="medium-6 large-6 columns text-align-right text-mobile-align-center">
+          <div class="quick-links">
+            <a href="/help">Help</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="/about">About</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="/contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

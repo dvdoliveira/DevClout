@@ -1,5 +1,5 @@
 <% provide(:title, "Home") %>
-<div class="homepage-hero-module">
+<div class="homepage-hero-module <%= controller_name%> <%= action_name %>">
         <div class="video-container">
             <div class="filter"></div>
             <%= video_tag(["Hello-World.webm", "Hello-World.mp4"], poster: "Hello-World.jpg", :autobuffer => true, :autoplay => true, :loop => true,) %>
@@ -10,6 +10,7 @@
                 <h2>Compare yourself with your friends</h2>
                 <a class="btn" href="/signin">I'm a Developer</a>
                 <a class="btn btn-secondary" href="#">I'm a Recruiter</a>
+                <a class="btn btn-secondary" href="/stackoverflow">Test StackOverflow</a>
                 <a href="#main" class="down-arrow hide-for-small-down"></a>
             </div>
         </div>
@@ -146,13 +147,3 @@
         <div class="spacer-primary"></div>
     </div>
 </div>
-
-
-
-
-<footer>
-    <span style="color:white;">&nbsp;&nbsp;&nbsp;&nbsp;DevStack Copyright &copy; 2015</span>
-    <a href="/help">Help</a> |
-    <a href="/about">About</a> |
-    <a href="/contact">Contact</a>
-</footer>
