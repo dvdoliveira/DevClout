@@ -1,9 +1,10 @@
 class SessionsController < ApplicationController
-
   def new
     redirect_to '/auth/github'
   end
-
+  # def authenticated?
+  #   session[:access_token]
+  # end
   def create
     @auth = request.env["omniauth.auth"]
     session_code = request.env["omniauth.auth"]['code']
@@ -11,6 +12,13 @@ class SessionsController < ApplicationController
 
     #Check if user already exists
     @user = User.find_by(user_name: @auth.info[:nickname])
+
+    # begin
+    #   client.check_application_authorization access_token
+    # rescue => e
+    #   session[:access_token] = nil
+    #   return authenticate!
+    # end
 
     unless @user then
       @user = User.create(
@@ -61,9 +69,13 @@ class SessionsController < ApplicationController
 
   def profile
     @user = User.first
+    respond_to do |format|
+      format.html
+      format.json {render json: {:user => @user}}
+    end
   end
 
-  def  failure
+  def failure
     redirect_to root_path, :alert => "Authentication error: #{params[:message].humanize}"
   end
 

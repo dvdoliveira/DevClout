@@ -10,10 +10,10 @@
     <%= stylesheet_link_tag "http://cdn.jsdelivr.net/jquery.slick/1.5.0/slick.css" %>
     <%= stylesheet_link_tag "http://cdn.jsdelivr.net/jquery.slick/1.5.0/slick-theme.css" %>
     <%= stylesheet_link_tag "http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" %>
-    <%= stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track' => true  %>
+    <%= stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track' => false  %>
 
     <%= javascript_include_tag "vendor/modernizr" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => false %>
     <%= javascript_include_tag "http://cdn.jsdelivr.net/jquery.slick/1.5.0/slick.min.js" %>
     <%= csrf_meta_tags %>
 
@@ -34,6 +34,12 @@
         </ul>
       </section>
     </nav>
+
+    <div class="container">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+      
     <%= yield %>
     <footer>
       <div class="row">
