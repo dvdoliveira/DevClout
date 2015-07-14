@@ -10,7 +10,7 @@ before_filter :authenticate_user!
     @user = User.first
     respond_to do |format|
       format.html
-      format.json {render json: {:user => @user}}
+      format.json {render json: {:user => @user, :github_user => @user.github_user}}
     end
   end
 
