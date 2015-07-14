@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712173817) do
+ActiveRecord::Schema.define(version: 20150714154002) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 20150712173817) do
     t.integer  "open_issues_count"
     t.integer  "watchers"
     t.string   "default_branch"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "github_repos", ["github_user_id"], name: "index_github_repos_on_github_user_id", using: :btree
@@ -80,8 +80,8 @@ ActiveRecord::Schema.define(version: 20150712173817) do
     t.integer  "following"
     t.date     "gh_created"
     t.date     "gh_updated"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "user_type"
   end
 
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 20150712173817) do
   create_table "stack_users", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "about_me"
-    t.integer  "accept_rate"
     t.integer  "account_id"
     t.integer  "age"
     t.integer  "answer_count"
@@ -113,13 +112,13 @@ ActiveRecord::Schema.define(version: 20150712173817) do
     t.integer  "reputation_change_quarter"
     t.integer  "reputation_change_week"
     t.integer  "reputation_change_year"
-    t.date     "timed_penalty_date"
     t.integer  "up_vote_count"
     t.string   "user_type"
     t.integer  "view_count"
     t.string   "website_url"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "access_token"
   end
 
   add_index "stack_users", ["user_id"], name: "index_stack_users_on_user_id", using: :btree
@@ -145,8 +144,8 @@ ActiveRecord::Schema.define(version: 20150712173817) do
     t.string   "access_token"
     t.text     "bio"
     t.string   "blog"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "twitter_users", ["user_id"], name: "index_twitter_users_on_user_id", using: :btree
@@ -159,8 +158,8 @@ ActiveRecord::Schema.define(version: 20150712173817) do
     t.integer  "user_score"
     t.string   "access_token"
     t.string   "user_bio"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "profile_image_url"
     t.string   "user_name"
     t.string   "blog"
