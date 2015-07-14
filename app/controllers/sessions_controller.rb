@@ -61,6 +61,10 @@ class SessionsController < ApplicationController
 
   def profile
     @user = User.first
+    respond_to do |format|
+      format.html
+      format.json {render json: {:user => @user}}
+    end
   end
 
   def  failure

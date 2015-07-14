@@ -1,11 +1,29 @@
 $(function(){
   if ($(".sessions.profile").length == 0) return;
-  Chart.defaults.global.responsive = true;
 
+  function user_data(){
+    var result;
+    $.ajax({
+      url: '/profile',
+      type: 'get',
+      dataType: 'json',
+      data: {},
+      contentType: 'application/json; charset=UTF-8',
+      success: function(data){
+        console.log(data);
+        result = data
+      }
+    });
+    return result;
+  }
+  var user = user_data()
+  console.log(user)
+  
+  Chart.defaults.global.responsive = true;
   // Data set for Github
   var Line = {}
   var gh_linedata = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: [user, "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
           label: "My First dataset",
@@ -83,7 +101,7 @@ $(function(){
 
   // Data set for StackOverflow
   var so_linedata = {
-    labels: ["January", "February", "March", "April", "May", "June", "July"],
+    labels: ["Stack", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
           label: "My First dataset",
@@ -158,6 +176,8 @@ $(function(){
         }
     ]
   };
+
+  // Changes graphs between GH and SO
   changedataset = function(service){
     if (service == 'gh') {
       piedata = gh_piedata
@@ -181,17 +201,20 @@ $(function(){
     var myLineChart = new Chart(ctx8).Line(linedata);
   }
 
-  // JS for button to switch from GitHub to StackOverflow
+  // Button to switch from GitHub to StackOverflow
   $(".stackoverflow-btn").on('click', function(){
+    if ($(this).hasClass('active')) return;
     $(this).addClass("active")
     $(".github-btn").removeClass("active")
     changedataset('so')
   })
 
   $(".github-btn").on('click', function(){
+    if ($(this).hasClass('active')) return;
     $(this).addClass("active")
     $(".stackoverflow-btn").removeClass("active")
     changedataset('gh')
   })
+  // Default page to Github stats
   changedataset('gh')
 })
