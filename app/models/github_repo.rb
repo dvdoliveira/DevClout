@@ -1,3 +1,3 @@
 class GithubRepo < ActiveRecord::Base
-  belongs_to :github_user , :foreign_key => 'gh_id'
+  belongs_to :user
 end

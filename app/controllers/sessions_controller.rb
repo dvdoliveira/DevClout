@@ -73,7 +73,7 @@ class SessionsController < ApplicationController
       @githubrepo = GithubRepo.create(
       github_user_id: @user.id,
       gh_owner_name: repo["owner"]["login"],
-      owner_id: repo["id"],
+      owner_id: repo["owner"]["id"],
       name: repo["name"],
       full_name:repo["full_name"],
       private: repo["private"],
@@ -102,9 +102,6 @@ class SessionsController < ApplicationController
       default_branch: repo["default_branch"]
       )
       end
-
-
-
 
     end
     session[:user_id] = @user.id
