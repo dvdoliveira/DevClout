@@ -2,6 +2,7 @@ include ApplicationHelper
 
 SETUP_PROC = lambda do |env|
   req = Rack::Request.new(env)
+  # Add parameter to oauth URL to disable token expiration
   env['omniauth.strategy'].options[:scope] = 'no_expiry'
 end
 

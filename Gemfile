@@ -3,13 +3,23 @@ source 'https://rubygems.org'
 # omniauth gem
 gem 'omniauth'
 
-# omniauth-github gem
+# omniauth-github strategy gem
 gem 'omniauth-github', :github => 'intridea/omniauth-github'
 
-# omniauth-stackexchange gem
+# omniauth-stackexchange strategy gem
 gem 'omniauth-stackexchange'
 
+# Octokit is a gem to retrieve data from GitHub
 gem "octokit", "~> 3.0"
+
+# Foundation CSS Framework gem
+gem 'foundation-rails'
+
+# Chart.js gem
+gem 'chart-js-rails'
+
+# HTTPparty gem to handle HTTP requests from the server
+gem 'httparty'
 
 gem 'rack', '~> 1.6.4'
 
@@ -39,8 +49,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Access an IRB console on exception pages or by using <%= console %> in views
 gem 'web-console', '~> 2.0', group: :development
 
-gem 'foundation-rails'
-gem 'chart-js-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
