@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150712173817) do
+ActiveRecord::Schema.define(version: 20150714173421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 20150712173817) do
   create_table "stack_users", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "about_me"
-    t.integer  "accept_rate"
     t.integer  "account_id"
     t.integer  "age"
     t.integer  "answer_count"
@@ -113,13 +112,14 @@ ActiveRecord::Schema.define(version: 20150712173817) do
     t.integer  "reputation_change_quarter"
     t.integer  "reputation_change_week"
     t.integer  "reputation_change_year"
-    t.date     "timed_penalty_date"
     t.integer  "up_vote_count"
     t.string   "user_type"
     t.integer  "view_count"
     t.string   "website_url"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.string   "access_token"
+    t.integer  "so_user_id"
   end
 
   add_index "stack_users", ["user_id"], name: "index_stack_users_on_user_id", using: :btree

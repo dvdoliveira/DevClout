@@ -1,82 +1,27 @@
 Rails.application.routes.draw do
-  get 'users/index'
-
-  get 'users/show'
-
-  get 'stack_users/auth'
-
 
   root 'static_pages#home'
 
+  # Static pages routes
   get 'help' => 'static_pages#help'
-
   get 'about' => 'static_pages#about'
-
   get 'contact' => 'static_pages#contact'
-
-  get '/signin' => 'sessions#new', :as => :signin
+  
+  # Omniauth Routes
   get '/stackoverflow' => 'stack_users#new', :as => :stackoverflow
+  
+  # Omniauth CallBack Routes
   get '/auth/stackexchange/callback', to: 'stack_users#create'
   get '/auth/github/callback', to: 'sessions#create'
 
+  # Omniauth Authentication Errors Routes
   get '/auth/failure', to: 'sessions#failure'
 
+  # Session and Users routes
+  get '/signin' => 'sessions#new', :as => :signin
+  get '/logout', to: 'users#logout', :as => :logout
+  get 'users/index'
+  get 'users/show'
   get 'profile', to: 'users#profile', :as => :profile
 
-  get '/logout', to: 'users#logout', :as => :logout
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 end

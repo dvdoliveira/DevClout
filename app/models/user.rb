@@ -7,4 +7,15 @@ class User < ActiveRecord::Base
   has_one :github_user
   has_one :stack_user
   has_one :twitter_user
+
+  def diff_between_gists_and_repos
+    self.github_user.public_gists - self.github_user.public_repos
+  end
+  def followers_to_following
+    if self.github_user.following > 0
+      self.github_user.followers / self.github_user.following
+    else
+      0
+    end
+  end
 end
