@@ -19,6 +19,24 @@
 
   </head>
   <body>
+    <% if !current_user %>
+    <nav class="top-bar" data-topbar role="navigation">
+      <ul class="title-area">
+        <li class="name">
+          <h2><a class="text-logo" href="/">DevStack</a></h2>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="name" style="list-style-type: none;"><h2><a href="#">About</a></h2></li>
+          <li class="name" style="list-style-type: none;"><h2><a href="#">Contact Us</a></h2></li>
+          <li class="name" style="list-style-type: none;"><h2><a data-reveal-id="developer-sign-in" class="signin-btn" href="/signin">Sign In</a></h2></li>
+        </ul> 
+      </section>
+    </nav>
+    <% else %>
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li class="name">
@@ -29,11 +47,15 @@
 
       <section class="top-bar-section">
         <ul class="right">
-          <li class="name" style="list-style-type: none;"><h2><a href="#">About</a></h2></li>
-          <li class="name" style="list-style-type: none;"><h2><a href="#">Contact Us</a></h2></li>
+          <% if !current_page?(controller: 'users', action: 'profile') %>
+            <li class="name" style="list-style-type: none;"><h2><a href="/profile">
+          Profile</a></h2></li>
+          <% end %>
+          <li class="name" style="list-style-type: none;"><h2><a href="/logout">Logout</a></h2></li>
         </ul>
       </section>
     </nav>
+    <% end %>
 
     <div class="container">
       <% flash.each do |key, value| %>

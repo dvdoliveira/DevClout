@@ -150,6 +150,37 @@
  nav.top-bar{
     z-index: 10;
  }
+ nav li.title-area a.text-logo{
+    font-size: 1.0625rem;
+    line-height: 2.8125rem;
+    text-transform: uppercase;
+    letter-spacing: .3rem;
+    margin: 0;
+    color: #ffffff;
+    display: block;
+    font-weight: normal;
+ }
+body > nav > section.top-bar-section > ul.right > li > h2{
+    font-size: 1rem; 
+    line-height: 1.5rem;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 300;
+
+    a{ 
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: 300;
+        padding:10px 0px;
+    }
+
+    a.signin-btn{
+        background: #8abf67;
+    }
+    a.signin-btn:hover{
+        background: #719c54;
+    }
+}
 
  /************ LIST /************/
  ul, ol{
