@@ -11,7 +11,7 @@ before_filter :authenticate_user!
 
   def logout
     session.clear
-    redirect root_path
+    redirect_to root_path
   end
 
 end

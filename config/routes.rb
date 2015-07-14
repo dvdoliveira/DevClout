@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   get 'profile', to: 'users#profile', :as => :profile
 
+  get '/logout', to: 'users#logout', :as => :logout
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
