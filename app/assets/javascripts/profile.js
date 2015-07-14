@@ -1,8 +1,7 @@
 $(function(){
-  if ($(".sessions.profile").length == 0) return;
+  if ($(".users.profile").length == 0) return;
 
-  function user_data(){
-    var result;
+  var user = 
     $.ajax({
       url: '/profile',
       type: 'get',
@@ -14,9 +13,6 @@ $(function(){
         result = data
       }
     });
-    return result;
-  }
-  var user = user_data()
   console.log(user)
   
   Chart.defaults.global.responsive = true;
