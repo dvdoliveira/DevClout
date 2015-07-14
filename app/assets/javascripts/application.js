@@ -18,9 +18,15 @@
 
 $(function() {
     $(document).foundation();
-    $('.popup').on('click', function(){
-        $(this).find('.btn').hide()
-        $(this).find('.title').hide();
-        $(this).find('.disable').show()
+    $('.popup').on('click', '.btn, .login', function(){
+        $(this).closest('.popup').find('.btn').hide();
+        $(this).closest('.popup').find('.title').hide();
+        $(this).closest('.popup').find('.disable').show();
+    });
+    $('.signin-btn').on('click', function(){
+        $('.popup').find('.btn, .title, .popup-logo').hide();
+        $('.popup').find('.title').hide();
+        $('.popup').find('.disable').show();
+        window.location.replace("/signin");
     });
 });

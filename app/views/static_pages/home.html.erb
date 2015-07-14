@@ -8,7 +8,11 @@
                 <%= image_tag("beta.png", class: "beta-img") %>
 
                 <h2>Compare yourself with your friends</h2>
-                <a class="btn" href="#" data-reveal-id="developer-sign-in">I'm a Developer</a>
+                <% if current_user %> 
+                  <a class="btn" href="/profile">I'm a Developer</a>
+                <% else %>
+                  <a class="btn" href="#" data-reveal-id="developer-sign-in">I'm a Developer</a>
+                <% end %>
                 <a class="btn btn-secondary" href="#">I'm a Recruiter</a>
                 <a class="btn btn-secondary" href="/stackoverflow">Test StackOverflow</a>
                 <a href="#main" class="down-arrow hide-for-small-down"></a>
@@ -27,8 +31,7 @@
         <a class="btn" href="/signin">Login to Github</a>
         <div class="spacer-teritary"></div>
         <div class="disclaimer">
-        <p>By clicking login, you agree to the <a href="#" class="black">terms of service</a> and <a href="#" class="black">privacy statement</a>.<br/>You may delete your account at anytime.
-        <br/><br/>Already have an account? <a href="/signin">Sign In</a></p>
+        <p>By clicking login, you agree to the <a href="#" class="black">terms of service</a> and <a href="#" class="black">privacy statement</a>.<br/>You may delete your account at anytime.</p>
         </div>
         <a class="close-reveal-modal" aria-label="Close">X</a>
       </div>
