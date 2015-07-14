@@ -9,6 +9,9 @@ gem 'omniauth-github', :github => 'intridea/omniauth-github'
 # omniauth-stackexchange strategy gem
 gem 'omniauth-stackexchange'
 
+# omniauth-twitter strategy gem
+gem 'omniauth-twitter'
+
 # Octokit is a gem to retrieve data from GitHub
 gem "octokit", "~> 3.0"
 
