@@ -7,6 +7,11 @@ before_filter :authenticate_user!
   end
 
   def profile
+    @user = User.first
+    respond_to do |format|
+      format.html
+      format.json {render json: {:user => @user}}
+    end
   end
 
   def logout
