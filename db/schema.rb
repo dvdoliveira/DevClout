@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714213656) do
+ActiveRecord::Schema.define(version: 20150714223930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,17 +136,28 @@ ActiveRecord::Schema.define(version: 20150714213656) do
 
   create_table "twitter_users", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "email"
-    t.string   "full_name"
-    t.string   "password"
-    t.string   "user_type"
-    t.integer  "user_score"
-    t.string   "user_name"
     t.string   "access_token"
-    t.text     "bio"
-    t.string   "blog"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.datetime "tw_created_at"
+    t.integer  "twitter_id"
+    t.string   "screen_name"
+    t.string   "name"
+    t.text     "description"
+    t.string   "lang"
+    t.string   "location"
+    t.string   "time_zone"
+    t.string   "profile_image_url"
+    t.string   "url"
+    t.boolean  "notifications"
+    t.boolean  "verified"
+    t.boolean  "protected"
+    t.string   "id_str"
+    t.integer  "favourites_count"
+    t.integer  "followers_count"
+    t.integer  "friends_count"
+    t.integer  "listed_count"
+    t.integer  "statuses_count"
   end
 
   add_index "twitter_users", ["user_id"], name: "index_twitter_users_on_user_id", using: :btree
