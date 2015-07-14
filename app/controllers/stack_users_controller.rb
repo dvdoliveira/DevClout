@@ -13,7 +13,6 @@ class StackUsersController < ApplicationController
 
     # Do another HTTP API request to retrieve additional user data
     @response = HTTParty.get("#{SE_ENDPOINT}#{so_user_id}?client_id=#{so_client_id}&key=#{so_key}&site=stackoverflow&filter=!9YdnSBVWs")
-    binding.pry
     @stack_user = StackUser.create(
       user_id: session[:user_id],
       access_token: @auth[:credentials].token,
@@ -46,7 +45,6 @@ class StackUsersController < ApplicationController
       last_access_date: Time.at(@response["items"][0]["last_access_date"]).to_datetime,
       last_modified_date: Time.at(@response["items"][0]["last_modified_date"]).to_datetime,
     )
-    binding.pry
     redirect_to profile_path
   end
 end
