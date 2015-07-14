@@ -11,41 +11,42 @@ class StackUsersController < ApplicationController
     so_client_id = Rails.application.secrets.omniauth_stackexchange_client_id
     so_key = Rails.application.secrets.omniauth_stackexchange_public_key
 
-    # Do another HTTP API request to retrieve additional data
-    parsed_response = HTTParty.get("#{SE_ENDPOINT}#{so_user_id}?client_id=#{so_client_id}&key=#{so_key}&site=stackoverflow&filter=!9YdnSBVWs")
+    # Do another HTTP API request to retrieve additional user data
+    @response = HTTParty.get("#{SE_ENDPOINT}#{so_user_id}?client_id=#{so_client_id}&key=#{so_key}&site=stackoverflow&filter=!9YdnSBVWs")
     binding.pry
-    # @stack_user = StackUser.create(
-    #   user_id: session[:user_id],
-    #   access_token: @auth[:credentials].token,
-    #   account_id: @auth[:extra][:raw_info].account_id,
-    #   bc_bronze: @auth[:extra][:raw_info][:badge_counts].bronze,
-    #   bc_silver: @auth[:extra][:raw_info][:badge_counts].silver,
-    #   bc_gold: @auth[:extra][:raw_info][:badge_counts].gold,
-    #   creation_date: @auth[:extra][:raw_info].creation_date,
-    #   display_name: @auth[:extra][:raw_info].display_name,
-    #   is_employee: @auth[:extra][:raw_info].is_employee,
-    #   last_access_date: @auth[:extra][:raw_info].last_access_date,
-    #   last_modified_date: @auth[:extra][:raw_info].last_modified_date,
-    #   link: @auth[:extra][:raw_info].link,
-    #   profile_image: @auth[:extra][:raw_info].profile_image,
-    #   reputation: @auth[:extra][:raw_info].reputation,
-    #   reputation_change_day: @auth[:extra][:raw_info].reputation_change_day,
-    #   reputation_change_month: @auth[:extra][:raw_info].reputation_change_month,
-    #   reputation_change_quarter: @auth[:extra][:raw_info].reputation_change_quarter,
-    #   reputation_change_week: @auth[:extra][:raw_info].reputation_change_week,
-    #   reputation_change_year: @auth[:extra][:raw_info].reputation_change_year,
-    #   user_type: @auth[:extra][:raw_info].user_type,
-    #   website_url: @auth[:info].urls
-    #   # about_me: 
-    #   # accept_rate:
-    #   # age: 
-    #   # answer_count:
-    #   # down_vote_count:
-    #   # location:  
-    #   # question_count: 
-    #   # timed_penalty_date: 
-    #   # up_vote_count:
-    #   # view_count:
-    #   # )
+    @stack_user = StackUser.create(
+      user_id: session[:user_id],
+      access_token: @auth[:credentials].token,
+      so_user_id: @auth[:extra][:raw_info].user_id,
+      account_id: @response["items"][0]["account_id"],
+      display_name: @response["items"][0]["display_name"],
+      about_me: @response["items"][0]["about_me"],
+      age: @response["items"][0]["age"],
+      location: @response["items"][0]["location"], 
+      link: @response["items"][0]["link"],
+      profile_image: @response["items"][0]["profile_image"],
+      is_employee: @response["items"][0]["is_employee"],
+      user_type: @response["items"][0]["user_type"],
+      website_url: @response["items"][0]["website_url"],
+      reputation: @response["items"][0]["reputation"],
+      reputation_change_day: @response["items"][0]["reputation_change_day"],
+      reputation_change_week: @response["items"][0]["reputation_change_week"],
+      reputation_change_month: @response["items"][0]["reputation_change_month"],
+      reputation_change_quarter: @response["items"][0]["reputation_change_quarter"],
+      reputation_change_year: @response["items"][0]["reputation_change_year"],
+      bc_bronze: @response["items"][0]["badge_counts"]["bronze"],
+      bc_silver: @response["items"][0]["badge_counts"]["silver"],
+      bc_gold: @response["items"][0]["badge_counts"]["gold"],
+      answer_count: @response["items"][0]["answer_count"],
+      down_vote_count: @response["items"][0]["down_vote_count"],
+      question_count: @response["items"][0]["question_count"],
+      up_vote_count: @response["items"][0]["up_vote_count"],
+      view_count: @response["items"][0]["view_count"],
+      creation_date: Time.at(@response["items"][0]["creation_date"]).to_datetime,
+      last_access_date: Time.at(@response["items"][0]["last_access_date"]).to_datetime,
+      last_modified_date: Time.at(@response["items"][0]["last_modified_date"]).to_datetime,
+    )
+    binding.pry
+    redirect_to profile_path
   end
 end
