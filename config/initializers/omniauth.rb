@@ -20,3 +20,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     site: 'stackoverflow', 
     setup: SETUP_PROC
 end
+
+OmniAuth.config.on_failure = Proc.new { |env|
+  OmniAuth::FailureEndpoint.new(env).redirect_to_failure
+}

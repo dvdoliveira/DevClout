@@ -76,7 +76,11 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to root_path, :alert => "Authentication error: #{params[:message].humanize}"
+    if current_user
+      redirect_to profile_path, :alert => "Authentication error: #{params[:message].humanize}"
+    else
+      redirect_to root_path, :alert => "Authentication error: #{params[:message].humanize}"
+    end
   end
 
   protected

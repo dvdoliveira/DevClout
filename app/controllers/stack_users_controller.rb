@@ -11,7 +11,9 @@ class StackUsersController < ApplicationController
     so_client_id = Rails.application.secrets.omniauth_stackexchange_client_id
     so_key = Rails.application.secrets.omniauth_stackexchange_public_key
 
+    # Check if stack_user already exist
     @stack_user = StackUser.find_by(so_user_id: @auth[:extra][:raw_info].user_id)
+
     unless @stack_user then
       # Do another HTTP API request to retrieve additional user data
       @response = HTTParty.get("#{SE_ENDPOINT}#{so_user_id}?client_id=#{so_client_id}&key=#{so_key}&site=stackoverflow&filter=!9YdnSBVWs")
@@ -50,4 +52,5 @@ class StackUsersController < ApplicationController
     end
     redirect_to profile_path
   end
+
 end
