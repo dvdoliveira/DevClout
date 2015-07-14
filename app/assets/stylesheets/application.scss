@@ -164,6 +164,9 @@
      list-style-type: decimal;
  }
  /************ MISC ****************/
+.disable{
+    display:none;
+}
  hr{
    border-top: 1px solid #ccc;
    margin: 0px;
@@ -273,5 +276,111 @@ footer{
     }
     .profile{padding-top:45px;
         z-index:-1
+    }
+}
+
+
+/****** POP UP *************/
+.popup{
+
+    padding:0px;
+    padding-top:40px;
+
+    .close-pop-up, .profile .profile-options .close-profile-pop-up{
+        position:absolute;
+        z-index: 99999;
+        right:15px;
+        top:20px;
+        cursor: pointer;
+        font-weight: 900;
+    }
+     .spacer-teritary.smaller{
+        height: 10px;
+    }
+     .active-steps,  .disclaimer,  .analytics{
+        padding:20px;
+    }
+     h3{
+        margin-bottom:20px;
+    }
+
+     h3.orange,  p.orange strong{
+        color: #e4702a;
+    }
+     h3.blue,  p.blue strong{
+        color: #2aa9e0;
+    }
+     p.orange strong{
+        font-weight: 400;
+    }
+     .btn.orange{
+        background: #e4702a;
+    }
+     .btn.orange:hover{
+        background: #d26828;
+    }
+     .btn.blue{
+        background: #2aa9e0;
+    }
+     .btn.blue:hover{
+        background: #279dd1;
+    }
+     a.black{
+        color: #222;
+    }
+    .popup-logo img{
+        width: 150px;
+        margin-bottom:50px;
+    }
+    .popup-logo.stackoverflow img{
+        width: 300px;
+        margin-bottom:20px;
+    }
+    .popup-logo.twitter img{
+        width: 100px;
+        margin-bottom:20px;
+    }
+     .circles{
+        margin-bottom:30px;
+    }
+     .circle{
+        width:70px;
+        height:70px;
+        border-radius:50%;
+        font-size:25px;
+        color:#fff;
+        padding-top:15px;
+        text-align:center;
+        background:#e6e6e6;
+        display: inline-block;
+        padding:20px 0px;
+
+    }
+     .circles.blue{
+        margin-bottom: 20px;
+    }
+     .circle.middle{
+        margin: 0 20px;
+    }
+     .circle.green{
+        background: #8abf67;
+    }
+     .circle.orange{
+        background: #e4702a;
+    }
+     .circle.blue{
+        background: #2aa9e0;
+    }
+
+
+    /** DISCLAIMER **/
+     .disclaimer,  .anlytics{
+        background: #e6e6e6;
+    }
+     .disclaimer p{
+        padding-top:30px;
+        padding-bottom: 30px;
+        margin-bottom:0px;
+        font-size: 15px;
     }
 }
