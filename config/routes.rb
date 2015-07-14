@@ -9,10 +9,12 @@ Rails.application.routes.draw do
   
   # Omniauth Routes
   get '/stackoverflow' => 'stack_users#new', :as => :stackoverflow
+  get '/twitter' => 'twitter_users#new', :as => :twitter
   
   # Omniauth CallBack Routes
   get '/auth/stackexchange/callback', to: 'stack_users#create'
   get '/auth/github/callback', to: 'sessions#create'
+  get '/auth/twitter/callback', to: 'twitter_users#create'
 
   # Omniauth Authentication Errors Routes
   get '/auth/failure', to: 'sessions#failure'
