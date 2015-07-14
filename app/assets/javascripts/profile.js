@@ -1,11 +1,11 @@
 $(function(){
   if ($(".users.profile").length == 0) return;
 
-  // Function called in AJAX request below
+// Function called in AJAX request below
   initialize = function() {
     console.log(user)
     Chart.defaults.global.responsive = true;
-    // Data set for Github
+// Data set for Github
     var Line = {}
     var gh_linedata = {
       labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -84,7 +84,7 @@ $(function(){
       ]
     };
 
-    // Data set for StackOverflow
+// Data set for StackOverflow
     var so_linedata = {
       labels: ["Stack", "February", "March", "April", "May", "June", "July"],
       datasets: [
@@ -162,7 +162,7 @@ $(function(){
       ]
     };
 
-    // Changes graphs between GH and SO
+// Changes graphs between GH and SO
     changedataset = function(service){
       if (service == 'gh') {
         piedata = gh_piedata
@@ -186,25 +186,51 @@ $(function(){
       var myLineChart = new Chart(ctx8).Line(linedata);
     }
 
-    // Button to switch from GitHub to StackOverflow
+// Button to switch from GitHub to StackOverflow
     $(".stackoverflow-btn").on('click', function(){
       if ($(this).hasClass('active')) return;
-      $(this).addClass("active")
-      $(".github-btn").removeClass("active")
-      changedataset('so')
+      $(this).addClass("active");
+      $(".github-btn").removeClass("active");
+      // Change first stat to reputation
+      $(".ap-1 h3").text("Reputation ");
+      $(".ap-1 .current_total").text(user.github_user.followers);
+      $(".ap-1 .current_changed").text();
+      // Change second stat to views
+      $(".ap-2 h3").text("Views ");
+      $(".ap-2 .current_total").text(user.github_user.followers);
+      $(".ap-2 .current_changed").text();
+      // Change third stat to answers
+      $(".ap-3 h3").text("Answers ");
+      $(".ap-3 .current_total").text(user.github_user.followers);
+      $(".ap-3 .current_changed").text();
+
+      changedataset('so');
     })
 
     $(".github-btn").on('click', function(){
       if ($(this).hasClass('active')) return;
-      $(this).addClass("active")
-      $(".stackoverflow-btn").removeClass("active")
-      changedataset('gh')
+      $(this).addClass("active");
+      $(".stackoverflow-btn").removeClass("active");
+      changedataset('gh');
+      // Change first stat to followers
+      $(".ap-1 h3").text("Followers ");
+      $(".ap-1 .current_total").text(user.github_user.followers);
+      $(".ap-1 .current_changed").text();
+      // Change second stat to pub repos
+      $(".ap-2 h3").text("Public Repositories ");
+      $(".ap-2 .current_total").text(user.github_user.followers);
+      $(".ap-2 .current_changed").text();
+      // Change third stat to f.f ratio
+      $(".ap-3 h3").text("F.F Ratio ");
+      $(".ap-3 .current_total").text(user.github_user.followers);
+      $(".ap-3 .current_changed").text();
+
     })
-    // Default page to Github stats
-    changedataset('gh')
+// Default page to Github stats
+    changedataset('gh');
   };
 
-  // Makes AJAX request then creates graphs
+// Makes AJAX request then creates graphs
   var user
   var user_data = $.ajax({
     url: '/profile',
