@@ -18,4 +18,9 @@
 
 $(function() {
     $(document).foundation();
+    $('.popup').on('click', function(){
+        $(this).find('.btn').hide()
+        $(this).find('.title').hide();
+        $(this).find('.disable').show()
+    });
 });
