@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  GH_ENDPOINT = "https://api.github.com/users/"
   def new
     redirect_to '/auth/github'
   end
@@ -9,10 +10,15 @@ class SessionsController < ApplicationController
     @auth = request.env["omniauth.auth"]
     session_code = request.env["omniauth.auth"]['code']
     session[:access_token] = @auth.credentials[:token]
-
+    gh_user_id = @auth.extra[:raw_info][:login]
+    gh_client_id = Rails.application.secrets.omniauth_github_key
+    gh_key = Rails.application.secrets.omniauth_github_secret
+    repo_response = HTTParty.get("#{GH_ENDPOINT}#{gh_user_id}/repos?client_id=#{gh_client_id}&key=#{gh_key}")
     #Check if user already exists
     @user = User.find_by(user_name: @auth.info[:nickname])
 
+
+    # check to see if access token is valid
     # begin
     #   client.check_application_authorization access_token
     # rescue => e
@@ -62,6 +68,41 @@ class SessionsController < ApplicationController
         gh_created: @auth.extra[:raw_info][:created_at],
         gh_updated: @auth.extra[:raw_info][:updated_at]
       )
+
+      repo_response.each do |repo|
+      @githubrepo = GithubRepo.create(
+      github_user_id: @user.id,
+      gh_owner_name: repo["owner"]["login"],
+      owner_id: repo["owner"]["id"],
+      name: repo["name"],
+      full_name:repo["full_name"],
+      private: repo["private"],
+      html_url: repo["html_url"],
+      description: repo["description"],
+      fork: repo["fork"],
+      url:repo["url"],
+      gh_created_at: repo["created_at"],
+      gh_updated_at: repo["updated_at"],
+      gh_pushed_at: repo["pushed_at"],
+      git_url: repo["git_url"],
+      clone_url: repo["clone_url"],
+      ssh_url: repo["ssh_url"],
+      svn_url: repo["svn_url"],
+      homepage: repo["homepage"],
+      size: repo["size"],
+      stars_count: repo[:stars_count],
+      watchers_count: repo[:watchers_count],
+      forks_count: repo[:forks_count],
+      language: repo[:language],
+      has_issues: repo["has_issues"],
+      has_downloads: repo["has_downloads"],
+      mirror_url: repo["mirror_url"],
+      open_issues_count: repo["open_issues_count"],
+      watchers: repo["watchers"],
+      default_branch: repo["default_branch"]
+      )
+      end
+
     end
     session[:user_id] = @user.id
     redirect_to profile_path

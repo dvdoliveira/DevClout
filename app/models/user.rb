@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_one :github_user
   has_one :stack_user
   has_one :twitter_user
+  has_many :github_repos
 
   def diff_between_gists_and_repos
     self.github_user.public_gists - self.github_user.public_repos
