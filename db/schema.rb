@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714223930) do
+ActiveRecord::Schema.define(version: 20150715011139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,13 +151,14 @@ ActiveRecord::Schema.define(version: 20150714223930) do
     t.string   "url"
     t.boolean  "notifications"
     t.boolean  "verified"
-    t.boolean  "protected"
+    t.boolean  "tw_protected"
     t.string   "id_str"
     t.integer  "favourites_count"
     t.integer  "followers_count"
     t.integer  "friends_count"
     t.integer  "listed_count"
     t.integer  "statuses_count"
+    t.string   "secret"
   end
 
   add_index "twitter_users", ["user_id"], name: "index_twitter_users_on_user_id", using: :btree
