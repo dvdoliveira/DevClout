@@ -9,6 +9,9 @@ gem 'omniauth-github', :github => 'intridea/omniauth-github'
 # omniauth-stackexchange strategy gem
 gem 'omniauth-stackexchange'
 
+# omniauth-twitter strategy gem
+gem 'omniauth-twitter'
+
 # Octokit is a gem to retrieve data from GitHub
 gem "octokit", "~> 3.0"
 
@@ -24,6 +27,9 @@ gem 'httparty'
 gem 'rack', '~> 1.6.4'
 
 gem 'dotenv-rails', :groups => [:development, :test]
+
+#interactor-rails
+gem "interactor-rails", "~> 2.0"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'

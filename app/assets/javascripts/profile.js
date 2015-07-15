@@ -7,6 +7,20 @@ $(function(){
     Chart.defaults.global.responsive = true;
 // Data set for Github
     var Line = {}
+    var ctx5;
+    var myDoughnutChart;
+
+    var ctx6;
+    var myRadarChart;
+
+    var ctx7;
+    var myLineChart;
+
+    var ctx8;
+    var myBarChart;
+
+    var piedata, radardata, linedata, bardata;
+
     var gh_bardata = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -205,32 +219,49 @@ $(function(){
     };
 
 // Changes graphs between GH and SO
-    var ctx5 = $("#myPie4").get(0).getContext("2d");
-    var ctx6 = $("#myPie6").get(0).getContext("2d");
-    var ctx7 = $("#myPie7").get(0).getContext("2d");
-    var ctx8 = $("#myPie8").get(0).getContext("2d");
-
-    changedataset = function(service){
-      if (service === 'gh') {
-        piedata = gh_piedata
-        radardata = gh_radardata
-        linedata = gh_linedata
-        bardata = gh_bardata
-      } else if (service === 'so') {
-        piedata = so_piedata
-        radardata = so_radardata
-        linedata = so_linedata
-        bardata = so_bardata
-      } 
-     
-    var myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
-    var myRadarChart = new Chart(ctx6).Radar(radardata, {animateScale: true});
-    var myLineChart = new Chart(ctx7).Line(linedata);
-    var myBarChart = new Chart(ctx8).Bar(bardata);
-
+    changedataset = function() {
+      // debugger;
+      if ($(".github-btn").hasClass('active')) {
+        piedata = gh_piedata;
+        radardata = gh_radardata;
+        linedata = gh_linedata;
+        bardata = gh_bardata;
+      } else if ($(".stackoverflow-btn").hasClass('active')) {
+        piedata = so_piedata;
+        radardata = so_radardata;
+        linedata = so_linedata;
+        bardata = so_bardata;
+      }
     }
+    changedataset();
 
-// Button to switch from GitHub to StackOverflow
+    creategraphs = function() {
+      ctx5 = $("#myPie4").get(0).getContext("2d");
+      myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
+
+      ctx6 = $("#myPie6").get(0).getContext("2d");
+      myRadarChart = new Chart(ctx6).Radar(radardata, {animateScale: true});
+
+      ctx7 = $("#myPie7").get(0).getContext("2d");
+      myLineChart = new Chart(ctx7).Line(linedata);
+
+      ctx8 = $("#myPie8").get(0).getContext("2d");
+      myBarChart = new Chart(ctx8).Bar(bardata);
+    };
+    creategraphs();
+
+    updategraphs = function(){
+      changedataset();
+
+      myBarChart.destroy();
+      myLineChart.destroy();
+      myDoughnutChart.destroy();
+      myRadarChart.destroy();
+
+      creategraphs();
+    };
+
+    // Button to switch from GitHub to StackOverflow
     $(".stackoverflow-btn").on('click', function(){
       if ($(this).hasClass('active')) return;
       $(this).addClass("active");
@@ -248,8 +279,8 @@ $(function(){
       $(".ap-3 .current_total").text(github_user.followers);
       $(".ap-3 .current_changed").text();
 
-      changedataset('so');
-    })
+      updategraphs();
+    }); 
 
     ff_ratio = function() { 
       if (github_user.following > 0) {
@@ -261,7 +292,7 @@ $(function(){
       if ($(this).hasClass('active')) return;
       $(this).addClass("active");
       $(".stackoverflow-btn").removeClass("active");
-      changedataset('gh');
+      // changedataset();
       // Change first stat to followers
       $(".ap-1 h3").text("Followers ");
       $(".ap-1 .current_total").text(github_user.followers);
@@ -275,9 +306,8 @@ $(function(){
       $(".ap-3 .current_total").text(ff_ratio);
       $(".ap-3 .current_changed").text();
 
-    })
-// Default page to Github stats
-    changedataset('gh');
+      updategraphs();
+    });
   };
 
 // Makes AJAX request then creates graphs
@@ -287,7 +317,7 @@ $(function(){
     url: '/profile',
     type: 'get',
     dataType: 'json',
-    data: {},
+    data: { format: 'json' },
     contentType: 'application/json; charset=UTF-8',
     success: function(data){
       user = data
@@ -295,5 +325,4 @@ $(function(){
       initialize();
     }
   })
-
 })

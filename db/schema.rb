@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714173421) do
+ActiveRecord::Schema.define(version: 20150714213656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,9 +166,4 @@ ActiveRecord::Schema.define(version: 20150714173421) do
     t.string   "blog"
   end
 
-  add_foreign_key "github_repos", "github_users"
-  add_foreign_key "github_users", "users"
-  add_foreign_key "stack_users", "users"
-  add_foreign_key "statistics", "users"
-  add_foreign_key "twitter_users", "users"
 end

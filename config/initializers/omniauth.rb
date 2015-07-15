@@ -19,4 +19,11 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     public_key: Rails.application.secrets.omniauth_stackexchange_public_key, 
     site: 'stackoverflow', 
     setup: SETUP_PROC
+  provider :twitter, 
+    Rails.application.secrets.omniauth_twitter_key, 
+    Rails.application.secrets.omniauth_twitter_secret
 end
+
+OmniAuth.config.on_failure = Proc.new { |env|
+  OmniAuth::FailureEndpoint.new(env).redirect_to_failure
+}

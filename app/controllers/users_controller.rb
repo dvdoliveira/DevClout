@@ -10,7 +10,7 @@ before_filter :authenticate_user!
     @user = User.first
     respond_to do |format|
       format.html
-      format.json {render json: {:user => @user, :github_user => @user.github_user, :avg_user_score => @user.avg_user_score}}
+      format.json {render json: {:user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score}}
     end
   end
 
