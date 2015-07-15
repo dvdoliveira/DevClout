@@ -205,29 +205,29 @@ $(function(){
     };
 
 // Changes graphs between GH and SO
+    var ctx5 = $("#myPie4").get(0).getContext("2d");
+    var ctx6 = $("#myPie6").get(0).getContext("2d");
+    var ctx7 = $("#myPie7").get(0).getContext("2d");
+    var ctx8 = $("#myPie8").get(0).getContext("2d");
+
     changedataset = function(service){
-      if (service == 'gh') {
+      if (service === 'gh') {
         piedata = gh_piedata
         radardata = gh_radardata
         linedata = gh_linedata
         bardata = gh_bardata
-      } else if (service == 'so') {
+      } else if (service === 'so') {
         piedata = so_piedata
         radardata = so_radardata
         linedata = so_linedata
         bardata = so_bardata
-      }
-      var ctx5 = $("#myPie4").get(0).getContext("2d");
-      var myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
+      } 
+     
+    var myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
+    var myRadarChart = new Chart(ctx6).Radar(radardata, {animateScale: true});
+    var myLineChart = new Chart(ctx7).Line(linedata);
+    var myBarChart = new Chart(ctx8).Bar(bardata);
 
-      var ctx6 = $("#myPie6").get(0).getContext("2d");
-      var myRadarChart = new Chart(ctx6).Radar(radardata, {animateScale: true});
-
-      var ctx7 = $("#myPie7").get(0).getContext("2d");
-      var myLineChart = new Chart(ctx7).Line(linedata);
-
-      var ctx8 = $("#myPie8").get(0).getContext("2d");
-      var myBarChart = new Chart(ctx8).Bar(bardata);
     }
 
 // Button to switch from GitHub to StackOverflow
@@ -254,7 +254,7 @@ $(function(){
     ff_ratio = function() { 
       if (github_user.following > 0) {
         github_user.followers / github_user.following
-      } else {0.0};
+      } else {0};
     }
 
     $(".github-btn").on('click', function(){
