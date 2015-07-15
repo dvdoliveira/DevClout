@@ -11,9 +11,6 @@ class StaticPagesController < ApplicationController
   def contact
   end
 
-  def profile
-  end
-
   def leaderboard
   end
 end

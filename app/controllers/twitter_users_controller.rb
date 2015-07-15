@@ -6,7 +6,6 @@ class TwitterUsersController < ApplicationController
   def create
     @auth = request.env["omniauth.auth"]
     @twitter_user = TwitterUser.find_by(twitter_id: @auth[:extra][:raw_info][:id])
-    binding.pry
     unless @twitter_user then
       @twitter_user = TwitterUser.create(
         user_id: session[:user_id],
