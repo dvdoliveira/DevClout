@@ -2,7 +2,10 @@ $(function(){
   if ($(".users.profile").length == 0) return;
 
 // Function called in AJAX request below
-  initialize = function() {
+  initialize = function(user) {
+    var stack_user = user.stack_user
+    var github_user = user.github_user
+
     console.log(user)
     Chart.defaults.global.responsive = true;
 // Data set for Github
@@ -231,25 +234,8 @@ $(function(){
     }
 
 // Button to switch from GitHub to StackOverflow
-    $(".stackoverflow-btn").on('click', function(){
-      if ($(this).hasClass('active')) return;
-      $(this).addClass("active");
-      $(".github-btn").removeClass("active");
-      // Change first stat to reputation
-      $(".ap-1 h3").text("Reputation ");
-      $(".ap-1 .current_total").text(github_user.followers);
-      $(".ap-1 .current_changed").text();
-      // Change second stat to views
-      $(".ap-2 h3").text("Views ");
-      $(".ap-2 .current_total").text(github_user.followers);
-      $(".ap-2 .current_changed").text();
-      // Change third stat to answers
-      $(".ap-3 h3").text("Answers ");
-      $(".ap-3 .current_total").text(github_user.followers);
-      $(".ap-3 .current_changed").text();
-
-      changedataset('so');
-    })
+    
+    //STACK OVERFLOW BUTTONS
 
     ff_ratio = function() { 
       if (github_user.following > 0) {
@@ -281,19 +267,13 @@ $(function(){
   };
 
 // Makes AJAX request then creates graphs
-  var user
-  var github_user
-  var user_data = $.ajax({
+  $.ajax({
     url: '/profile',
     type: 'get',
     dataType: 'json',
     data: {},
     contentType: 'application/json; charset=UTF-8',
-    success: function(data){
-      user = data
-      github_user = user.github_user
-      initialize();
-    }
+    success: initialize
   })
 
 })

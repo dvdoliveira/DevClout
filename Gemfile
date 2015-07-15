@@ -28,6 +28,9 @@ gem 'rack', '~> 1.6.4'
 
 gem 'dotenv-rails', :groups => [:development, :test]
 
+#interactor-rails
+gem "interactor-rails", "~> 2.0"
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use postgresql as the database for Active Record
