@@ -5,7 +5,7 @@ require 'rails/all'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-unless Rails.env.production
+unless Rails.env.production?
     Dotenv.load
 end
 module DevStack
