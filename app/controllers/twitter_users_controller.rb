@@ -34,4 +34,10 @@ class TwitterUsersController < ApplicationController
     end
     redirect_to profile_path
   end
+
+  protected
+
+  def auth_hash
+    request.env['omniauth.auth']
+  end
 end
