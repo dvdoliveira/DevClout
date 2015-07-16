@@ -13,10 +13,14 @@ class StackUsersController < ApplicationController
 
     # Check if stack_user already exist
     @stack_user = StackUser.find_by(so_user_id: @auth[:extra][:raw_info].user_id)
-
     unless @stack_user then
       # Do another HTTP API request to retrieve additional user data
       @response = HTTParty.get("#{SE_ENDPOINT}#{so_user_id}?client_id=#{so_client_id}&key=#{so_key}&site=stackoverflow&filter=!9YdnSBVWs")
+      if (@response["items"][0]["last_modified_date"])
+        @new_modified_time =  Time.at(@response["items"][0]["last_modified_date"]).to_datetime
+      else
+        @new_modified_time =  Time.at(@response["items"][0]["creation_date"]).to_datetime
+      end
       @stack_user = StackUser.create(
         user_id: session[:user_id],
         access_token: @auth[:credentials].token,
@@ -25,7 +29,7 @@ class StackUsersController < ApplicationController
         display_name: @response["items"][0]["display_name"],
         about_me: @response["items"][0]["about_me"],
         age: @response["items"][0]["age"],
-        location: @response["items"][0]["location"], 
+        location: @response["items"][0]["location"],
         link: @response["items"][0]["link"],
         profile_image: @response["items"][0]["profile_image"],
         is_employee: @response["items"][0]["is_employee"],
@@ -47,7 +51,7 @@ class StackUsersController < ApplicationController
         view_count: @response["items"][0]["view_count"],
         creation_date: Time.at(@response["items"][0]["creation_date"]).to_datetime,
         last_access_date: Time.at(@response["items"][0]["last_access_date"]).to_datetime,
-        last_modified_date: Time.at(@response["items"][0]["last_modified_date"]).to_datetime,
+        last_modified_date: @new_modified_time
       )
     end
     redirect_to profile_path

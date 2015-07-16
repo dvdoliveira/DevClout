@@ -2,11 +2,13 @@ $(function(){
   if ($(".users.profile").length == 0) return;
 
 // Function called in AJAX request below
-  initialize = function() {
-    console.log(user)
+  initialize = function(user) {
+    console.log(user);
+    var stack_user = user.stack_user;
+    var github_user = user.github_user;
     Chart.defaults.global.responsive = true;
 // Data set for Github
-    var Line = {}
+    var Line = {};
     var ctx5;
     var myDoughnutChart;
 
@@ -94,7 +96,7 @@ $(function(){
       }
     ]
     var gh_radardata = {
-      labels: ["Score", "Following", "Forks", "Followers", "Watchers"],
+      labels: ["Score", "Following", "Followers", "Forks", "Watchers"],
       datasets: [
           {
               label: user.full_name,
@@ -104,7 +106,7 @@ $(function(){
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(250,164,58,1)",
-              data: [65, github_user.following, 90, github_user.followers, 56]
+              data: [user.user.user_score, github_user.following, github_user.followers, 0, 0]
           },
           {
               label: "Average All Users",
@@ -114,7 +116,7 @@ $(function(){
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(151,187,205,1)",
-              data: [28, 48, 40, 19, 96]
+              data: [user.avg_user_score, 48, 40, 19, 96]
           }
       ]
     };
@@ -220,7 +222,6 @@ $(function(){
 
 // Changes graphs between GH and SO
     changedataset = function() {
-      // debugger;
       if ($(".github-btn").hasClass('active')) {
         piedata = gh_piedata;
         radardata = gh_radardata;
@@ -292,7 +293,6 @@ $(function(){
       if ($(this).hasClass('active')) return;
       $(this).addClass("active");
       $(".stackoverflow-btn").removeClass("active");
-      // changedataset();
       // Change first stat to followers
       $(".ap-1 h3").text("Followers ");
       $(".ap-1 .current_total").text(github_user.followers);
@@ -311,18 +311,12 @@ $(function(){
   };
 
 // Makes AJAX request then creates graphs
-  var user
-  var github_user
-  var user_data = $.ajax({
+  $.ajax({
     url: '/profile',
     type: 'get',
     dataType: 'json',
     data: { format: 'json' },
     contentType: 'application/json; charset=UTF-8',
-    success: function(data){
-      user = data
-      github_user = user.github_user
-      initialize();
-    }
+    success: initialize
   })
 })
