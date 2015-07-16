@@ -3,12 +3,12 @@ $(function(){
 
 // Function called in AJAX request below
   initialize = function(user) {
-    var stack_user = user.stack_user
-    var github_user = user.github_user
-    console.log(user)
+    console.log(user);
+    var stack_user = user.stack_user;
+    var github_user = user.github_user;
     Chart.defaults.global.responsive = true;
 // Data set for Github
-    var Line = {}
+    var Line = {};
     var ctx5;
     var myDoughnutChart;
 
@@ -96,7 +96,7 @@ $(function(){
       }
     ]
     var gh_radardata = {
-      labels: ["Score", "Following", "Forks", "Followers", "Watchers"],
+      labels: ["Score", "Following", "Followers", "Forks", "Watchers"],
       datasets: [
           {
               label: user.full_name,
@@ -106,7 +106,7 @@ $(function(){
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(250,164,58,1)",
-              data: [user.user.user_score, github_user.following, 90, github_user.followers, 56]
+              data: [user.user.user_score, github_user.following, github_user.followers, 0, 0]
           },
           {
               label: "Average All Users",
@@ -116,7 +116,7 @@ $(function(){
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(151,187,205,1)",
-              data: [28, 48, 40, 19, 96]
+              data: [user.avg_user_score, 48, 40, 19, 96]
           }
       ]
     };
