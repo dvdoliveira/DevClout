@@ -11,11 +11,11 @@ default: &default
   timeout: 5000
   host: localhost
   port: 5432
-  username: development
-  password: development
 
 development:
   <<: *default
+  username: development
+  password: development
   database: development_devstack
 
 
@@ -26,6 +26,6 @@ test:
   <<: *default
   database: test_devstack
 #
-# production:
-#   <<: *default
-#   database: db/production.sqlite3
+production:
+  <<: *default
+  database: postgres://lxtpplyvepsber:uBmGCn9SC6OmKEoRy0tz06Kp5P@ec2-54-235-145-226.compute-1.amazonaws.com:5432/deqjve8mpiveuk
