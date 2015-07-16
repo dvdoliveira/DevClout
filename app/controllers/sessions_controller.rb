@@ -26,14 +26,6 @@ class SessionsController < ApplicationController
     redirect_to profile_path
   end
 
-  def profile
-    @user = User.first
-    respond_to do |format|
-      format.html
-      format.json {render json: {:user => @user}}
-    end
-  end
-
   def failure
     if current_user
       redirect_to profile_path, :alert => "Authentication error: #{params[:message].humanize}"
