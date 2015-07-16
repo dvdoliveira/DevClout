@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.2'
+
 # omniauth gem
 gem 'omniauth'
 
@@ -23,6 +25,9 @@ gem 'chart-js-rails'
 
 # HTTPparty gem to handle HTTP requests from the server
 gem 'httparty'
+
+# Gem required by Heroku to work better with Rails
+gem 'rails_12factor'
 
 gem 'rack', '~> 1.6.4'
 
