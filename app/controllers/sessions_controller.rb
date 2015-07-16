@@ -10,7 +10,6 @@ class SessionsController < ApplicationController
     session[:access_token] = @auth.credentials[:token]
     gh_client_id = Rails.application.secrets.omniauth_github_key
     gh_key = Rails.application.secrets.omniauth_github_secret
-    
     repo_response = GithubAuthentication.call({auth: @auth, gh_client_id: gh_client_id, gh_key: gh_key})
     @user = User.find_by(user_name: @auth.info[:nickname])
 
@@ -25,14 +24,6 @@ class SessionsController < ApplicationController
     end
 
     redirect_to profile_path
-  end
-
-  def profile
-    @user = User.first
-    respond_to do |format|
-      format.html
-      format.json {render json: {:user => @user}}
-    end
   end
 
   def failure

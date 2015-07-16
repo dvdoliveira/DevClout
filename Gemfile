@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.2'
+
 # omniauth gem
 gem 'omniauth'
 
@@ -24,9 +26,15 @@ gem 'chart-js-rails'
 # HTTPparty gem to handle HTTP requests from the server
 gem 'httparty'
 
+# Gem required by Heroku to work better with Rails
+gem 'rails_12factor'
+
 gem 'rack', '~> 1.6.4'
 
 gem 'dotenv-rails', :groups => [:development, :test]
+
+# This gem allows the push of ENV variables on .env files to Heroku
+gem 'dotenv-heroku'
 
 #interactor-rails
 gem "interactor-rails", "~> 2.0"

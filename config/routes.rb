@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'averages/create'
+
+  get 'averages/update'
+
   root 'static_pages#home'
 
   # Static pages routes

@@ -7,7 +7,7 @@ before_filter :authenticate_user!
   end
 
   def profile
-    @user = User.first
+    @user = current_user
     respond_to do |format|
       format.html
       format.json {render json: {:user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score}}

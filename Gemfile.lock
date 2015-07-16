@@ -64,6 +64,8 @@ GEM
     columnize (0.9.0)
     debug_inspector (0.0.2)
     dotenv (2.0.2)
+    dotenv-heroku (0.0.1)
+      rake
     dotenv-rails (2.0.2)
       dotenv (= 2.0.2)
       railties (~> 4.0)
@@ -158,6 +160,11 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.4)
+    rails_stdout_logging (0.0.3)
     railties (4.2.3)
       actionpack (= 4.2.3)
       activesupport (= 4.2.3)
@@ -209,6 +216,7 @@ DEPENDENCIES
   byebug
   chart-js-rails
   coffee-rails (~> 4.1.0)
+  dotenv-heroku
   dotenv-rails
   foundation-rails
   httparty
@@ -224,6 +232,7 @@ DEPENDENCIES
   pry
   rack (~> 1.6.4)
   rails (= 4.2.3)
+  rails_12factor
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

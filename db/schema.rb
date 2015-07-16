@@ -11,10 +11,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715011139) do
+ActiveRecord::Schema.define(version: 20150716180043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "averages", force: :cascade do |t|
+    t.float    "gh_users_stars",         default: 0.0
+    t.float    "gh_users_followers",     default: 0.0
+    t.float    "gh_users_forks",         default: 0.0
+    t.float    "gh_users_following",     default: 0.0
+    t.float    "gh_users_ff_ratio",      default: 0.0
+    t.float    "so_users_answers",       default: 0.0
+    t.float    "so_users_questions",     default: 0.0
+    t.float    "so_users_down_votes",    default: 0.0
+    t.float    "so_users_up_votes",      default: 0.0
+    t.float    "so_users_reputation",    default: 0.0
+    t.float    "so_users_gold_badges",   default: 0.0
+    t.float    "so_users_silver_badges", default: 0.0
+    t.float    "so_users_bronze_badges", default: 0.0
+    t.float    "tw_users_followers",     default: 0.0
+    t.float    "tw_users_friends",       default: 0.0
+    t.float    "tw_users_favourites",    default: 0.0
+    t.float    "tw_users_listed",        default: 0.0
+    t.float    "tw_users_statuses",      default: 0.0
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
 
   create_table "github_repos", force: :cascade do |t|
     t.integer  "github_user_id"
