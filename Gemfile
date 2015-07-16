@@ -28,6 +28,9 @@ gem 'rack', '~> 1.6.4'
 
 gem 'dotenv-rails', :groups => [:development, :test]
 
+# This gem allows the push of ENV variables on .env files to Heroku
+gem 'dotenv-heroku'
+
 #interactor-rails
 gem "interactor-rails", "~> 2.0"
 
