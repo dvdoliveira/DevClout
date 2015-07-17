@@ -90,9 +90,15 @@ class CalculateUserScore
     @total_followers_count = find_user_follower.followers
     @following_count = find_user_follower.following
       unless @following_count = 0
-        @friend_ratio_score = (total_followers_count/following_count)
+        @friend_ratio_score = (@total_followers_count/@following_count)
       else
-        @friend_ratio_score = 10
+        if @total_followers_count > 10
+          @friend_ratio_score = (@total_followers_count/1)
+        elsif @total_followers_count >= 5 && @total_followers_count < 10
+              @friend_ratio_score = 2
+        else
+              @friend_ratio_score = 0
+        end
       end
 
     repos_for_user = GithubRepo.where(github_user_id: user.id)
