@@ -5,6 +5,10 @@ ruby '2.2.2'
 # omniauth gem
 gem 'omniauth'
 
+#async jobs
+gem 'delayed_job_active_record'
+
+gem "daemons"
 # omniauth-github strategy gem
 gem 'omniauth-github', :github => 'intridea/omniauth-github'
 
