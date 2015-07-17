@@ -4,6 +4,7 @@ $(function(){
 // Function called in AJAX request below
   initialize = function(user) {
     console.log(user);
+    console.log(user.github_repos[1])
     var stack_user = user.stack_user;
     var github_user = user.github_user;
     Chart.defaults.global.responsive = true;
@@ -148,7 +149,7 @@ $(function(){
                 strokeColor: "rgba(220,220,220,0.8)",
                 highlightFill: "rgba(220,220,220,0.75)",
                 highlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: [65, 59, 80, 81, 56, 55]
             },
             {
                 label: "My Second dataset",
@@ -156,7 +157,7 @@ $(function(){
                 strokeColor: "rgba(151,187,205,0.8)",
                 highlightFill: "rgba(151,187,205,0.75)",
                 highlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86, 27, 90]
+                data: [28, 48, 40, 19, 86, 27]
             }
         ]
     };
@@ -171,7 +172,7 @@ $(function(){
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: [65, 59, 80, 81, 56, 55]
         },
         {
             label: "My Second dataset",
@@ -181,7 +182,7 @@ $(function(){
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
+            data: [28, 48, 40, 19, 86, 27]
         }
       ]
     };
@@ -298,9 +299,9 @@ $(function(){
       $(".ap-3 .current_changed").text();
        // Change 4 graph titles
       $(".graph1 h3").text("General");
-      $(".graph2 h3").text("Languages");
+      $(".graph2 h3").text("Badges");
       $(".graph3 h3").text("Reputation");
-      $(".graph4 h3").text("");
+      $(".graph4 h3").text("Influence");
 
       updategraphs();
     }); 
@@ -330,8 +331,8 @@ $(function(){
       // Change 4 graph titles
       $(".graph1 h3").text("General");
       $(".graph2 h3").text("Languages");
-      $(".graph3 h3").text("Followers");
-      $(".graph4 h3").text("Repositories");
+      $(".graph3 h3").text("Repositories");
+      $(".graph4 h3").text("Followers");
 
       updategraphs();
     });
