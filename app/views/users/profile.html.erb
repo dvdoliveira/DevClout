@@ -1,11 +1,7 @@
 <section class="profile <%= controller_name%> <%= action_name %>">
 	<div class="row centered-text">
 	  <div class="large-3 columns">
-<<<<<<< HEAD
-	  	<%= render 'shared/profile_sidebar' %>
-=======
-	  	<%= render 'layouts/profile_sidebar.html.erb' %>
->>>>>>> master
+	  	<%= render partial: 'shared/profile_sidebar', locals: { :user => current_user, :github_user => current_user.github_user, :stack_user => current_user.stack_user, :avg_user_score => current_user.avg_user_score  } %>
 	  </div>
 	  <div class="large-9 background-grey columns">
 	    <div class="analytics-pane">
