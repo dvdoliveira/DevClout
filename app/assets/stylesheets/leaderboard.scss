@@ -1,15 +1,60 @@
-#leaderboard{
-	img{
-	  height: auto;
-	  height: 40px;
-	  width: 40px;
-	  min-width: 40px;
-	  border-radius: 50%;
-	  -webkit-border-radius: 50%;
-	  margin-right:10px;
+.leaderBoard-pane{
+
+	margin-top:20px;
+	
+	// bypassing some TableData CSS
+	.dataTables_wrapper .dataTables_filter input{
+		margin:0px;
+	}
+	table, table.dataTable.no-footer, table.dataTable thead th, table.dataTable thead td{
+		border: 0px;
+	}
+	select[name=leaderboard_length]{
+	  display: inline !important;
+  	margin-left: 10px !important;
+  	width: 170px !important;
+	}
+	.dataTables_length label::before{
+		content: "Show " !important;
+	}
+
+	.leaderboard_filter input{
+		font-weight: 100;
 	}
 	
-	table.dataTable tbody th, table.dataTable tbody td{
-		padding: 8px 20px !important;
+
+	#leaderboard{
+		img{
+		  height: auto;
+		  height: 40px;
+		  width: 40px;
+		  min-width: 40px;
+		  border-radius: 50%;
+		  -webkit-border-radius: 50%;
+		  margin-right:10px;
+		}
+		table{
+			border-bottom: 1px solid #ccc;
+			margin-bottom: 15px;
+		}
+		tbody{
+			tr{
+				&.odd{
+					background: #f8f8f8;
+				}
+
+				&:hover, &:active{
+					background: #e6e6e6;
+				}
+
+				&.current_user{
+					background: #f5f73f;
+				} 	
+
+				td{
+					padding: 8px 20px;
+				}
+			}
+		}
 	}
 }

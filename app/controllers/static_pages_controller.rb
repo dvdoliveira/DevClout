@@ -12,6 +12,6 @@ class StaticPagesController < ApplicationController
   end
 
   def leaderboard
-    @user = User.all
+    @user = User.order(user_score: :desc)
   end
 end

@@ -55,7 +55,11 @@
             </div>
             <div class="spacer-primary hide-for-medium-down"></div>
             <div class="text-align-center">
-                <a class="btn" href="/signin">Get Started</a>
+                <% if current_user %> 
+                  <a class="btn" href="/profile">I'm a Developer</a>
+                <% else %>
+                  <a class="btn" href="#" data-reveal-id="developer-sign-in">I'm a Developer</a>
+                <% end %>
             </div>
         </div>
         <div class="spacer-primary"></div>
@@ -82,7 +86,11 @@
         </div>
         <div class="spacer-primary "></div>
         <div class="text-align-center">
-            <a class="btn" href="/signin">Get Started</a>
+            <% if current_user %> 
+                  <a class="btn" href="/profile">I'm a Developer</a>
+                <% else %>
+                  <a class="btn" href="#" data-reveal-id="developer-sign-in">I'm a Developer</a>
+                <% end %>
         </div>
         <div class="spacer-primary"></div>
         <hr/>
@@ -162,7 +170,11 @@
             </div>
             <div class="spacer-primary"></div>
             <div class="text-mobile-align-center">
-                <a class="btn" href="/signin">Get Started</a>
+                <% if current_user %> 
+                  <a class="btn" href="/profile">I'm a Developer</a>
+                <% else %>
+                  <a class="btn" href="#" data-reveal-id="developer-sign-in">I'm a Developer</a>
+                <% end %>
             </div>
         </div>
         <div class="spacer-primary"></div>
