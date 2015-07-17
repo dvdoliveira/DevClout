@@ -28,8 +28,6 @@ Rails.application.routes.draw do
   # Session and Users routes
   get '/signin' => 'sessions#new', :as => :signin
   get '/logout', to: 'users#logout', :as => :logout
-  get 'users/index'
-  get 'users/show'
   get 'profile', to: 'users#profile', :as => :profile
 
 end

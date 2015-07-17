@@ -23,6 +23,15 @@ $(function(){
 
     var piedata, radardata, linedata, bardata;
 
+    var last_six_months = [];
+    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var d = new Date();
+    var current_month =  monthNames[d.getMonth()];
+
+    // for (i=0;i<6;i--) {
+    //   last_six_months.push(monthNames[i])
+    // }
+
     var gh_bardata = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -48,7 +57,7 @@ $(function(){
       labels: ["January", "February", "March", "April", "May", "June", "July"],
       datasets: [
         {
-            label: "My First dataset",
+            label: "This User",
             fillColor: "rgba(220,220,220,0.2)",
             strokeColor: "rgba(220,220,220,1)",
             pointColor: "rgba(220,220,220,1)",
@@ -58,7 +67,7 @@ $(function(){
             data: [65, 59, 80, 81, 56, 55, 40]
         },
         {
-            label: "My Second dataset",
+            label: "User Average",
             fillColor: "rgba(151,187,205,0.2)",
             strokeColor: "rgba(151,187,205,1)",
             pointColor: "rgba(151,187,205,1)",
@@ -269,16 +278,21 @@ $(function(){
       $(".github-btn").removeClass("active");
       // Change first stat to reputation
       $(".ap-1 h3").text("Reputation ");
-      $(".ap-1 .current_total").text(github_user.followers);
+      $(".ap-1 .current_total").text(stack_user.reputation);
       $(".ap-1 .current_changed").text();
       // Change second stat to views
       $(".ap-2 h3").text("Views ");
-      $(".ap-2 .current_total").text(github_user.followers);
+      $(".ap-2 .current_total").text(stack_user.view_count);
       $(".ap-2 .current_changed").text();
       // Change third stat to answers
       $(".ap-3 h3").text("Answers ");
-      $(".ap-3 .current_total").text(github_user.followers);
+      $(".ap-3 .current_total").text(stack_user.answer_count);
       $(".ap-3 .current_changed").text();
+       // Change 4 graph titles
+      $(".graph1 h3").text("General");
+      $(".graph2 h3").text("Languages");
+      $(".graph3 h3").text("Reputation");
+      $(".graph4 h3").text("");
 
       updategraphs();
     }); 
@@ -305,6 +319,11 @@ $(function(){
       $(".ap-3 h3").text("F.F Ratio ");
       $(".ap-3 .current_total").text(ff_ratio);
       $(".ap-3 .current_changed").text();
+      // Change 4 graph titles
+      $(".graph1 h3").text("General");
+      $(".graph2 h3").text("Languages");
+      $(".graph3 h3").text("Followers");
+      $(".graph4 h3").text("Repositories");
 
       updategraphs();
     });
