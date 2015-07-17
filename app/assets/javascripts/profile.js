@@ -7,6 +7,7 @@ $(function(){
     console.log(user.github_repos[1])
     var stack_user = user.stack_user;
     var github_user = user.github_user;
+    var average = user.average[0];
     Chart.defaults.global.responsive = true;
 // Initializing variables for charts and data
     var Line = {};
@@ -43,10 +44,12 @@ $(function(){
     // Calculate total watchers and forks across all repos for user
     var total_watchers = 0;
     var total_forks = 0;
+    var total_stars = 0;
     for (i>0;i<user.github_repos.length;i++) {
       var current_repo = user.github_repos[i];
       total_watchers += current_repo.watchers_count
       total_forks += current_repo.forks_count
+      total_stars =+ current_repo.stars_count
     }
 
     // Graphs for Github
@@ -123,7 +126,7 @@ $(function(){
       }
     ]
     var gh_radardata = {
-      labels: ["Score", "Following", "Followers", "Forks", "Watchers"],
+      labels: ["Score", "Following", "Followers", "Forks", "Stars"],
       datasets: [
           {
               label: user.full_name,
@@ -133,7 +136,7 @@ $(function(){
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(250,164,58,1)",
-              data: [user.user.user_score, github_user.following, github_user.followers, total_forks, total_watchers]
+              data: [user.user.user_score, github_user.following, github_user.followers, total_forks, total_stars]
           },
           {
               label: "Average All Users",
@@ -143,7 +146,7 @@ $(function(){
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(151,187,205,1)",
-              data: [user.avg_user_score, 48, 40, 19, 96]
+              data: [user.avg_user_score, average.gh_users_following, average.gh_users_followers, average.gh_users_forks, average.gh_users_stars]
           }
       ]
     };
@@ -197,52 +200,46 @@ $(function(){
     };
     var so_piedata = [
       {
-          value: 300,
-          color:"#F7464A",
-          highlight: "#FF5A5E",
-          label: "Red"
+          value: stack_user.bc_bronze,
+          color:"#CD7F32",
+          highlight: "#D7995B",
+          label: "Bronze"
       },
       {
-          value: 50,
-          color: "#46BFBD",
-          highlight: "#5AD3D1",
-          label: "Green"
+          value: stack_user.bc_silver,
+          color: "#C0C0C0 ",
+          highlight: "#DADADA",
+          label: "Silver"
       },
       {
-          value: 100,
-          color: "#FDB45C",
-          highlight: "#FFC870",
-          label: "Yellow"
-      },
-      {
-          value: 100,
-          color: "#2ec81b",
-          highlight: "#3dbf1c",
-          label: "Green"
+          value: stack_user.bc_gold,
+          color: "#FFD700",
+          highlight: "#FFDF33",
+          label: "Gold"
       }
     ]
     var so_radardata = {
-      labels: ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+      labels: ["Answers", "Questions", "Up-Votes", "Down-Votes"],
       datasets: [
           {
-              label: "My First dataset",
+              label: user.full_name,
               fillColor: "rgba(220,220,220,0.2)",
               strokeColor: "rgba(220,220,220,1)",
               pointColor: "rgba(220,220,220,1)",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 90, 81, 56, 55, 40]
+              data: [stack_user.answer_count, stack_user.question_count, stack_user.up_vote_count, stack_user.down_vote_count]
           },
           {
-              label: "My Second dataset",
+              label: "Average all users",
               fillColor: "rgba(151,187,205,0.2)",
               strokeColor: "rgba(151,187,205,1)",
               pointColor: "rgba(151,187,205,1)",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(151,187,205,1)",
-              data: [28, 48, 40, 19, 96, 27, 100]
+              data: [average.so_users_answers, average.so_users_questions, average.so_users_up_votes, average.so_users_down_votes]
           }
       ]
     };
@@ -264,11 +261,23 @@ $(function(){
     changedataset();
 
     creategraphs = function() {
-      ctx5 = $("#myPie4").get(0).getContext("2d");
-      myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
-
+      // First checks if the user has any stackoverflow badges to display the badges pie graph
       ctx6 = $("#myPie6").get(0).getContext("2d");
       myRadarChart = new Chart(ctx6).Radar(radardata, {animateScale: true});
+
+      if ($(".github-btn").hasClass('active')) {
+        if ($("myPie4").length < 1){
+          $(".replace-so-pie").replaceWith("<canvas id='myPie4' class='chartset3'>")
+        };
+        ctx5 = $("#myPie4").get(0).getContext("2d");
+        myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
+      } else if (stack_user.bc_bronze + stack_user.bc_silver + stack_user.bc_gold > 0) {
+        ctx5 = $("#myPie4").get(0).getContext("2d");
+        myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
+      } else {
+        $("#myPie4").replaceWith("<div class='replace-so-pie chartset3'><h4>Achieve at least 1 badge to see this graph</h4></div>");
+        $('.replace-so-pie').css('min-height', $('#myPie6').height());
+      }
 
       ctx7 = $("#myPie7").get(0).getContext("2d");
       myLineChart = new Chart(ctx7).Line(linedata);
@@ -311,7 +320,7 @@ $(function(){
       $(".graph2 h3").text("Badges");
       $(".graph3 h3").text("Reputation");
       $(".graph4 h3").text("Influence");
-
+    
       updategraphs();
     }); 
 
