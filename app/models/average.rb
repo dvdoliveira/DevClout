@@ -1,7 +1,8 @@
 class Average < ActiveRecord::Base
 
-  @github_users = GithubUser.all;
-  @stack_users = StackUser.all;
+  @github_users = GithubUser.all
+  @stack_users = StackUser.all
+  @twitter_users = TwitterUser.all
   @average = Average.find_by(id: 1)
 
   # Update GitHub averages on the averages table using all GitHub users data
@@ -21,5 +22,14 @@ class Average < ActiveRecord::Base
     @average.update_attribute(:so_users_silver_badges, @stack_users.average(:bc_silver))
     @average.update_attribute(:so_users_bronze_badges, @stack_users.average(:bc_bronze))
   end
-  
+
+  # Update Twitter averages on the averages table using all Twitter users data
+  def self.update_twitter_averages
+    @average.update_attribute(:tw_users_followers, @twitter_users.average(:followers_count))
+    @average.update_attribute(:tw_users_friends, @twitter_users.average(:friends_count))
+    @average.update_attribute(:tw_users_favourites, @twitter_users.average(:favourites_count))
+    @average.update_attribute(:tw_users_listed, @twitter_users.average(:listed_count))
+    @average.update_attribute(:tw_users_statuses, @twitter_users.average(:statuses_count))
+  end
+
 end
