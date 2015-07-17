@@ -40,6 +40,15 @@ $(function(){
       last_six_months.push(monthNames[i]);
     }
 
+    // Calculate total watchers and forks across all repos for user
+    var total_watchers = 0;
+    var total_forks = 0;
+    for (i>0;i<user.github_repos.length;i++) {
+      var current_repo = user.github_repos[i];
+      total_watchers += current_repo.watchers_count
+      total_forks += current_repo.forks_count
+    }
+
     // Graphs for Github
     var gh_bardata = {
         labels: last_six_months,
@@ -124,7 +133,7 @@ $(function(){
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(250,164,58,1)",
-              data: [user.user.user_score, github_user.following, github_user.followers, 0, 0]
+              data: [user.user.user_score, github_user.following, github_user.followers, total_forks, total_watchers]
           },
           {
               label: "Average All Users",
