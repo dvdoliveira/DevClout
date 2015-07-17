@@ -10,6 +10,9 @@ before_filter :authenticate_user!
   def profile
     @user = current_user
     user_score = CalculateUserScore.call({user: @user})
+    if StackUser.find_by(user_id: @user.id)
+      stack_score = StackUserScore.call({user: @user,total_score: user_score.total_score})
+    end
     respond_to do |format|
       format.html
       format.json {render json: {:user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score, :github_repos => @user.github_user.github_repos, :averages => Average.all, :statistics => @user.statistics}}
