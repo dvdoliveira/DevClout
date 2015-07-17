@@ -1,30 +1,31 @@
 class CalculateUserScore
   include Interactor
-  @total_stars_count = 0
-  @total_forks_count = 0
-  @total_score = 0
 
   def call
-    score_calc
+    score_calc(context.user)
   end
 
   def total_stars_count(repo)
-    @total_stars_count += repo.stars_count
+    if repo.stars_count
+      @total_stars_count += repo.stars_count
+    end
   end
 
 
   def total_forks_count(repo)
-    @total_forks_count += user.forks_count
+    if repo.forks_count
+      @total_forks_count += repo.forks_count
+    end
   end
 
   def stars_score
-    if (@total_stars_count>=50)
+    if (@total_stars_count >= 50)
       @total_score += 20
-    elsif (@total_stars_count>=10 && <49)
+    elsif (@total_stars_count >=10 && @total_stars_count < 49)
       @total_score += 14
-    elsif (@total_stars_count>=5 && <10)
+    elsif (@total_stars_count >=5 && @total_stars_count < 10)
       @total_score += 8
-    elsif (@total_stars_count>=1 && <5)
+    elsif (@total_stars_count >=1 && @total_stars_count < 5)
       @total_score += 4
     else
       @total_score += 1
@@ -34,11 +35,11 @@ class CalculateUserScore
   def followers_score
     if (@total_followers_count>=20)
       @total_score += 10
-    elsif (@total_followers_count>=5 && <20)
+    elsif (@total_followers_count>=5 && @total_followers_count <20)
       @total_score += 7
-    elsif (@total_followers_count>=3 && <5)
+    elsif (@total_followers_count>=3 && @total_followers_count <5)
       @total_score += 4
-    elsif (@total_followers_count>=1 && <3)
+    elsif (@total_followers_count>=1 && @total_followers_count <3)
       @total_score += 2
     else
       @total_score += 1
@@ -48,11 +49,11 @@ class CalculateUserScore
   def forks_score
     if (@total_forks_count>=50)
       @total_score += 20
-    elsif (@total_forks_count>=10 && <50)
+    elsif (@total_forks_count>=10 && @total_forks_count <50)
       @total_score += 14
-    elsif (@total_forks_count>=5 && <10)
+    elsif (@total_forks_count>=5 && @total_forks_count <10)
       @total_score += 8
-    elsif (@total_forks_count>=1 && <5)
+    elsif (@total_forks_count>=1 && @total_forks_count <5)
       @total_score += 4
     else
       @total_score += 2
@@ -62,11 +63,11 @@ class CalculateUserScore
   def friend_ratio_final_score
     if (@friend_ratio_score>=5)
       @total_score += 10
-    elsif (@friend_ratio_score>=3 && <5)
+    elsif (@friend_ratio_score>=3 && @friend_ratio_score < 5)
       @total_score += 7
-    elsif (@friend_ratio_score>=2 && <3)
+    elsif (@friend_ratio_score>=2 && @friend_ratio_score < 3)
       @total_score += 4
-    elsif (@friend_ratio_score>=1 && <2)
+    elsif (@friend_ratio_score>=1 && @friend_ratio_score < 2)
       @total_score += 2
     else
       @total_score += 1
@@ -80,16 +81,21 @@ class CalculateUserScore
     friend_ratio_final_score
   end
 
-  def score_calc
-    @total_followers_count = GithubUser.followers
-    @following_count = GithubUser.following
+  def score_calc(user)
+    @total_stars_count = 0
+    @total_forks_count = 0
+    @total_score = 0
+    find_user_follower = GithubUser.find_by(user_id: user.id)
+    @user = User.find_by(id: user.id)
+    @total_followers_count = find_user_follower.followers
+    @following_count = find_user_follower.following
       unless @following_count = 0
         @friend_ratio_score = (total_followers_count/following_count)
       else
         @friend_ratio_score = 10
       end
 
-    repos_for_user = GithubRepo.find_by(github_user_id: user.id)
+    repos_for_user = GithubRepo.where(github_user_id: user.id)
     repos_for_user.each do |repo|
       total_stars_count(repo)
       total_forks_count(repo)
@@ -111,8 +117,8 @@ class CalculateUserScore
     # score: @total_score,
     # score_type: "total_score"
     # )
-
+    calculate_score
+    @user.update user_score: @total_score
   end
-
 
 end
