@@ -12,5 +12,10 @@ class StaticPagesController < ApplicationController
   end
 
   def leaderboard
+    @user = current_user
+    respond_to do |format|
+      format.html
+      format.json {render json: {:user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score}}
+    end
   end
 end
