@@ -47,7 +47,7 @@ class CreateNewUser
 
     context.repo_response.each do |repo|
     @githubrepo = GithubRepo.create(
-      github_user_id: @user.id,
+      github_user_id: @githubuser.gh_id,
       gh_owner_name: repo["owner"]["login"],
       owner_id: repo["owner"]["id"],
       name: repo["name"],
@@ -77,6 +77,7 @@ class CreateNewUser
       watchers: repo["watchers"],
       default_branch: repo["default_branch"]
     )
+
     end
     context.value = @user
   end
