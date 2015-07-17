@@ -7,7 +7,7 @@ $(function(){
     console.log(user.github_repos[1])
     var stack_user = user.stack_user;
     var github_user = user.github_user;
-    var average = user.average[1];
+    var average = user.average[0];
     Chart.defaults.global.responsive = true;
 // Initializing variables for charts and data
     var Line = {};
