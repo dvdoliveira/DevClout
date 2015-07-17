@@ -7,7 +7,7 @@ $(function(){
     var stack_user = user.stack_user;
     var github_user = user.github_user;
     Chart.defaults.global.responsive = true;
-// Data set for Github
+// Initializing variables for charts and data
     var Line = {};
     var ctx5;
     var myDoughnutChart;
@@ -23,17 +23,25 @@ $(function(){
 
     var piedata, radardata, linedata, bardata;
 
+    // Figures out the last 6 months in string form for the graph labels
+
+    function addMonths(date, months) {
+      date.setMonth(date.getMonth() + months);
+      return date;
+    }
+
     var last_six_months = [];
-    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    var d = new Date();
-    var current_month =  monthNames[d.getMonth()];
+    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June"];
+    var d = addMonths(new Date(), -5);
+    var six_month_ago =  d.getMonth();
 
-    // for (i=0;i<6;i--) {
-    //   last_six_months.push(monthNames[i])
-    // }
+    for (i = six_month_ago;i < (six_month_ago + 6);i++) {
+      last_six_months.push(monthNames[i]);
+    }
 
+    // Graphs for Github
     var gh_bardata = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: last_six_months,
         datasets: [
             {
                 label: "My First dataset",
@@ -41,7 +49,7 @@ $(function(){
                 strokeColor: "rgba(220,220,220,0.8)",
                 highlightFill: "rgba(220,220,220,0.75)",
                 highlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55, 40]
+                data: [65, 59, 80, 81, 56, 55]
             },
             {
                 label: "My Second dataset",
@@ -49,12 +57,12 @@ $(function(){
                 strokeColor: "rgba(151,187,205,0.8)",
                 highlightFill: "rgba(151,187,205,0.75)",
                 highlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86, 27, 90]
+                data: [28, 48, 40, 19, 86, 27]
             }
         ]
     };
     var gh_linedata = {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      labels: last_six_months,
       datasets: [
         {
             label: "This User",
@@ -64,7 +72,7 @@ $(function(){
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55, 40]
+            data: [65, 59, 80, 81, 56, 55]
         },
         {
             label: "User Average",
@@ -74,7 +82,7 @@ $(function(){
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27, 90]
+            data: [28, 48, 40, 19, 86, 27]
         }
       ]
     };
@@ -132,7 +140,7 @@ $(function(){
 
 // Data set for StackOverflow
     var so_bardata = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: last_six_months,
         datasets: [
             {
                 label: "My First dataset",
@@ -153,7 +161,7 @@ $(function(){
         ]
     };
     var so_linedata = {
-      labels: ["Stack", "February", "March", "April", "May", "June", "July"],
+      labels: last_six_months,
       datasets: [
         {
             label: "My First dataset",
@@ -230,7 +238,7 @@ $(function(){
     };
 
 // Changes graphs between GH and SO
-    changedataset = function() {
+    function changedataset() {
       if ($(".github-btn").hasClass('active')) {
         piedata = gh_piedata;
         radardata = gh_radardata;
@@ -260,7 +268,7 @@ $(function(){
     };
     creategraphs();
 
-    updategraphs = function(){
+    function updategraphs(){
       changedataset();
 
       myBarChart.destroy();
@@ -297,7 +305,7 @@ $(function(){
       updategraphs();
     }); 
 
-    ff_ratio = function() { 
+    function ff_ratio() { 
       if (github_user.following > 0) {
         github_user.followers / github_user.following
       } else {0};
