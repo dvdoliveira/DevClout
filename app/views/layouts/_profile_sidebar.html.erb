@@ -1,0 +1,89 @@
+<div class="profile-pane">
+	    	<!-- Profile Details -->
+		    	<div class="profile-details">
+			    	<!-- Profile Image + Name -->
+				    	<div class="profile-image-name">
+					    	<div class="row centered-text">
+							    <div class="large-3 medium-3 small-3 columns">
+                    <%=image_tag(@user.profile_image_url, alt: "profile-image")%>
+							    </div>
+							    <div class="large-8 medium-8 small-8 columns">
+							      <h3><%=@user.full_name%></h3>
+							      <h4><%=@user.user_type%></h4>
+							      <a class="edit-profile" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Edit Profile</a>
+							    </div>
+							  </div>
+						  </div>
+			    	<!-- #/End of Profile Image + Name -->
+
+
+			    	<!-- Profile Extra Info -->
+			    	<div class="profile-extra-info">
+              <p><%=@user.user_bio%></p>
+              <span><a class="black" href="#"><%=@user.email%></a></span></br>
+			    		<span><a class="black" href="#">http://passionate.ca</a></span>
+			    		<span class="phone-number">604-218-9556</span>
+			    	</div>
+			    	<!-- #/End Profile Extra info -->
+			    </div>
+		    	<!-- #/End of Profile Details -->
+
+		    	<!-- Profile Score -->
+		    	<div class="profile-score">
+		    		<table cellspacing="0">
+		    			<tr>
+		    				<th>Score</th>
+		    				<th>Change</th>
+		    			</tr>
+		    			<tr>
+		    				<td><%=@user.user_score%></td>
+		    				<td>-9 <i class="fa fa-long-arrow-down"></i></td>
+		    			</tr>
+		    		</table>
+		    	</div>
+		    <!-- #/End of Profile Score -->
+		    <div class="profile-btns">
+		    	<div class="twitter-signup">
+		    		<a class="btn btn-twitter-signup" href="/stackoverflow">StackOverflow</a>
+		    		<a class="btn btn-secondary btn-stackoverflow-signup" href="/twitter">Twitter</a>
+		    	</div>
+		    	<div class="twitter-signup">
+		    		
+		    	</div>
+		    	
+		    </div>
+
+		    <!-- Profile Friends -->
+		    <div class="profile-friends">
+		    	<h3>My Friends</h3>
+		    	<ul>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    		<li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+		    	</ul>
+		    </div>
+		    <!-- #/End of Friends -->
+	  	</div>
