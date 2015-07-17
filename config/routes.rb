@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'help' => 'static_pages#help'
   get 'about' => 'static_pages#about'
   get 'contact' => 'static_pages#contact'
+  get 'leaderboard' => 'static_pages#leaderboard'
+
   
   # Omniauth Routes
   get '/stackoverflow' => 'stack_users#new', :as => :stackoverflow
