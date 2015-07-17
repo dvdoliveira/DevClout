@@ -4,6 +4,7 @@ before_filter :authenticate_user!
   end
 
   def show
+    
   end
 
   def profile
