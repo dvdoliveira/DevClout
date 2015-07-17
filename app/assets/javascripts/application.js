@@ -18,6 +18,9 @@
 
 $(function() {
     $(document).foundation();
+    $('#leaderboard').dataTable({
+
+    });
     $('.popup').on('click', '.btn, .login', function(){
         $(this).closest('.popup').find('.btn').hide();
         $(this).closest('.popup').find('.title').hide();

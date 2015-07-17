@@ -1,11 +1,47 @@
-<section class="profile <%= controller_name%> <%= action_name %>">
+<section class="profile leaderboard">
 	<div class="row centered-text">
 	  <div class="large-3 columns">
-	  		  	<%= render partial: 'shared/profile_sidebar', locals: { :user => current_user, :github_user => current_user.github_user, :stack_user => current_user.stack_user, :avg_user_score => current_user.avg_user_score  } %>
+			<%= render partial: 'shared/profile_sidebar', locals: { :user => current_user, :github_user => current_user.github_user, :stack_user => current_user.stack_user, :avg_user_score => current_user.avg_user_score  } %>
 	  </div>
 	  <div class="large-9 background-grey columns">
 	    <div class="leaderBoard-pane">
-	    	Content Here
+	    	<table id="leaderboard">
+	    		<thead>
+	    		<tr>
+	    			<th>Rank</th>
+	    			<th>Change</th>
+	    			<th>Tier</th>
+	    			<th>Member</th>
+	    			<th>Score</th>
+	    		</tr>
+	    		</thead>
+	    		<tbody>
+	    		<% @user.each do |user| %>
+  				<tr>
+  					<td>
+  						<%= user.id %>
+  					</td>
+  					<td>
+  						+ 3
+  					</td>
+  					<td>
+  						Tier
+  					</td>
+  					<td>
+							<img src="<%= user.profile_image_url %>" alt="<%= user.full_name %>" />
+  						<a target="_blank" href="user/<%= user.id %>"><%= user.full_name %>
+  					</td>
+  					<td>
+  						<% if user.user_score == nil %>
+  							0
+  						<% else %>
+  							<%= user.user_score %>
+  						<% end %>
+  					</td>
+    			</tr>	
+	    		<% end %>
+	    		</tbody>
+	    	</table>
 	    </div>
 	  </div>
 	</div>
