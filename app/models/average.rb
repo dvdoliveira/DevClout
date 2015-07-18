@@ -1,9 +1,11 @@
 class Average < ActiveRecord::Base
 
+  @average = Average.find_by(id: 1)
+  @users = User.all
   @github_users = GithubUser.all
   @stack_users = StackUser.all
   @twitter_users = TwitterUser.all
-  @average = Average.find_by(id: 1)
+
 
   # Update GitHub averages on the averages table using all GitHub users data
   def self.update_github_averages
@@ -31,5 +33,10 @@ class Average < ActiveRecord::Base
     @average.update_attribute(:tw_users_listed, @twitter_users.average(:listed_count))
     @average.update_attribute(:tw_users_statuses, @twitter_users.average(:statuses_count))
   end
+
+  # # Update User averages on the averages table using all Users data
+  # def self.update_user_averages
+  #   @average.update_attribute(:users_total_score, @users.average(:user_score))
+  # end 
 
 end

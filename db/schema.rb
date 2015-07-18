@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150717214819) do
+ActiveRecord::Schema.define(version: 20150717233151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150717214819) do
     t.float    "tw_users_statuses",      default: 0.0
     t.datetime "created_at",                           null: false
     t.datetime "updated_at",                           null: false
+    t.float    "users_total_score",      default: 0.0
   end
 
   create_table "github_repos", force: :cascade do |t|
@@ -191,14 +192,15 @@ ActiveRecord::Schema.define(version: 20150717214819) do
     t.string   "full_name"
     t.string   "password"
     t.string   "user_type"
-    t.integer  "user_score"
+    t.integer  "user_score",        default: 0
     t.string   "access_token"
     t.string   "user_bio"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "profile_image_url"
     t.string   "user_name"
     t.string   "blog"
+    t.string   "user_level"
   end
 
 end

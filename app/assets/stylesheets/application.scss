@@ -195,6 +195,9 @@ body > nav > section.top-bar-section > ul.right > li > h2{
      list-style-type: decimal;
  }
  /************ MISC ****************/
+*:focus {
+    outline:none !important;
+}
 .disable{
     display:none;
 }

@@ -18,6 +18,16 @@
 
 $(function() {
     $(document).foundation();
+
+     $('#leaderboard').dataTable( {
+        "lengthMenu": [ [25, 50, 100, 250, -1], [25, 50, 100, 250, "All"] ],
+
+        "oLanguage": {
+         "sLengthMenu": '_MENU_',
+         "sSearch": "_INPUT_"
+       }
+     } );
+    $('.dataTables_filter input').attr("placeholder", "Search");
     $('.popup').on('click', '.btn, .login', function(){
         $(this).closest('.popup').find('.btn').hide();
         $(this).closest('.popup').find('.title').hide();
