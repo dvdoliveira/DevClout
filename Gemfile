@@ -25,7 +25,7 @@ gem "octokit", "~> 3.0"
 gem 'foundation-rails'
 
 # Chart.js gem
-gem 'chart-js-rails'
+
 
 # HTTPparty gem to handle HTTP requests from the server
 gem 'httparty'

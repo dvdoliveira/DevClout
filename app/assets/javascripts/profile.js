@@ -47,18 +47,17 @@ $(function(){
     var total_stars = 0;
     var repos_names = [];
     var repos_forks = [];
+    var repos_watchers = [];
+    var repos_stars = [];
     for (i = 0;i < github_repos.length; i++) {
       var current_repo = user.github_repos[i];
       repos_names.push(current_repo.name);
       total_watchers += current_repo.watchers_count
       total_forks += current_repo.forks_count
       total_stars =+ current_repo.stars_count
-      if (!current_repo.forks_count) {
-        repos_forks.push('0');      
-      } else {
-        var data = current_repo.forks_count;
-        repos_forks.push(data);
-      }
+      repos_forks.push(current_repo.forks_count);
+      repos_forks.push(current_repo.stars_count);
+      repos_forks.push(current_repo.watchers_count);
     }
     // Graphs for Github
     var gh_bardata = {
@@ -73,12 +72,20 @@ $(function(){
                 data: repos_forks
             },
             {
-                label: "My Second dataset",
+                label: "Stars",
                 fillColor: "rgba(151,187,205,0.5)",
                 strokeColor: "rgba(151,187,205,0.8)",
                 highlightFill: "rgba(151,187,205,0.75)",
                 highlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86, 27]
+                data: repos_stars
+            },
+            {
+                label: "Watchers",
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(151,187,205,0.75)",
+                highlightStroke: "rgba(151,187,205,1)",
+                data: repos_watchers
             }
         ]
     };
@@ -296,8 +303,7 @@ $(function(){
 
       ctx8 = $("#myPie8").get(0).getContext("2d");
       myBarChart = new Chart(ctx8).Bar(bardata, {
-        showXLabels: 1,
-        responsive : true,
+        labelLength: 4,
         animation: true,
         barValueSpacing : 5,
         barDatasetSpacing : 1,
@@ -373,8 +379,8 @@ $(function(){
       // Change 4 graph titles
       $(".graph1 h3").text("General");
       $(".graph2 h3").text("Languages");
-      $(".graph3 h3").text("Repositories");
-      $(".graph4 h3").text("Followers");
+      $(".graph3 h3").text("DUNNO");
+      $(".graph4 h3").text("Repositories");
 
       updategraphs();
     });
