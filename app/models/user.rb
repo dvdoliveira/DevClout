@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_one :twitter_user
   has_many :github_repos
 
+
   def followers_to_following
     if self.github_user.following > 0
       self.github_user.followers / self.github_user.following
