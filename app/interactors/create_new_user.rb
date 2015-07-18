@@ -77,10 +77,8 @@ class CreateNewUser
       watchers: repo["watchers"],
       default_branch: repo["default_branch"]
     )
-
-    user_score = CalculateUserScore.call({user: @user})
-    
     end
+    user_score = CalculateUserScore.call({user: @user})
     context.value = @user
   end
 end

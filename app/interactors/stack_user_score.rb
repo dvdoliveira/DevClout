@@ -77,29 +77,29 @@ class StackUserScore
     user_previous_score = @user.user_score
     @user.update user_score: @total_score+user_previous_score
 
-    # Statistic.create(
-    #   user_id: @user.id,
-    #   score: @down_vote_count_value,
-    #   score_type: "so_down_vote"
-    # )
-    #
-    # Statistic.create(
-    #   user_id: @user.id,
-    #   score: @up_vote_count_value,
-    #   score_type: "so_up_vote"
-    # )
-    #
-    # Statistic.create(
-    #   user_id: @user.id,
-    #   score: @answer_count_value,
-    #   score_type: "so_answer_count"
-    # )
-    #
-    # Statistic.create(
-    #   user_id: @user.id,
-    #   score:  @reputation_value ,
-    #   score_type: "so_reputation_count"
-    # )
+    Statistic.create(
+      user_id: @user.id,
+      score: @down_vote_count_value,
+      score_type: "so_down_vote"
+    )
+
+    Statistic.create(
+      user_id: @user.id,
+      score: @up_vote_count_value,
+      score_type: "so_up_vote"
+    )
+
+    Statistic.create(
+      user_id: @user.id,
+      score: @answer_count_value,
+      score_type: "so_answer_count"
+    )
+
+    Statistic.create(
+      user_id: @user.id,
+      score:  @reputation_value ,
+      score_type: "so_reputation_count"
+    )
 
   end
 
