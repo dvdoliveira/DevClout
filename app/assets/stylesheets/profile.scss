@@ -211,10 +211,56 @@
 			  }
 			}
 		}
-		.profile-btns {
+		.profile-btn {
 			margin:20px 0px;
 			background: #e6e6e6;
 			padding:20px;
+			position: relative;
+
+			table{
+				width: 100%;
+				background:none;
+				border:none;
+				margin-bottom: 0px;
+
+				td{
+					padding:0px;
+
+					&.link{padding-left:10px;}
+				}
+
+				img{
+					height: 50px;
+					&.stack-overflow-icon{
+						margin-right: 27px;
+					}
+					&.stack-overflow-icon-connected{
+						margin-right: 10px;
+					}
+				}
+
+			}
+
+			a.connect-link{
+				font-size:14px;
+				color:#222;
+				text-decoration: none;
+				font-weight: 300;
+				&:hover{
+					text-decoration: underline;
+				}
+			}
+
+			a.connect-btn, span.connect-btn{
+				position: absolute;
+			  top: 27px;
+			  right: 23px;
+			  background: #719c54;
+			  padding: 8px 15px;
+			  text-decoration: none;
+			  color: white;
+			  border-radius: 3px;
+			}
 
 			.btn-stackoverflow-signup {
 				width: 100%;
