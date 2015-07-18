@@ -39,5 +39,10 @@ class StackCreateUser
       last_access_date: Time.at(context.response["items"][0]["last_access_date"]).to_datetime,
       last_modified_date: @new_modified_time
       )
+
+      @user = User.find_by(id: context.session_user_id)
+      stack_score = StackUserScore.call({user: @user,total_score: @user.user_score})
+
   end
+
 end

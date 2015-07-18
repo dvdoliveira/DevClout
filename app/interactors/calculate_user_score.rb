@@ -123,8 +123,8 @@ class CalculateUserScore
     # score: @total_score,
     # score_type: "total_score"
     # )
-    calculate_score
-    @user.update user_score: @total_score
   end
+  calculate_score
+  @user.update user_score: @total_score
   # context.total_score = @total_score
 end
