@@ -107,17 +107,20 @@ class CalculateUserScore
       end
     end
 
+    repos_value(@user)
+    calculate_score
+    @user.update user_score: @total_score
+     update_stats_table(@user)
+  end
+
+
+  def repos_value(user)
     repos_for_user = GithubRepo.where(github_user_id: user.id)
     repos_for_user.each do |repo|
       total_stars_count(repo)
       total_forks_count(repo)
     end
-    calculate_score
-    @user.update user_score: @total_score
-    # update_stats_table(@user)
   end
-
-
 
 
   def update_stats_table(user)
