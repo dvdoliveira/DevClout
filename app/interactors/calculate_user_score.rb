@@ -126,5 +126,5 @@ class CalculateUserScore
     calculate_score
     @user.update user_score: @total_score
   end
-
+  # context.total_score = @total_score
 end

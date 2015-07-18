@@ -78,6 +78,8 @@ class CreateNewUser
       default_branch: repo["default_branch"]
     )
 
+    user_score = CalculateUserScore.call({user: @user})
+    
     end
     context.value = @user
   end
