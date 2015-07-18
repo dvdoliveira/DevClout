@@ -46,13 +46,14 @@ class CreateNewUser
     )
 
     context.repo_response.each do |repo|
+    binding.pry
     @githubrepo = GithubRepo.create(
       github_user_id: @githubuser.gh_id,
       gh_owner_name: repo["owner"]["login"],
       owner_id: repo["owner"]["id"],
       name: repo["name"],
       full_name:repo["full_name"],
-      private: repo["private"],
+      gh_private: repo["private"],
       html_url: repo["html_url"],
       description: repo["description"],
       fork: repo["fork"],
@@ -66,10 +67,10 @@ class CreateNewUser
       svn_url: repo["svn_url"],
       homepage: repo["homepage"],
       size: repo["size"],
-      stars_count: repo[:stars_count],
-      watchers_count: repo[:watchers_count],
-      forks_count: repo[:forks_count],
-      language: repo[:language],
+      stars_count: repo["stargazers_count"],
+      watchers_count: repo["watchers_count"],
+      forks_count: repo["forks_count"],
+      language: repo["language"],
       has_issues: repo["has_issues"],
       has_downloads: repo["has_downloads"],
       mirror_url: repo["mirror_url"],
