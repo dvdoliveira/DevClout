@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-
   def new
     redirect_to '/auth/github'
   end
@@ -22,7 +21,6 @@ class SessionsController < ApplicationController
     else
       session[:user_id] = new_user.value.id
     end
-
     redirect_to profile_path
   end
 
