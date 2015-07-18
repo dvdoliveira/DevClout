@@ -1,20 +1,19 @@
 class Average < ActiveRecord::Base
 
-  @average = Average.first
   @users = User.all
-  @github_users = GithubUser.all
-  @stack_users = StackUser.all
-  @twitter_users = TwitterUser.all
-
 
   # Update GitHub averages on the averages table using all GitHub users data
   def self.update_github_averages
+    @github_users = GithubUser.all
+    @average = Average.first
     @average.update_attribute(:gh_users_followers, @github_users.average(:followers))
     @average.update_attribute(:gh_users_following, @github_users.average(:following))
   end
 
   # Update StackOverflow averages on the averages table using all StackOverflow users data
   def self.update_stackoverflow_averages
+    @stack_users = StackUser.all
+    @average = Average.first
     @average.update_attribute(:so_users_answers, @stack_users.average(:answer_count))
     @average.update_attribute(:so_users_questions, @stack_users.average(:question_count))
     @average.update_attribute(:so_users_down_votes, @stack_users.average(:down_vote_count))
@@ -27,6 +26,8 @@ class Average < ActiveRecord::Base
 
   # Update Twitter averages on the averages table using all Twitter users data
   def self.update_twitter_averages
+    @twitter_users = TwitterUser.all
+    @average = Average.first
     @average.update_attribute(:tw_users_followers, @twitter_users.average(:followers_count))
     @average.update_attribute(:tw_users_friends, @twitter_users.average(:friends_count))
     @average.update_attribute(:tw_users_favourites, @twitter_users.average(:favourites_count))
