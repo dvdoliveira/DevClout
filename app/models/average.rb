@@ -1,6 +1,6 @@
 class Average < ActiveRecord::Base
 
-  @average = Average.find_by(id: 1)
+  @average = Average.first
   @users = User.all
   @github_users = GithubUser.all
   @stack_users = StackUser.all
