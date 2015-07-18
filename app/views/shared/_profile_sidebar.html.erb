@@ -42,14 +42,56 @@
       </table>
     </div>
   <!-- #/End of Profile Score -->
-  <div class="profile-btns">
-    <div class="twitter-signup">
-      <a class="btn btn-twitter-signup" href="/stackoverflow">StackOverflow</a>
-      <a class="btn btn-secondary btn-stackoverflow-signup" href="/twitter">Twitter</a>
-    </div>
-    <div class="twitter-signup">
-      
-    </div>
+  <div class="profile-btn">
+    <table>
+      <tr>
+        <td width="70%">
+          <table>
+            <tr>
+              <td><img src="images/icons/twitter-icon.svg" width="50" height="50" /></td>
+              <% if !current_user.twitter_user %>
+              <td class="link"><a class="connect-link" href="/twitter">Connect to Twitter</a></td>
+              <% else %>
+              <td class="link">Connected</td>
+              <% end %>
+            </tr>
+          </table>
+        </td>
+        <td width="30%"></td>
+      </tr>
+    </table>
+    <% if !current_user.twitter_user %>
+    <a class="connect-btn" href="/twitter">+</a>
+    <% else %>
+    <span class="connect-btn"><i class="fa fa-check"></i></span>
+    <% end %>
+  </div>
+
+  <div class="profile-btn">
+    <table>
+      <tr>
+        <td width="70%">
+          <table>
+            <tr>
+              <% if !current_user.stack_user %>
+              <td><img class="stack-overflow-icon" src="images/icons/stack-overflow-icon.svg" /></td>
+              <td class="link"><a class="connect-link" href="/stackoverflow">Connect to Stack&nbsp;Overflow</a></td>
+              <% else %>
+              <td><img class="stack-overflow-icon-connected" src="images/icons/stack-overflow-icon.svg" /></td>
+              <td class="link">Connected</td>
+              <% end %>
+
+            </tr>
+          </table>
+        </td>
+        <td width="30%"></td>
+      </tr>
+    </table>
+    <% if !current_user.stack_user %>
+    <a class="connect-btn" href="/stackoverflow">+</a>
+    <% else %>
+    <span class="connect-btn"><i class="fa fa-check"></i></span>
+    <% end %>
   </div>
 
   <!-- Profile Friends -->

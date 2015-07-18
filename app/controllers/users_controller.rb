@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user = current_user
     respond_to do |format|
       format.html
-      format.json {render json: {:user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score, :github_repos => @user.github_user.github_repos, :average => Average.all, :statistics => @user.statistics}}
+      format.json {render json: {:user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score, :github_repos => @user.github_user.github_repos, :average => Average.first, :statistics => @user.statistics}}
     end
   end
 

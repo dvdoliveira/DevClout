@@ -17,7 +17,7 @@
 	    		</thead>
 	    		<tbody>
 	    		<% rank = 0 %>
-	    		<% @user.each do |user| %>
+	    		<% @users.each do |user| %>
 
 	    		<% if current_user && current_user.id == user.id %>
 	    			<tr class="current_user">
