@@ -52,7 +52,7 @@ class CreateNewUser
       owner_id: repo["owner"]["id"],
       name: repo["name"],
       full_name:repo["full_name"],
-      private: repo["private"],
+      gh_private: repo["private"],
       html_url: repo["html_url"],
       description: repo["description"],
       fork: repo["fork"],
@@ -66,10 +66,10 @@ class CreateNewUser
       svn_url: repo["svn_url"],
       homepage: repo["homepage"],
       size: repo["size"],
-      stars_count: repo[:stars_count],
-      watchers_count: repo[:watchers_count],
-      forks_count: repo[:forks_count],
-      language: repo[:language],
+      stars_count: repo["stargazers_count"],
+      watchers_count: repo["watchers_count"],
+      forks_count: repo["forks_count"],
+      language: repo["language"],
       has_issues: repo["has_issues"],
       has_downloads: repo["has_downloads"],
       mirror_url: repo["mirror_url"],
@@ -77,10 +77,8 @@ class CreateNewUser
       watchers: repo["watchers"],
       default_branch: repo["default_branch"]
     )
-
-    user_score = CalculateUserScore.call({user: @user})
-    
     end
+    user_score = CalculateUserScore.call({user: @user})
     context.value = @user
   end
 end
