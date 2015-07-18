@@ -33,6 +33,8 @@ gem 'httparty'
 # Gem required by Heroku to work better with Rails
 gem 'rails_12factor'
 
+gem 'railroady'
+
 gem 'rack', '~> 1.6.4'
 
 gem 'dotenv-rails', :groups => [:development, :test]
