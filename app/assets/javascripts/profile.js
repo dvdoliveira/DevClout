@@ -24,13 +24,43 @@ $(function(){
     var ctx8;
     var myBarChart;
 
-    var piedata, radardata, linedata, bardata;
+    var piedata, radardata, linedata, bardata, pieoptions;
 
     var colors =[];
     var lighter_colors = [];
 
-    // Figures out the last 6 months in string form for the graph labels
+    // Updates the github stats page
+    function ff_ratio() { 
+      if (github_user.following > 0) {
+        return(github_user.followers / github_user.following);
+      } else {return 0;};
+    }
+    function update_gh_stats() {
+      // Change first stat to followers
+      $(".ap-1 h3").text("Followers ");
+      $(".ap-1 .current_total").text(github_user.followers);
+      $(".ap-1 .current_changed").html(change_in(github_user.followers, "gh_followers"));
+      // Change second stat to pub repos
+      $(".ap-2 h3").text("Public Repositories ");
+      $(".ap-2 .current_total").text(github_user.public_repos);
+      $(".ap-2 .current_changed").html("Pls do");
+      // Change third stat to f.f ratio
+      $(".ap-3 h3").text("F.F Ratio ");
+      $(".ap-3 .current_total").text(ff_ratio());
+      $(".ap-3 .current_changed").html(change_in(ff_ratio(), "gh_friends_following_ratio"));
+      // Change 4 graph titles
+      $(".graph1 h3").text("General");
+      $(".graph2 h3").text("Languages");
+      $(".graph3 h3").text("DUNNO");
+      $(".graph4 h3").text("Repositories");
+    }
+    function update_total_score() {
+      $(".total-score-changed").html(change_in(user.user.user_score, "gh_total_score"))
+    }
+    update_total_score();
+    update_gh_stats();
 
+    // Figures out the last 6 months in string form for the graph labels
     function addMonths(date, months) {
       date.setMonth(date.getMonth() + months);
       return date;
@@ -308,11 +338,17 @@ $(function(){
         radardata = gh_radardata;
         linedata = gh_linedata;
         bardata = gh_bardata;
+        pieoptions = {animateScale: true};
       } else if ($(".stackoverflow-btn").hasClass('active')) {
         piedata = so_piedata;
         radardata = so_radardata;
         linedata = so_linedata;
         bardata = so_bardata;
+        if (stack_user.bc_bronze + stack_user.bc_silver + stack_user.bc_gold > 0){
+          pieoptions = {animateScale: true, tooltipTemplate: "No Badges"}
+        } else {
+          pieoptions = {animateScale: true};
+        }
       }
     }
     changedataset();
@@ -324,7 +360,7 @@ $(function(){
       legend(document.getElementById('radar-legend'), radardata, myRadarChart);
 
       ctx5 = $("#myPie4").get(0).getContext("2d");
-      myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
+      myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
       legend(document.getElementById('pie-legend'), piedata, myDoughnutChart);
      
       ctx7 = $("#myPie7").get(0).getContext("2d");
@@ -355,6 +391,55 @@ $(function(){
       creategraphs();
     };
 
+    // Finds the change in certain stats since the last update
+    function change_in(new_stat, stat_field) {
+      var old_stat;
+
+      if (stat_field === "so_up_down_ratio") {
+        var old_up;
+        var old_down;
+        for (i=0; i<user.newest_stats.length; i++) {
+          if (user.newest_stats[i].score_type === "so_up_vote") {
+            old_up = user.newest_stats[i].score;
+            break;
+          }
+        }
+        for (i=0; i<user.newest_stats.length; i++) {
+          if (user.newest_stats[i].score_type === "so_down_vote") {
+            old_down = user.newest_stats[i].score;
+            break;
+          }
+        }
+        if (old_down > 0) {
+          old_stat = (old_up / old_down);
+        } else {old_stat = 0;};
+
+      } else {
+
+        for (i=0; i<user.newest_stats.length; i++) {
+          if (user.newest_stats[i].score_type === stat_field) {
+            old_stat = user.newest_stats[i].score;
+            break;
+          }
+        }
+      }
+
+      var change = parseFloat((new_stat - old_stat).toFixed(2));
+      if (change > 0) {
+        return('+' + change + ' <i class="fa fa-long-arrow-up"></i>');
+      } else if (change < 0) {
+        return(change + ' <i class="fa fa-long-arrow-down"></i>');
+      } else if (change == 0) {
+        return('<i class="fa fa-minus"></i>');
+      }
+    }
+
+    function up_down_ratio() {
+      if (stack_user.down_vote_count > 0) {
+        return(stack_user.up_vote_count / stack_user.down_vote_count);
+      } else {return 0;};
+    }
+
     // Button to switch from GitHub to StackOverflow'=
     if (stack_user) {
       $(".stackoverflow-btn").on('click', function(){
@@ -364,15 +449,15 @@ $(function(){
         // Change first stat to reputation
         $(".ap-1 h3").text("Reputation ");
         $(".ap-1 .current_total").text(stack_user.reputation);
-        $(".ap-1 .current_changed").text();
+        $(".ap-1 .current_changed").html(change_in(stack_user.reputation, "so_reputation_count"));
         // Change second stat to views
-        $(".ap-2 h3").text("Views ");
+        $(".ap-2 h3").text("Up/Down Ratio ");
         $(".ap-2 .current_total").text(stack_user.view_count);
-        $(".ap-2 .current_changed").text();
+        $(".ap-2 .current_changed").html(change_in(up_down_ratio(), "so_up_down_ratio"));
         // Change third stat to answers
         $(".ap-3 h3").text("Answers ");
         $(".ap-3 .current_total").text(stack_user.answer_count);
-        $(".ap-3 .current_changed").text();
+        $(".ap-3 .current_changed").html(change_in(stack_user.answer_count, "so_answer_count"));
          // Change 4 graph titles
         $(".graph1 h3").text("General");
         $(".graph2 h3").text("Badges");
@@ -381,41 +466,16 @@ $(function(){
 
         updategraphs();
       }); 
-    } else {
-      
-    }
-
-    function ff_ratio() { 
-      if (github_user.following > 0) {
-        github_user.followers / github_user.following
-      } else {0};
     }
 
     $(".github-btn").on('click', function(){
       if ($(this).hasClass('active')) return;
       $(this).addClass("active");
       $(".stackoverflow-btn").removeClass("active");
-      // Change first stat to followers
-      $(".ap-1 h3").text("Followers ");
-      $(".ap-1 .current_total").text(github_user.followers);
-      $(".ap-1 .current_changed").text();
-      // Change second stat to pub repos
-      $(".ap-2 h3").text("Public Repositories ");
-      $(".ap-2 .current_total").text(github_user.public_repos);
-      $(".ap-2 .current_changed").text();
-      // Change third stat to f.f ratio
-      $(".ap-3 h3").text("F.F Ratio ");
-      $(".ap-3 .current_total").text(ff_ratio);
-      $(".ap-3 .current_changed").text();
-      // Change 4 graph titles
-      $(".graph1 h3").text("General");
-      $(".graph2 h3").text("Languages");
-      $(".graph3 h3").text("DUNNO");
-      $(".graph4 h3").text("Repositories");
-      // Change second graph persons
-      
+
+      update_gh_stats()
       updategraphs();
-    });
+    });  
   };
 
 // Makes AJAX request then creates graphs
