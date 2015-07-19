@@ -49,6 +49,7 @@ $(function(){
     var repos_forks = [];
     var repos_watchers = [];
     var repos_stars = [];
+    var languages_associative = {};
     for (i = 0;i < github_repos.length; i++) {
       var current_repo = user.github_repos[i];
       repos_names.push(current_repo.name);
@@ -56,35 +57,76 @@ $(function(){
       total_forks += current_repo.forks_count
       total_stars =+ current_repo.stars_count
       repos_forks.push(current_repo.forks_count);
-      repos_forks.push(current_repo.stars_count);
-      repos_forks.push(current_repo.watchers_count);
+      repos_stars.push(current_repo.stars_count);
+      repos_watchers.push(current_repo.watchers_count);
+      if(languages_associative[current_repo.language]==undefined){
+        languages_associative[current_repo.language]=1;
+      }else{
+        languages_associative[current_repo.language] +=1;
+      }
     }
+
+    // This is for creating 10 random colors in RGB and finding their highlighted version
+    var colors =[];
+    var lighter_colors = [];
+    function lighten(color, percent) {
+      var f=color.split(","),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=parseInt(f[0].slice(4)),G=parseInt(f[1]),B=parseInt(f[2]);
+      return "rgb("+(Math.round((t-R)*p)+R)+","+(Math.round((t-G)*p)+G)+","+(Math.round((t-B)*p)+B)+")";
+    };
+    for (i=0;i<10;i++) {
+      random_color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+      colors.push(random_color);
+      lighter_colors.push(lighten(random_color, 0.2));
+    };
+    function rgb_to_rgba(rgb, percent){
+      new_rgba = rgb.replace(/rgb/i, "rgba");
+      new_rgba = new_rgba.replace(/\)/i, ',' + percent + ')');
+      return new_rgba;
+    };
+
+    // This makes the data for each users language for the GitHub pie graph 
+    var languages_data = [];
+    var count = 0;
+    for(var index in languages_associative) {
+      languages_data.push({
+            value: languages_associative[index],
+            color: colors[count],
+            highlight: lighter_colors[count],
+            label: index
+      });
+      if (count < 10){
+        count += 1;
+      } else{
+        count = 0;
+      };
+    };
+
     // Graphs for Github
     var gh_bardata = {
         labels: repos_names,
         datasets: [
             {
                 label: "Forks",
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
+                fillColor: rgb_to_rgba(colors[0], 0.5),
+                strokeColor: rgb_to_rgba(colors[0], 0.8),
+                highlightFill: rgb_to_rgba(colors[0], 0.75),
+                highlightStroke: rgb_to_rgba(colors[0], 1),
                 data: repos_forks
             },
             {
                 label: "Stars",
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
+                fillColor: rgb_to_rgba(colors[1], 0.5),
+                strokeColor: rgb_to_rgba(colors[1], 0.8),
+                highlightFill: rgb_to_rgba(colors[1], 0.75),
+                highlightStroke: rgb_to_rgba(colors[1], 1),
                 data: repos_stars
             },
             {
                 label: "Watchers",
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
+                fillColor: rgb_to_rgba(colors[2], 0.5),
+                strokeColor: rgb_to_rgba(colors[2], 0.8),
+                highlightFill: rgb_to_rgba(colors[2], 0.75),
+                highlightStroke: rgb_to_rgba(colors[2], 1),
                 data: repos_watchers
             }
         ]
@@ -94,73 +136,49 @@ $(function(){
       datasets: [
         {
             label: "This User",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
+            fillColor: rgb_to_rgba(colors[0], 0.2),
+            strokeColor: rgb_to_rgba(colors[0], 1),
+            pointColor: rgb_to_rgba(colors[0], 1),
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
+            pointHighlightStroke: rgb_to_rgba(colors[0], 1),
             data: [65, 59, 80, 81, 56, 55]
         },
         {
             label: "User Average",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
+            fillColor: rgb_to_rgba(colors[1], 0.2),
+            strokeColor: rgb_to_rgba(colors[1], 1),
+            pointColor: rgb_to_rgba(colors[1], 1),
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
+            pointHighlightStroke: rgb_to_rgba(colors[1], 1),
             data: [28, 48, 40, 19, 86, 27]
         }
       ]
     };
-    var gh_piedata = [
-      {
-          value: 300,
-          color:"#F7464A",
-          highlight: "#FF5A5E",
-          label: "Red"
-      },
-      {
-          value: 50,
-          color: "#46BFBD",
-          highlight: "#5AD3D1",
-          label: "Green"
-      },
-      {
-          value: 100,
-          color: "#FDB45C",
-          highlight: "#FFC870",
-          label: "Yellow"
-      },
-      {
-          value: 100,
-          color: "#2ec81b",
-          highlight: "#3dbf1c",
-          label: "Green"
-      }
-    ]
+    var gh_piedata = languages_data;
+
     var gh_radardata = {
       labels: ["Score", "Following", "Followers", "Forks", "Stars"],
       datasets: [
           {
               label: user.full_name,
-              fillColor: "rgba(250,164,58,0.2)",
-              strokeColor: "rgba(250,164,58,1)",
-              pointColor: "rgba(250,164,58,1)",
+              fillColor: rgb_to_rgba(colors[0], 0.2),
+              strokeColor: rgb_to_rgba(colors[0], 1),
+              pointColor: rgb_to_rgba(colors[0], 1),
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(250,164,58,1)",
+              pointHighlightStroke: rgb_to_rgba(colors[0], 1),
               data: [user.user.user_score, github_user.following, github_user.followers, total_forks, total_stars]
           },
           {
               label: "Average All Users",
-              fillColor: "rgba(151,187,205,0.2)",
-              strokeColor: "rgba(151,187,205,1)",
-              pointColor: "rgba(151,187,205,1)",
+              fillColor: rgb_to_rgba(colors[1], 0.2),
+              strokeColor: rgb_to_rgba(colors[1], 1),
+              pointColor: rgb_to_rgba(colors[1], 1),
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(151,187,205,1)",
+              pointHighlightStroke: rgb_to_rgba(colors[1], 1),
               data: [user.avg_user_score, average.gh_users_following, average.gh_users_followers, average.gh_users_forks, average.gh_users_stars]
           }
       ]
@@ -308,7 +326,7 @@ $(function(){
         barValueSpacing : 5,
         barDatasetSpacing : 1,
         tooltipFillColor: "rgba(0,0,0,0.8)",                
-        multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>"
+        multiTooltipTemplate: "<%= datasetLabel %> = <%= value %>",
       });
     };
     creategraphs();
@@ -381,6 +399,7 @@ $(function(){
       $(".graph2 h3").text("Languages");
       $(".graph3 h3").text("DUNNO");
       $(".graph4 h3").text("Repositories");
+      // Change second graph persons
 
       updategraphs();
     });
