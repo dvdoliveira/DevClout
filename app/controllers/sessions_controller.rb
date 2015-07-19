@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
     redirect_to '/auth/github'
   end
 
+
   def create
     @auth = request.env["omniauth.auth"]
     session_code = request.env["omniauth.auth"]['code']

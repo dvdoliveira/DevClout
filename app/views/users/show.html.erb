@@ -1,0 +1,10 @@
+<section class="profile <%= controller_name%> <%= action_name %>">
+	<div class="row centered-text">
+	  <div class="large-3 columns offset-profile-menu">
+	  	<%= render partial: 'shared/profile_sidebar', locals: { :user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score  } %>
+	  </div>
+	  <div class="large-9 background-grey columns">
+	    <%= render partial: 'shared/profile_analytics', locals: { :user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score  } %>
+	  </div>
+	</div>
+</section>

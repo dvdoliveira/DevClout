@@ -74,7 +74,7 @@ class UserStackScore
     answer_score(@answer_count_value)
     reputation_score(@reputation_value)
     user_previous_score = @user.user_score
-    @user.update user_score: @total_score+user_previous_score
+    @user.update_attribute(:user_score,@total_score+user_previous_score)
 
     Statistic.create(
       user_id: @user.id,
