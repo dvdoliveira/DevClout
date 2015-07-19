@@ -26,5 +26,11 @@ class CreateTwitterUser
       listed_count: context.auth[:extra][:raw_info][:listed_count],
       statuses_count: context.auth[:extra][:raw_info][:statuses_count]
     )
+    update_user_twitter_id(@twitter_user)
+  end
+
+  def update_user_twitter_id(user)
+    @user = User.find_by(id: user.user.id)
+    @user.update_attribute(:tw_id, user.twitter_id)
   end
 end
