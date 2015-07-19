@@ -78,6 +78,11 @@ $(function(){
       colors.push(random_color);
       lighter_colors.push(lighten(random_color, 0.2));
     };
+    function rgb_to_rgba(rgb, percent){
+      new_rgba = rgb.replace(/rgb/i, "rgba");
+      new_rgba = new_rgba.replace(/\)/i, ',' + percent + ')');
+      return new_rgba;
+    };
 
     // This makes the data for each users language for the GitHub pie graph 
     var languages_data = [];
@@ -89,7 +94,11 @@ $(function(){
             highlight: lighter_colors[count],
             label: index
       });
-      count += 1
+      if (count < 10){
+        count += 1;
+      } else{
+        count = 0;
+      };
     };
 
     // Graphs for Github
@@ -98,26 +107,26 @@ $(function(){
         datasets: [
             {
                 label: "Forks",
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
+                fillColor: rgb_to_rgba(colors[0], 0.5),
+                strokeColor: rgb_to_rgba(colors[0], 0.8),
+                highlightFill: rgb_to_rgba(colors[0], 0.75),
+                highlightStroke: rgb_to_rgba(colors[0], 1),
                 data: repos_forks
             },
             {
                 label: "Stars",
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
+                fillColor: rgb_to_rgba(colors[1], 0.5),
+                strokeColor: rgb_to_rgba(colors[1], 0.8),
+                highlightFill: rgb_to_rgba(colors[1], 0.75),
+                highlightStroke: rgb_to_rgba(colors[1], 1),
                 data: repos_stars
             },
             {
                 label: "Watchers",
-                fillColor: "rgba(70,191,189,0.5)",
-                strokeColor: "rgba(70,191,189,0.8)",
-                highlightFill: "rgba(70,191,189,0.75)",
-                highlightStroke: "rgba(70,191,189,1)",
+                fillColor: rgb_to_rgba(colors[2], 0.5),
+                strokeColor: rgb_to_rgba(colors[2], 0.8),
+                highlightFill: rgb_to_rgba(colors[2], 0.75),
+                highlightStroke: rgb_to_rgba(colors[2], 1),
                 data: repos_watchers
             }
         ]
@@ -127,73 +136,49 @@ $(function(){
       datasets: [
         {
             label: "This User",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
+            fillColor: rgb_to_rgba(colors[0], 0.2),
+            strokeColor: rgb_to_rgba(colors[0], 1),
+            pointColor: rgb_to_rgba(colors[0], 1),
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
+            pointHighlightStroke: rgb_to_rgba(colors[0], 1),
             data: [65, 59, 80, 81, 56, 55]
         },
         {
             label: "User Average",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
+            fillColor: rgb_to_rgba(colors[1], 0.2),
+            strokeColor: rgb_to_rgba(colors[1], 1),
+            pointColor: rgb_to_rgba(colors[1], 1),
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
+            pointHighlightStroke: rgb_to_rgba(colors[1], 1),
             data: [28, 48, 40, 19, 86, 27]
         }
       ]
     };
-    var gh_piedata = languages_data
-    //   {
-    //       value: 300,
-    //       color:"#F7464A",
-    //       highlight: "#FF5A5E",
-    //       label: "Red"
-    //   },
-    //   {
-    //       value: 50,
-    //       color: "#46BFBD",
-    //       highlight: "#5AD3D1",
-    //       label: "Green"
-    //   },
-    //   {
-    //       value: 100,
-    //       color: "#FDB45C",
-    //       highlight: "#FFC870",
-    //       label: "Yellow"
-    //   },
-    //   {
-    //       value: 100,
-    //       color: "#2ec81b",
-    //       highlight: "#3dbf1c",
-    //       label: "Green"
-    //   }
-    // ]
+    var gh_piedata = languages_data;
+
     var gh_radardata = {
       labels: ["Score", "Following", "Followers", "Forks", "Stars"],
       datasets: [
           {
               label: user.full_name,
-              fillColor: "rgba(250,164,58,0.2)",
-              strokeColor: "rgba(250,164,58,1)",
-              pointColor: "rgba(250,164,58,1)",
+              fillColor: rgb_to_rgba(colors[0], 0.2),
+              strokeColor: rgb_to_rgba(colors[0], 1),
+              pointColor: rgb_to_rgba(colors[0], 1),
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(250,164,58,1)",
+              pointHighlightStroke: rgb_to_rgba(colors[0], 1),
               data: [user.user.user_score, github_user.following, github_user.followers, total_forks, total_stars]
           },
           {
               label: "Average All Users",
-              fillColor: "rgba(151,187,205,0.2)",
-              strokeColor: "rgba(151,187,205,1)",
-              pointColor: "rgba(151,187,205,1)",
+              fillColor: rgb_to_rgba(colors[1], 0.2),
+              strokeColor: rgb_to_rgba(colors[1], 1),
+              pointColor: rgb_to_rgba(colors[1], 1),
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(151,187,205,1)",
+              pointHighlightStroke: rgb_to_rgba(colors[1], 1),
               data: [user.avg_user_score, average.gh_users_following, average.gh_users_followers, average.gh_users_forks, average.gh_users_stars]
           }
       ]
@@ -414,6 +399,7 @@ $(function(){
       $(".graph2 h3").text("Languages");
       $(".graph3 h3").text("DUNNO");
       $(".graph4 h3").text("Repositories");
+      // Change second graph persons
 
       updategraphs();
     });
