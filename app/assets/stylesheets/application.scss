@@ -116,6 +116,12 @@
   text-align: center;
   text-decoration: none;
   background: #8abf67;
+    &:hover {
+     text-decoration: none;
+     background: #719c54;
+    }
+ }
+ input.profile-update-btn{
   margin-bottom: 15px;
   position: static;
   display: block;
@@ -123,10 +129,6 @@
   font-weight: 300;
   font-family: lato;
   cursor: pointer;
-    &:hover {
-     text-decoration: none;
-     background: #719c54;
-    }
  }
  a.btn-secondary{
      background: #2c87c1;
