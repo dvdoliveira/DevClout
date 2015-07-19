@@ -1,4 +1,4 @@
-class CreateNewUser
+class CreateGithubUser
   include Interactor
 
   def call
@@ -78,7 +78,7 @@ class CreateNewUser
       default_branch: repo["default_branch"]
     )
     end
-    user_score = CalculateUserScore.call({user: @user})
+    user_score = UserGithubScore.call({user: @user})
     context.value = @user
   end
 end

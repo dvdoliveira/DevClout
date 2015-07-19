@@ -1,6 +1,5 @@
-class StackUserScore
+class UserStackScore
   include Interactor
-
 
   def call
     score_calc(context.user)

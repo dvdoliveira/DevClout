@@ -24,14 +24,17 @@ gem "octokit", "~> 3.0"
 # Foundation CSS Framework gem
 gem 'foundation-rails'
 
-# Chart.js gem
-gem 'chart-js-rails'
-
 # HTTPparty gem to handle HTTP requests from the server
 gem 'httparty'
 
 # Gem required by Heroku to work better with Rails
 gem 'rails_12factor'
+
+# Gem to generate visual database schemas
+gem 'railroady'
+
+# Gem to access twitter API using Rest
+gem 'twitter'
 
 gem 'rack', '~> 1.6.4'
 

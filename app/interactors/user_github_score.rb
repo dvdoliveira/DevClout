@@ -1,4 +1,4 @@
-class CalculateUserScore
+class UserGithubScore
   include Interactor
 
   def call
@@ -81,41 +81,63 @@ class CalculateUserScore
     friend_ratio_final_score
   end
 
+  def friend_ratio_for_display(following,followers)
+    if following == 0
+      @friend_ratio_score_display = followers/1
+    else
+      @friend_ratio_score_display = followers/following.to_f
+    end
+  end
+
+  def friend_ratio_score_calculation(following,followers)
+    unless following == 0
+      @friend_ratio_score = (followers/following)
+    else
+      if followers > 10
+        @friend_ratio_score = (followers/1)
+      elsif followers >= 5 && followers < 10
+        @friend_ratio_score = 2
+      else
+        @friend_ratio_score = 0
+      end
+    end
+  end
+
   def score_calc(user)
     @total_stars_count = 0
     @total_forks_count = 0
     @total_score = 0
     find_user_follower = GithubUser.find_by(user_id: user.id)
     @user = User.find_by(id: user.id)
+    @githubUser = GithubUser.find_by(user_id: user.id)
     @total_followers_count = find_user_follower.followers
     @following_count = find_user_follower.following
-    if @following_count == 0
-      @friend_ratio_score = @total_followers_count/1
-    else
-      @friend_ratio_score = @total_followers_count/@following_count
-    end
-
-    unless @following_count == 0
-      @friend_ratio_score = (@total_followers_count/@following_count)
-    else
-      if @total_followers_count > 10
-        @friend_ratio_score = (@total_followers_count/1)
-      elsif @total_followers_count >= 5 && @total_followers_count < 10
-        @friend_ratio_score = 2
-      else
-        @friend_ratio_score = 0
-      end
-    end
-
-    repos_value(@user)
+    friend_ratio_for_display(@following_count,@total_followers_count)
+    friend_ratio_score_calculation(@following_count,@total_followers_count)
+    get_value_from_repos(@githubUser)
     calculate_score
     @user.update user_score: @total_score
      update_stats_table(@user)
+     update_user_level(@user)
   end
 
+def update_user_level(user)
+  case user.user_score
+  when 1..8
+    @user.update user_level: "Apprentice"
+  when 8..20
+    @user.update user_level: "Enthusiast"
+  when 20..44
+    @user.update user_level: "Creator"
+  when 44..77
+    @user.update user_level: "Collaborator"
+  else
+    @user.update user_level: "Guru"
+  end
+end
 
-  def repos_value(user)
-    repos_for_user = GithubRepo.where(github_user_id: user.id)
+  def get_value_from_repos(user)
+    repos_for_user = GithubRepo.where(github_user_id: user.gh_id)
     repos_for_user.each do |repo|
       total_stars_count(repo)
       total_forks_count(repo)
@@ -126,38 +148,36 @@ class CalculateUserScore
   def update_stats_table(user)
     Statistic.create(
       user_id: user.id,
-      score: @total_stars_count,
+      score: @total_stars_count.to_f,
       score_type: "gh_stars"
     )
     Statistic.create(
       user_id: user.id,
-      score: @total_forks_count,
+      score: @total_forks_count.to_f,
       score_type: "gh_forks"
     )
     Statistic.create(
       user_id: user.id,
-      score: @total_followers_count,
+      score: @total_followers_count.to_f,
       score_type: "gh_followers"
     )
     Statistic.create(
       user_id: user.id,
-      score: @following_count,
+      score: @following_count.to_f,
       score_type: "gh_following"
     )
 
     Statistic.create(
       user_id: user.id,
-      score: @friend_ratio_score,
+      score: @friend_ratio_score_display,
       score_type: "gh_friends_following_ratio"
     )
 
-
     Statistic.create(
     user_id: user.id,
-    score: @total_score,
+    score: @total_score.to_f,
     score_type: "gh_total_score"
     )
   end
 
-  # context.total_score = @total_score
 end

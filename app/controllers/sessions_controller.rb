@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(user_name: @auth.info[:nickname])
 
     unless @user then
-      new_user = CreateNewUser.call({auth: @auth, repo_response: repo_response.value})
+      new_user = CreateGithubUser.call({auth: @auth, repo_response: repo_response.value})
     end
 
     if @user
