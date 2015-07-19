@@ -6,13 +6,15 @@
           <div class="row centered-text">
             <div class="large-3 medium-3 small-3 columns">
               <div class="profile-image-container">
-                <%=image_tag(current_user.profile_image_url, alt: "profile-image")%>
+                <%=image_tag(@user.profile_image_url, alt: "profile-image")%>
               </div>
             </div>
             <div class="large-8 medium-8 small-8 columns">
-              <h3><%=current_user.full_name%></h3>
-              <h4><%=current_user.user_level%></h4>
-              <a class="edit-profile" href="#" data-reveal-id="profile-update"><i class="fa fa-pencil fa-fw"></i>&nbsp; Edit Profile</a>
+              <h3><%=@user.full_name%></h3>
+              <h4><%=@user.user_level%></h4>
+              <% if @user.id == @user.id %>
+                <a class="edit-profile" href="#" data-reveal-id="profile-update"><i class="fa fa-pencil fa-fw"></i>&nbsp; Edit Profile</a>
+              <% end %>
             </div>
           </div>
         </div>
@@ -27,7 +29,7 @@
         </div>
         <%= form_for(@user, remote: true, format: :json, html: {class: :update_profile}) do |f| %>
 
-          <input class="update-current-user-id" type="hidden" value="<% current_user.id %>">
+          <input class="update-current-user-id" type="hidden" value="<% @user.id %>">
           <div class="row">
             <div class="large-6 columns">
               <label class="full-name-label">Full Name (0/40)</label>
@@ -63,9 +65,9 @@
 
       <!-- Profile Extra Info -->
       <div class="profile-extra-info">
-        <p class="user-bio"><%=current_user.user_bio%></p>
-        <span class="email-address"><a class="black" href="mailto:<%=current_user.email%>"><%=current_user.email%></a></span></br>
-        <span class="profile-blog-url"><a class="black" href="<%=current_user.blog%>" target="_blank"><%=current_user.blog%></a></span>
+        <p class="user-bio"><%=@user.user_bio%></p>
+        <span class="email-address"><a class="black" href="mailto:<%=@user.email%>"><%=@user.email%></a></span></br>
+        <span class="profile-blog-url"><a class="black" href="<%=@user.blog%>" target="_blank"><%=@user.blog%></a></span>
       </div>
       <!-- #/End Profile Extra info -->
     </div>
@@ -79,7 +81,7 @@
           <th>Change</th>
         </tr>
         <tr>
-          <td><%=current_user.user_score%></td>
+          <td><%=@user.user_score%></td>
           <td>-9 <i class="fa fa-long-arrow-down"></i></td>
         </tr>
       </table>
@@ -91,11 +93,11 @@
         <td width="70%">
           <table>
             <tr>
-              <% if !current_user.stack_user %>
-              <td><img class="stack-overflow-icon" src="images/icons/stack-overflow-icon.svg" /></td>
+              <% if !@user.stack_user %>
+              <td><img class="stack-overflow-icon" src="../images/icons/stack-overflow-icon.svg" /></td>
               <td class="link"><a class="connect-link" href="/stackoverflow">Connect to Stack&nbsp;Overflow</a></td>
               <% else %>
-              <td><img class="stack-overflow-icon-connected" src="images/icons/stack-overflow-icon.svg" /></td>
+              <td><img class="stack-overflow-icon-connected" src="../images/icons/stack-overflow-icon.svg" /></td>
               <td class="link">Connected</td>
               <% end %>
 
@@ -105,7 +107,7 @@
         <td width="30%"></td>
       </tr>
     </table>
-    <% if !current_user.stack_user %>
+    <% if !@user.stack_user %>
     <a class="connect-btn" href="/stackoverflow">+</a>
     <% else %>
     <span class="connect-btn"><i class="fa fa-check"></i></span>
@@ -118,8 +120,8 @@
         <td width="70%">
           <table>
             <tr>
-              <td><img src="images/icons/twitter-icon.svg" width="50" height="50" /></td>
-              <% if !current_user.twitter_user %>
+              <td><img src="../images/icons/twitter-icon.svg" width="50" height="50" /></td>
+              <% if !@user.twitter_user %>
               <td class="link"><a class="connect-link" href="/twitter">Connect to Twitter</a></td>
               <% else %>
               <td class="link">Connected</td>
@@ -130,7 +132,7 @@
         <td width="30%"></td>
       </tr>
     </table>
-    <% if !current_user.twitter_user %>
+    <% if !@user.twitter_user %>
     <a class="connect-btn" href="/twitter">+</a>
     <% else %>
     <span class="connect-btn"><i class="fa fa-check"></i></span>
