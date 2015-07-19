@@ -5,24 +5,67 @@
         <div class="profile-image-name">
           <div class="row centered-text">
             <div class="large-3 medium-3 small-3 columns">
-              <%=image_tag(current_user.profile_image_url, alt: "profile-image")%>
+              <div class="profile-image-container">
+                <%=image_tag(current_user.profile_image_url, alt: "profile-image")%>
+              </div>
             </div>
             <div class="large-8 medium-8 small-8 columns">
               <h3><%=current_user.full_name%></h3>
               <h4><%=current_user.user_type%></h4>
-              <a class="edit-profile" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Edit Profile</a>
+              <a class="edit-profile" href="#" data-reveal-id="profile-update"><i class="fa fa-pencil fa-fw"></i>&nbsp; Edit Profile</a>
             </div>
           </div>
         </div>
       <!-- #/End of Profile Image + Name -->
 
+      <!-- PROFILE UPDATE POP UP -->
+        <div id="profile-update" class="reveal-modal popup profile-updates text-align-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <div class="row">
+          <div class="large-12 columns">
+            <h3>Edit Your Profile</h3>
+          </div>
+        </div>
+        <%= form_for(@user, remote: true, format: :json, html: {class: :update_profile}) do |f| %>
+
+          <input class="update-current-user-id" type="hidden" value="<% current_user.id %>">
+          <div class="row">
+            <div class="large-6 columns">
+              <label class="full-name-label">Full Name (0/40)</label>
+              <%= f.text_field :full_name, placeholder: "Full Name", class: 'update-full-name', maxlength: 40 %>
+            </div>
+            <div class="large-6 columns">
+            <label>Email Address</label>
+              <%= f.text_field :email, placeholder: "Email", class: 'update-email', type:'email', required: true %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-6 columns">
+            <label>Profile Photo Url</label>
+              <%= f.text_field :profile_image_url, placeholder: "Profile Photo", class: 'update-profile-photo', type:'url', required: true %>
+            </div>
+            <div class="large-6 columns">
+              <label>Blog Url</label>
+              <%= f.text_field :blog, placeholder: "Blog Url", class: 'update-blog-url', type:'url', required: true %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="large-12 columns">
+              <label class="bio-label">Bio Description (0/140)</label>
+              <%= f.text_area(:user_bio, placeholder: "Profile Photo", size: '50x10', :class => "update-bio", maxlength: 140)%>
+             <%= f.submit :value => "Make Changes", class: 'profile-update-btn' %>
+            </div>
+          </div>
+        <% end %>
+        <a class="close-reveal-modal" aria-label="Close">X</a>
+      </div>
+    <!-- #/END OF PROFILE UPDATE POP UP -->
+
 
       <!-- Profile Extra Info -->
       <div class="profile-extra-info">
-        <p><%=current_user.user_bio%></p>
-        <span><a class="black" href="#"><%=current_user.email%></a></span></br>
-        <span><a class="black" href="#">http://passionate.ca</a></span>
-        <span class="phone-number">604-218-9556</span>
+        <p class="user-bio"><%=current_user.user_bio%></p>
+        <span class="email-address"><a class="black" href="mailto:<%=current_user.email%>"><%=current_user.email%></a></span></br>
+        <span class="profile-blog-url"><a class="black" href="<%=current_user.blog%>" target="_blank"><%=current_user.blog%></a></span>
       </div>
       <!-- #/End Profile Extra info -->
     </div>
@@ -48,31 +91,6 @@
         <td width="70%">
           <table>
             <tr>
-              <td><img src="images/icons/twitter-icon.svg" width="50" height="50" /></td>
-              <% if !current_user.twitter_user %>
-              <td class="link"><a class="connect-link" href="/twitter">Connect to Twitter</a></td>
-              <% else %>
-              <td class="link">Connected</td>
-              <% end %>
-            </tr>
-          </table>
-        </td>
-        <td width="30%"></td>
-      </tr>
-    </table>
-    <% if !current_user.twitter_user %>
-    <a class="connect-btn" href="/twitter">+</a>
-    <% else %>
-    <span class="connect-btn"><i class="fa fa-check"></i></span>
-    <% end %>
-  </div>
-
-  <div class="profile-btn">
-    <table>
-      <tr>
-        <td width="70%">
-          <table>
-            <tr>
               <% if !current_user.stack_user %>
               <td><img class="stack-overflow-icon" src="images/icons/stack-overflow-icon.svg" /></td>
               <td class="link"><a class="connect-link" href="/stackoverflow">Connect to Stack&nbsp;Overflow</a></td>
@@ -89,6 +107,31 @@
     </table>
     <% if !current_user.stack_user %>
     <a class="connect-btn" href="/stackoverflow">+</a>
+    <% else %>
+    <span class="connect-btn"><i class="fa fa-check"></i></span>
+    <% end %>
+  </div>
+
+  <div class="profile-btn">
+    <table>
+      <tr>
+        <td width="70%">
+          <table>
+            <tr>
+              <td><img src="images/icons/twitter-icon.svg" width="50" height="50" /></td>
+              <% if !current_user.twitter_user %>
+              <td class="link"><a class="connect-link" href="/twitter">Connect to Twitter</a></td>
+              <% else %>
+              <td class="link">Connected</td>
+              <% end %>
+            </tr>
+          </table>
+        </td>
+        <td width="30%"></td>
+      </tr>
+    </table>
+    <% if !current_user.twitter_user %>
+    <a class="connect-btn" href="/twitter">+</a>
     <% else %>
     <span class="connect-btn"><i class="fa fa-check"></i></span>
     <% end %>

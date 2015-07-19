@@ -30,4 +30,7 @@ Rails.application.routes.draw do
   get '/logout', to: 'users#logout', :as => :logout
   get 'profile', to: 'users#profile', :as => :profile
 
+  # User Update
+  resources :users, only: [:update]
+
 end

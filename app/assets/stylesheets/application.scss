@@ -18,7 +18,7 @@
 
  /*THIS FILE INCLUDES ALL STYLING FOR BASIC ASSESTS SUCH AS HEADERS/LINKS/BUTTONS/TEXT-ALIGNING/RESPONSIVE MEDIA*/
 
- body h1,h2,h3,h4,h5,h6,p,ul,ol,li,div,a, span{
+ body h1,h2,h3,h4,h5,h6,p,ul,ol,li,div,a, span, form, input, label, textarea {
      font-family: 'lato', 'helvetica', 'arial', 'sans-serif';
      color: #222222;
      font-weight: 300;
@@ -104,24 +104,29 @@
      color:#719c54;
      text-decoration: none;
  }
- a.btn {
-     display: inline-block;
-     -webkit-border-radius: 3;
-     -moz-border-radius: 3;
-     border-radius: 3px;
-     color: #ffffff;
-     font-size: 20px;
-     padding: 20px 0px;
-     width:250px;
-     text-align: center;
-     text-decoration: none;
-     background: #8abf67;
-     margin-bottom:15px;
- }
-
- .btn:hover {
+ a.btn, input.profile-update-btn{
+   display: inline-block;
+  -webkit-border-radius: 3;
+  -moz-border-radius: 3;
+  border-radius: 3px;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 20px 0px;
+  width: 250px;
+  text-align: center;
+  text-decoration: none;
+  background: #8abf67;
+  margin-bottom: 15px;
+  position: static;
+  display: block;
+  border: none;
+  font-weight: 300;
+  font-family: lato;
+  cursor: pointer;
+    &:hover {
      text-decoration: none;
      background: #719c54;
+    }
  }
  a.btn-secondary{
      background: #2c87c1;
@@ -416,5 +421,38 @@ footer{
         padding-bottom: 30px;
         margin-bottom:0px;
         font-size: 15px;
+    }
+
+    &.profile-updates{
+        padding:20px;
+        text-align: left;
+
+        input.update-email, input.update-full-name, input.update-profile-photo, input.update-blog-url, input.update-bio{
+            color:#222 !important;
+        }
+        label{
+            margin-bottom:5px;
+        }
+
+        h3{
+            margin-bottom: 0px;
+        }
+
+        a.close-reveal-modal.btn{
+         display: inline-block;
+         -webkit-border-radius: 3;
+         -moz-border-radius: 3;
+         border-radius: 3px;
+         color: #ffffff;
+         font-size: 20px;
+         padding: 20px 0px;
+         width:250px;
+         text-align: center;
+         text-decoration: none;
+         background: #8abf67;
+         margin-bottom:15px;
+         position:static;
+         display: block;
+        }
     }
 }
