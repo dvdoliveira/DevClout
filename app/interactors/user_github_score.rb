@@ -116,7 +116,7 @@ class UserGithubScore
     friend_ratio_score_calculation(@following_count,@total_followers_count)
     get_value_from_repos(@githubUser)
     calculate_score
-    @user.update_attribute(:user_score,@total_score)
+    @user.update_attribute(:user_score, @total_score)
      update_stats_table(@user)
      update_user_level(@user)
      update_user_rank
