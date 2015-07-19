@@ -9,7 +9,8 @@ $(function(){
     var average = user.average;
     var github_repos = user.github_repos
     Chart.defaults.global.responsive = true;
-// Initializing variables for charts and data
+
+    // Initializing variables for charts and data
     var Line = {};
     var ctx5;
     var myDoughnutChart;
@@ -24,6 +25,9 @@ $(function(){
     var myBarChart;
 
     var piedata, radardata, linedata, bardata;
+
+    var colors =[];
+    var lighter_colors = [];
 
     // Figures out the last 6 months in string form for the graph labels
 
@@ -67,22 +71,27 @@ $(function(){
     }
 
     // This is for creating 10 random colors in RGB and finding their highlighted version
-    var colors =[];
-    var lighter_colors = [];
     function lighten(color, percent) {
       var f=color.split(","),t=percent<0?0:255,p=percent<0?percent*-1:percent,R=parseInt(f[0].slice(4)),G=parseInt(f[1]),B=parseInt(f[2]);
       return "rgb("+(Math.round((t-R)*p)+R)+","+(Math.round((t-G)*p)+G)+","+(Math.round((t-B)*p)+B)+")";
     };
-    for (i=0;i<10;i++) {
-      random_color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-      colors.push(random_color);
-      lighter_colors.push(lighten(random_color, 0.2));
-    };
+
     function rgb_to_rgba(rgb, percent){
       new_rgba = rgb.replace(/rgb/i, "rgba");
       new_rgba = new_rgba.replace(/\)/i, ',' + percent + ')');
       return new_rgba;
     };
+
+    function random_color_creator() {
+      colors =[];
+      lighter_colors = [];
+      for (i=0;i<10;i++) {
+        random_color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+        colors.push(random_color);
+        lighter_colors.push(lighten(random_color, 0.2));
+      };
+    };
+    random_color_creator();
 
     // This makes the data for each users language for the GitHub pie graph 
     var languages_data = [];
@@ -106,28 +115,28 @@ $(function(){
         labels: repos_names,
         datasets: [
             {
-                label: "Forks",
-                fillColor: rgb_to_rgba(colors[0], 0.5),
-                strokeColor: rgb_to_rgba(colors[0], 0.8),
-                highlightFill: rgb_to_rgba(colors[0], 0.75),
-                highlightStroke: rgb_to_rgba(colors[0], 1),
-                data: repos_forks
+              label: "Forks",
+              fillColor: rgb_to_rgba(colors[0], 0.5),
+              strokeColor: rgb_to_rgba(colors[0], 0.8),
+              highlightFill: rgb_to_rgba(colors[0], 0.75),
+              highlightStroke: rgb_to_rgba(colors[0], 1),
+              data: repos_forks
             },
             {
-                label: "Stars",
-                fillColor: rgb_to_rgba(colors[1], 0.5),
-                strokeColor: rgb_to_rgba(colors[1], 0.8),
-                highlightFill: rgb_to_rgba(colors[1], 0.75),
-                highlightStroke: rgb_to_rgba(colors[1], 1),
-                data: repos_stars
+              label: "Stars",
+              fillColor: rgb_to_rgba(colors[1], 0.5),
+              strokeColor: rgb_to_rgba(colors[1], 0.8),
+              highlightFill: rgb_to_rgba(colors[1], 0.75),
+              highlightStroke: rgb_to_rgba(colors[1], 1),
+              data: repos_stars
             },
             {
-                label: "Watchers",
-                fillColor: rgb_to_rgba(colors[2], 0.5),
-                strokeColor: rgb_to_rgba(colors[2], 0.8),
-                highlightFill: rgb_to_rgba(colors[2], 0.75),
-                highlightStroke: rgb_to_rgba(colors[2], 1),
-                data: repos_watchers
+              label: "Watchers",
+              fillColor: rgb_to_rgba(colors[2], 0.5),
+              strokeColor: rgb_to_rgba(colors[2], 0.8),
+              highlightFill: rgb_to_rgba(colors[2], 0.75),
+              highlightStroke: rgb_to_rgba(colors[2], 1),
+              data: repos_watchers
             }
         ]
     };
@@ -135,24 +144,24 @@ $(function(){
       labels: last_six_months,
       datasets: [
         {
-            label: "This User",
-            fillColor: rgb_to_rgba(colors[0], 0.2),
-            strokeColor: rgb_to_rgba(colors[0], 1),
-            pointColor: rgb_to_rgba(colors[0], 1),
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: rgb_to_rgba(colors[0], 1),
-            data: [65, 59, 80, 81, 56, 55]
+          label: user.user.full_name,
+          fillColor: rgb_to_rgba(colors[0], 0.2),
+          strokeColor: rgb_to_rgba(colors[0], 1),
+          pointColor: rgb_to_rgba(colors[0], 1),
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: rgb_to_rgba(colors[0], 1),
+          data: [65, 59, 80, 81, 56, 55]
         },
         {
-            label: "User Average",
-            fillColor: rgb_to_rgba(colors[1], 0.2),
-            strokeColor: rgb_to_rgba(colors[1], 1),
-            pointColor: rgb_to_rgba(colors[1], 1),
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: rgb_to_rgba(colors[1], 1),
-            data: [28, 48, 40, 19, 86, 27]
+          label: "Average All Users",
+          fillColor: rgb_to_rgba(colors[1], 0.2),
+          strokeColor: rgb_to_rgba(colors[1], 1),
+          pointColor: rgb_to_rgba(colors[1], 1),
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: rgb_to_rgba(colors[1], 1),
+          data: [28, 48, 40, 19, 86, 27]
         }
       ]
     };
@@ -162,24 +171,24 @@ $(function(){
       labels: ["Score", "Following", "Followers", "Forks", "Stars"],
       datasets: [
           {
-              label: user.full_name,
-              fillColor: rgb_to_rgba(colors[0], 0.2),
-              strokeColor: rgb_to_rgba(colors[0], 1),
-              pointColor: rgb_to_rgba(colors[0], 1),
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: rgb_to_rgba(colors[0], 1),
-              data: [user.user.user_score, github_user.following, github_user.followers, total_forks, total_stars]
+            label: user.user.full_name,
+            fillColor: rgb_to_rgba(colors[0], 0.2),
+            strokeColor: rgb_to_rgba(colors[0], 1),
+            pointColor: rgb_to_rgba(colors[0], 1),
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: rgb_to_rgba(colors[0], 1),
+            data: [user.user.user_score, github_user.following, github_user.followers, total_forks, total_stars]
           },
           {
-              label: "Average All Users",
-              fillColor: rgb_to_rgba(colors[1], 0.2),
-              strokeColor: rgb_to_rgba(colors[1], 1),
-              pointColor: rgb_to_rgba(colors[1], 1),
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: rgb_to_rgba(colors[1], 1),
-              data: [user.avg_user_score, average.gh_users_following, average.gh_users_followers, average.gh_users_forks, average.gh_users_stars]
+            label: "Average All Users",
+            fillColor: rgb_to_rgba(colors[1], 0.2),
+            strokeColor: rgb_to_rgba(colors[1], 1),
+            pointColor: rgb_to_rgba(colors[1], 1),
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: rgb_to_rgba(colors[1], 1),
+            data: [user.avg_user_score, average.gh_users_following, average.gh_users_followers, average.gh_users_forks, average.gh_users_stars]
           }
       ]
     };
@@ -190,20 +199,20 @@ $(function(){
           labels: last_six_months,
           datasets: [
               {
-                  label: "My First dataset",
-                  fillColor: "rgba(220,220,220,0.5)",
-                  strokeColor: "rgba(220,220,220,0.8)",
-                  highlightFill: "rgba(220,220,220,0.75)",
-                  highlightStroke: "rgba(220,220,220,1)",
-                  data: [65, 59, 80, 81, 56, 55]
+                label: "My First dataset",
+                fillColor: rgb_to_rgba(colors[0], 0.5),
+                strokeColor: rgb_to_rgba(colors[0], 0.8),
+                highlightFill: rgb_to_rgba(colors[0], 0.75),
+                highlightStroke: rgb_to_rgba(colors[0], 1),
+                data: [65, 59, 80, 81, 56, 55]
               },
               {
-                  label: "My Second dataset",
-                  fillColor: "rgba(151,187,205,0.5)",
-                  strokeColor: "rgba(151,187,205,0.8)",
-                  highlightFill: "rgba(151,187,205,0.75)",
-                  highlightStroke: "rgba(151,187,205,1)",
-                  data: [28, 48, 40, 19, 86, 27]
+                label: "My Second dataset",
+                fillColor: rgb_to_rgba(colors[1], 0.5),
+                strokeColor: rgb_to_rgba(colors[1], 0.8),
+                highlightFill: rgb_to_rgba(colors[1], 0.75),
+                highlightStroke: rgb_to_rgba(colors[1], 1),
+                data: [28, 48, 40, 19, 86, 27]
               }
           ]
       };
@@ -211,71 +220,82 @@ $(function(){
         labels: last_six_months,
         datasets: [
           {
-              label: "My First dataset",
-              fillColor: "rgba(220,220,220,0.2)",
-              strokeColor: "rgba(220,220,220,1)",
-              pointColor: "rgba(220,220,220,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [65, 59, 80, 81, 56, 55]
+            label: "My First dataset",
+            fillColor: rgb_to_rgba(colors[0], 0.2),
+            strokeColor: rgb_to_rgba(colors[0], 1),
+            pointColor: rgb_to_rgba(colors[0], 1),
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: rgb_to_rgba(colors[0], 1),
+            data: [65, 59, 80, 81, 56, 55]
           },
           {
-              label: "My Second dataset",
-              fillColor: "rgba(151,187,205,0.2)",
-              strokeColor: "rgba(151,187,205,1)",
-              pointColor: "rgba(151,187,205,1)",
-              pointStrokeColor: "#fff",
-              pointHighlightFill: "#fff",
-              pointHighlightStroke: "rgba(151,187,205,1)",
-              data: [28, 48, 40, 19, 86, 27]
+            label: "My Second dataset",
+            fillColor: rgb_to_rgba(colors[1], 0.2),
+            strokeColor: rgb_to_rgba(colors[1], 1),
+            pointColor: rgb_to_rgba(colors[1], 1),
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: rgb_to_rgba(colors[1], 1),
+            data: [28, 48, 40, 19, 86, 27]
           }
         ]
       };
 
-      var so_piedata = [
-        {
-            value: stack_user.bc_bronze,
-            color:"#CD7F32",
-            highlight: "#D7995B",
-            label: "Bronze"
-        },
-        {
-            value: stack_user.bc_silver,
-            color: "#C0C0C0 ",
-            highlight: "#DADADA",
-            label: "Silver"
-        },
-        {
-            value: stack_user.bc_gold,
-            color: "#FFD700",
-            highlight: "#FFDF33",
-            label: "Gold"
-        }
-      ]
+      if (stack_user.bc_bronze + stack_user.bc_silver + stack_user.bc_gold > 0) {
+        var so_piedata = [
+          {
+              value: stack_user.bc_bronze,
+              color:"#CD7F32",
+              highlight: "#D7995B",
+              label: "Bronze"
+          },
+          {
+              value: stack_user.bc_silver,
+              color: "#C0C0C0 ",
+              highlight: "#DADADA",
+              label: "Silver"
+          },
+          {
+              value: stack_user.bc_gold,
+              color: "#FFD700",
+              highlight: "#FFDF33",
+              label: "Gold"
+          }
+        ]
+      }else{
+        var so_piedata = [
+          {
+              value: 1,
+              color:"#f1f1f1",
+              highlight: "#D8D8D8",
+              label: "No Badges"
+          }
+        ]
+      }
 
       var so_radardata = {
         labels: ["Answers", "Questions", "Up-Votes", "Down-Votes"],
         datasets: [
             {
-                label: user.full_name,
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [stack_user.answer_count, stack_user.question_count, stack_user.up_vote_count, stack_user.down_vote_count]
+              label: user.user.full_name,
+              fillColor: rgb_to_rgba(colors[0], 0.2),
+              strokeColor: rgb_to_rgba(colors[0], 1),
+              pointColor: rgb_to_rgba(colors[0], 1),
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: rgb_to_rgba(colors[0], 1),
+              data: [stack_user.answer_count, stack_user.question_count, stack_user.up_vote_count, stack_user.down_vote_count]
             },
             {
-                label: "Average all users",
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
-                data: [average.so_users_answers, average.so_users_questions, average.so_users_up_votes, average.so_users_down_votes]
+              label: "Average All Users",
+              fillColor: rgb_to_rgba(colors[1], 0.2),
+              strokeColor: rgb_to_rgba(colors[1], 1),
+              pointColor: rgb_to_rgba(colors[1], 1),
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: rgb_to_rgba(colors[1], 1),
+              data: [average.so_users_answers, average.so_users_questions, average.so_users_up_votes, average.so_users_down_votes]
             }
         ]
       };
@@ -301,23 +321,15 @@ $(function(){
       // First checks if the user has any stackoverflow badges to display the badges pie graph
       ctx6 = $("#myPie6").get(0).getContext("2d");
       myRadarChart = new Chart(ctx6).Radar(radardata, {animateScale: true});
+      legend(document.getElementById('radar-legend'), radardata, myRadarChart);
 
-      if ($(".github-btn").hasClass('active')) {
-        if ($("myPie4").length < 1){
-          $(".replace-so-pie").replaceWith("<canvas id='myPie4' class='chartset3'>")
-        };
-        ctx5 = $("#myPie4").get(0).getContext("2d");
-        myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
-      } else if (stack_user.bc_bronze + stack_user.bc_silver + stack_user.bc_gold > 0) {
-        ctx5 = $("#myPie4").get(0).getContext("2d");
-        myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
-      } else {
-        $("#myPie4").replaceWith("<div class='replace-so-pie chartset3'><h4>Achieve at least 1 badge to see this graph</h4></div>");
-        $('.replace-so-pie').css('min-height', $('#myPie6').height());
-      }
-
+      ctx5 = $("#myPie4").get(0).getContext("2d");
+      myDoughnutChart = new Chart(ctx5).Doughnut(piedata, {animateScale: true});
+      legend(document.getElementById('pie-legend'), piedata, myDoughnutChart);
+     
       ctx7 = $("#myPie7").get(0).getContext("2d");
       myLineChart = new Chart(ctx7).Line(linedata);
+      legend(document.getElementById('line-legend'), linedata, myLineChart);
 
       ctx8 = $("#myPie8").get(0).getContext("2d");
       myBarChart = new Chart(ctx8).Bar(bardata, {
@@ -328,6 +340,7 @@ $(function(){
         tooltipFillColor: "rgba(0,0,0,0.8)",                
         multiTooltipTemplate: "<%= datasetLabel %> = <%= value %>",
       });
+      legend(document.getElementById('bar-legend'), bardata, myBarChart);
     };
     creategraphs();
 
@@ -400,7 +413,7 @@ $(function(){
       $(".graph3 h3").text("DUNNO");
       $(".graph4 h3").text("Repositories");
       // Change second graph persons
-
+      
       updategraphs();
     });
   };
