@@ -26,7 +26,7 @@ $(function(){
 
     var piedata, radardata, linedata, bardata, pieoptions;
 
-    var colors =[];
+    var colors =["rgb(198, 110, 112)", "rgb(181,143,175)", "rgb(124,151,178)", "rgb(131,173,209)", "rgb(173,152,140)", "rgb(227,213,184)", "rgb(236,202,133)", "rgb(239,187,154)", "rgb(217,158,139)", "rgb(234,174,191)"];
     var lighter_colors = [];
 
     // Updates the github stats page
@@ -107,21 +107,19 @@ $(function(){
     };
 
     function rgb_to_rgba(rgb, percent){
-      new_rgba = rgb.replace(/rgb/i, "rgba");
+      var new_rgba = rgb.replace(/rgb/i, "rgba");
       new_rgba = new_rgba.replace(/\)/i, ',' + percent + ')');
       return new_rgba;
     };
 
-    function random_color_creator() {
-      colors =[];
-      lighter_colors = [];
-      for (i=0;i<10;i++) {
-        random_color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
-        colors.push(random_color);
-        lighter_colors.push(lighten(random_color, 0.2));
+    function color_scheme() {
+      for (i=0;i<colors.length;i++) {
+        // random_color = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')';
+        var color = colors[i];
+        lighter_colors.push(lighten(color, 0.2));
       };
     };
-    random_color_creator();
+    color_scheme();
 
     // This makes the data for each users language for the GitHub pie graph 
     var languages_data = [];
