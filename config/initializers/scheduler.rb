@@ -10,7 +10,7 @@ s = Rufus::Scheduler.singleton
 
 # Stupid recurrent task...
 #
-s.every '1m' do
+s.every '180m' do
 
   # Rails.logger.info "hello, it's #{Time.now}"
   get_users = User.all

@@ -116,7 +116,7 @@ class UserGithubScore
     friend_ratio_score_calculation(@following_count,@total_followers_count)
     get_value_from_repos(@githubUser)
     calculate_score
-    @user.update user_score: @total_score
+    @user.update_attribute(:user_score,@total_score)
      update_stats_table(@user)
      update_user_level(@user)
      update_user_rank
@@ -137,15 +137,15 @@ class UserGithubScore
 def update_user_level(user)
   case user.user_score
   when 1..8
-    @user.update user_level: "Apprentice"
+    @user.update_attribute(:user_level,"Apprentice")
   when 8..20
-    @user.update user_level: "Enthusiast"
+    @user.update_attribute(:user_level,"Enthusiast")
   when 20..44
-    @user.update user_level: "Creator"
+    @user.update_attribute(:user_level,"Creator")
   when 44..77
-    @user.update user_level: "Collaborator"
+    @user.update_attribute(:user_level,"Collaborator")
   else
-    @user.update user_level: "Guru"
+    @user.update_attribute(:user_level,"Guru")
   end
 end
 
