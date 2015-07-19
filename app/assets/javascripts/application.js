@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require Chart
+//= require legend
 //= require_tree .
 
 $(function() {

@@ -486,47 +486,29 @@
 				}
 
 				.comparing-with{
-					table{
-						background:none;
-						border:0px;
-						margin-bottom: 0px;
 
-						tr, td, th{
-							background:none;
-							border:none;
-							padding:0px;
-							margin:0px;
-							font-size:13px;
+					.legend {
+					  width: 100%;
+					  /*columns: 2;
+  					-webkit-columns: 2;
+  					-moz-columns: 2;*/
+  					padding:0px;
+						margin:0px;
+						font-size:13px;
 
-							.person-name{
-								padding-top:10px;
-								padding-right:20px;
-							}
-
-							.person-label{
-								margin-top:15px;
-								height: 13px;
-								width: 13px;
-								background: #8ABF67;
-								display: inline-block;
-								margin-right:10px;
-
-								&.person-one{
-									background: #95b5b4;
-								}
-								&.person-two{
-									background: #b48fae;
-								}
-								&.person-three{
-									background: #ecca85;
-								}
-								&.person-four{
-									background: #5791c2;
-								}
-							}
-
+						.title {
+					    display: inline-block;
+					    padding-bottom:10px;
+							padding-right:20px;
+					    font-size:13px;
 						}
-
+						.color-sample {
+					    display: inline-block;
+							height: 13px;
+							width: 13px;
+							margin-right:10px;
+					    border: 2px solid; /* Comment out if you don't want to show the fillColor */
+						}
 					}
 				}
 			}
