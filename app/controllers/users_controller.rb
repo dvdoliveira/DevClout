@@ -10,10 +10,12 @@ class UsersController < ApplicationController
 
   def profile
     @user = current_user
+    @users = User.all
+    @average_user_score = (@users.sum(:user_score) / @users.length)
     @repos = GithubRepo.where(github_user_id: @user.github_user.gh_id)
     respond_to do |format|
       format.html
-      format.json {render json: {:user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score, :github_repos => @repos, :average => Average.first, :statistics => @user.statistics}}
+      format.json {render json: {:user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @average_user_score, :github_repos => @repos, :average => Average.first, :statistics => @user.statistics}}
     end
   end
 
