@@ -12,56 +12,57 @@
             <div class="large-8 medium-8 small-8 columns">
               <h3><%=@user.full_name%></h3>
               <h4><%=@user.user_level%></h4>
-              <% if @user.id == @user.id %>
+              <% if current_user.id == @user.id %>
                 <a class="edit-profile" href="#" data-reveal-id="profile-update"><i class="fa fa-pencil fa-fw"></i>&nbsp; Edit Profile</a>
               <% end %>
             </div>
           </div>
         </div>
       <!-- #/End of Profile Image + Name -->
-
-      <!-- PROFILE UPDATE POP UP -->
-        <div id="profile-update" class="reveal-modal popup profile-updates text-align-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-        <div class="row">
-          <div class="large-12 columns">
-            <h3>Edit Your Profile</h3>
-          </div>
-        </div>
-        <%= form_for(@user, remote: true, format: :json, html: {class: :update_profile}) do |f| %>
-
-          <input class="update-current-user-id" type="hidden" value="<% @user.id %>">
-          <div class="row">
-            <div class="large-6 columns">
-              <label class="full-name-label">Full Name (0/40)</label>
-              <%= f.text_field :full_name, placeholder: "Full Name", class: 'update-full-name', maxlength: 40 %>
-            </div>
-            <div class="large-6 columns">
-            <label>Email Address</label>
-              <%= f.text_field :email, placeholder: "Email", class: 'update-email', type:'email', required: true %>
-            </div>
-          </div>
-          <div class="row">
-            <div class="large-6 columns">
-            <label>Profile Photo Url</label>
-              <%= f.text_field :profile_image_url, placeholder: "Profile Photo", class: 'update-profile-photo', type:'url', required: true %>
-            </div>
-            <div class="large-6 columns">
-              <label>Blog Url</label>
-              <%= f.text_field :blog, placeholder: "Blog Url", class: 'update-blog-url', type:'url', required: true %>
-            </div>
-          </div>
+      
+      <% if current_user.id == @user.id %>
+        <!-- PROFILE UPDATE POP UP -->
+          <div id="profile-update" class="reveal-modal popup profile-updates text-align-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
           <div class="row">
             <div class="large-12 columns">
-              <label class="bio-label">Bio Description (0/140)</label>
-              <%= f.text_area(:user_bio, placeholder: "Profile Photo", size: '50x10', :class => "update-bio", maxlength: 140)%>
-             <%= f.submit :value => "Make Changes", class: 'profile-update-btn' %>
+              <h3>Edit Your Profile</h3>
             </div>
           </div>
-        <% end %>
-        <a class="close-reveal-modal" aria-label="Close">X</a>
-      </div>
-    <!-- #/END OF PROFILE UPDATE POP UP -->
+          <%= form_for(@user, remote: true, format: :json, html: {class: :update_profile}) do |f| %>
 
+            <input class="update-current-user-id" type="hidden" value="<% @user.id %>">
+            <div class="row">
+              <div class="large-6 columns">
+                <label class="full-name-label">Full Name (0/40)</label>
+                <%= f.text_field :full_name, placeholder: "Full Name", class: 'update-full-name', maxlength: 40 %>
+              </div>
+              <div class="large-6 columns">
+              <label>Email Address</label>
+                <%= f.text_field :email, placeholder: "Email", class: 'update-email', type:'email', required: true %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-6 columns">
+              <label>Profile Photo Url</label>
+                <%= f.text_field :profile_image_url, placeholder: "Profile Photo", class: 'update-profile-photo', type:'url', required: true %>
+              </div>
+              <div class="large-6 columns">
+                <label>Blog Url</label>
+                <%= f.text_field :blog, placeholder: "Blog Url", class: 'update-blog-url', type:'url', required: true %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="large-12 columns">
+                <label class="bio-label">Bio Description (0/140)</label>
+                <%= f.text_area(:user_bio, placeholder: "Profile Photo", size: '50x10', :class => "update-bio", maxlength: 140)%>
+               <%= f.submit :value => "Make Changes", class: 'profile-update-btn' %>
+              </div>
+            </div>
+          <% end %>
+          <a class="close-reveal-modal" aria-label="Close">X</a>
+        </div>
+      <!-- #/END OF PROFILE UPDATE POP UP -->
+    <% end %>
 
       <!-- Profile Extra Info -->
       <div class="profile-extra-info">
