@@ -16,7 +16,7 @@ class StackUsersController < ApplicationController
     unless @stack_user then
       # Do another HTTP API request to retrieve additional user data
       @response = HTTParty.get("#{SE_ENDPOINT}#{so_user_id}?client_id=#{so_client_id}&key=#{so_key}&site=stackoverflow&filter=!9YdnSBVWs")
-      new_stack_user = StackCreateUser.call({auth: @auth, response: @response, session_user_id: session[:user_id]})
+      new_stack_user = CreateStackUser.call({auth: @auth, response: @response, session_user_id: session[:user_id]})
     end
     redirect_to profile_path
   end

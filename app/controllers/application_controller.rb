@@ -35,7 +35,6 @@ class ApplicationController < ActionController::Base
       if !current_user
         redirect_to root_path, :alert => 'You need to sign in for access to this page.'
       end
-
     end
 
 end

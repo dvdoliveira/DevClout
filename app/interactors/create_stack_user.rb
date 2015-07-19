@@ -1,4 +1,4 @@
-class StackCreateUser
+class CreateStackUser
   include Interactor
 
   def call
@@ -41,7 +41,7 @@ class StackCreateUser
       )
 
       @user = User.find_by(id: context.session_user_id)
-      stack_score = StackUserScore.call({user: @user,total_score: @user.user_score})
+      stack_score = UserStackScore.call({user: @user,total_score: @user.user_score})
 
   end
 

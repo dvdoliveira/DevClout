@@ -1,4 +1,4 @@
-class CreateTwitterFollowers
+class CreateTwitterUser
   include Interactor
 
   def call
