@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718175728) do
+ActiveRecord::Schema.define(version: 20150718213421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,10 +150,10 @@ ActiveRecord::Schema.define(version: 20150718175728) do
 
   create_table "statistics", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "score"
+    t.decimal  "score",      precision: 4, scale: 2
     t.string   "score_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   add_index "statistics", ["user_id"], name: "index_statistics_on_user_id", using: :btree

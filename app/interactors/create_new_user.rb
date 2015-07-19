@@ -46,7 +46,6 @@ class CreateNewUser
     )
 
     context.repo_response.each do |repo|
-    binding.pry
     @githubrepo = GithubRepo.create(
       github_user_id: @githubuser.gh_id,
       gh_owner_name: repo["owner"]["login"],
