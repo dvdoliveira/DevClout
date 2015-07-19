@@ -19,17 +19,17 @@ class UsersController < ApplicationController
     end
   end
 
-  def update
-    respond_to do |format|
-      @user = User.find(params[:id])
-      if @user.update(user_params)
-        format.html { redirect_to profile_path, notice: 'Thing was successfully updated.' }
-        format.json { render json: @user }
-      else
-        format.json { render json: @thing.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     @user = User.find(params[:id])
+  #     if @user.update(user_params)
+  #       format.html { redirect_to profile_path, notice: 'Thing was successfully updated.' }
+  #       format.json { render json: @user }
+  #     else
+  #       format.json { render json: @thing.errors.full_messages, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   def logout
     session.clear
