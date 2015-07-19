@@ -28,7 +28,7 @@ class CreateTwitterUser
     )
     update_user_twitter_id(@twitter_user)
     save_twitter_followers_to_relationships(@twitter_user)
-    # save_twitter_following_to_relationships(@twitter_user)
+    save_twitter_following_to_relationships(@twitter_user)
   end
 
   def update_user_twitter_id(user)
@@ -46,7 +46,13 @@ class CreateTwitterUser
     end
   end
 
-  def save_twitter_following_to_relationships
-
+  def save_twitter_following_to_relationships(user)
+    @following = $twitter.friend_ids(user.screen_name)
+    @following.each do |following|
+      Relationship.create(
+        follower_id: user.twitter_id,
+        followed_id: following
+      )
+    end
   end
 end
