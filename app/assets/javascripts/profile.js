@@ -4,10 +4,10 @@ $(function(){
 // Function called in AJAX request below
   initialize = function(user) {
     console.log(user);
-    console.log(user.github_repos[1])
     var stack_user = user.stack_user;
     var github_user = user.github_user;
-    var average = user.average[0];
+    var average = user.average;
+    var github_repos = user.github_repos
     Chart.defaults.global.responsive = true;
 // Initializing variables for charts and data
     var Line = {};
@@ -41,36 +41,51 @@ $(function(){
       last_six_months.push(monthNames[i]);
     }
 
-    // Calculate total watchers and forks across all repos for user
+    // Calculate total watchers and forks across all repos for user and the repos forks
     var total_watchers = 0;
     var total_forks = 0;
     var total_stars = 0;
-    for (i>0;i<user.github_repos.length;i++) {
+    var repos_names = [];
+    var repos_forks = [];
+    var repos_watchers = [];
+    var repos_stars = [];
+    for (i = 0;i < github_repos.length; i++) {
       var current_repo = user.github_repos[i];
+      repos_names.push(current_repo.name);
       total_watchers += current_repo.watchers_count
       total_forks += current_repo.forks_count
       total_stars =+ current_repo.stars_count
+      repos_forks.push(current_repo.forks_count);
+      repos_forks.push(current_repo.stars_count);
+      repos_forks.push(current_repo.watchers_count);
     }
-
     // Graphs for Github
     var gh_bardata = {
-        labels: last_six_months,
+        labels: repos_names,
         datasets: [
             {
-                label: "My First dataset",
+                label: "Forks",
                 fillColor: "rgba(220,220,220,0.5)",
                 strokeColor: "rgba(220,220,220,0.8)",
                 highlightFill: "rgba(220,220,220,0.75)",
                 highlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55]
+                data: repos_forks
             },
             {
-                label: "My Second dataset",
+                label: "Stars",
                 fillColor: "rgba(151,187,205,0.5)",
                 strokeColor: "rgba(151,187,205,0.8)",
                 highlightFill: "rgba(151,187,205,0.75)",
                 highlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86, 27]
+                data: repos_stars
+            },
+            {
+                label: "Watchers",
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(151,187,205,0.75)",
+                highlightStroke: "rgba(151,187,205,1)",
+                data: repos_watchers
             }
         ]
     };
@@ -152,96 +167,100 @@ $(function(){
     };
 
 // Data set for StackOverflow
-    var so_bardata = {
+    if (stack_user) {
+      var so_bardata = {
+          labels: last_six_months,
+          datasets: [
+              {
+                  label: "My First dataset",
+                  fillColor: "rgba(220,220,220,0.5)",
+                  strokeColor: "rgba(220,220,220,0.8)",
+                  highlightFill: "rgba(220,220,220,0.75)",
+                  highlightStroke: "rgba(220,220,220,1)",
+                  data: [65, 59, 80, 81, 56, 55]
+              },
+              {
+                  label: "My Second dataset",
+                  fillColor: "rgba(151,187,205,0.5)",
+                  strokeColor: "rgba(151,187,205,0.8)",
+                  highlightFill: "rgba(151,187,205,0.75)",
+                  highlightStroke: "rgba(151,187,205,1)",
+                  data: [28, 48, 40, 19, 86, 27]
+              }
+          ]
+      };
+      var so_linedata = {
         labels: last_six_months,
         datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(220,220,220,0.5)",
-                strokeColor: "rgba(220,220,220,0.8)",
-                highlightFill: "rgba(220,220,220,0.75)",
-                highlightStroke: "rgba(220,220,220,1)",
-                data: [65, 59, 80, 81, 56, 55]
-            },
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
-                data: [28, 48, 40, 19, 86, 27]
-            }
-        ]
-    };
-    var so_linedata = {
-      labels: last_six_months,
-      datasets: [
-        {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81, 56, 55]
-        },
-        {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19, 86, 27]
-        }
-      ]
-    };
-    var so_piedata = [
-      {
-          value: stack_user.bc_bronze,
-          color:"#CD7F32",
-          highlight: "#D7995B",
-          label: "Bronze"
-      },
-      {
-          value: stack_user.bc_silver,
-          color: "#C0C0C0 ",
-          highlight: "#DADADA",
-          label: "Silver"
-      },
-      {
-          value: stack_user.bc_gold,
-          color: "#FFD700",
-          highlight: "#FFDF33",
-          label: "Gold"
-      }
-    ]
-    var so_radardata = {
-      labels: ["Answers", "Questions", "Up-Votes", "Down-Votes"],
-      datasets: [
           {
-              label: user.full_name,
+              label: "My First dataset",
               fillColor: "rgba(220,220,220,0.2)",
               strokeColor: "rgba(220,220,220,1)",
               pointColor: "rgba(220,220,220,1)",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(220,220,220,1)",
-              data: [stack_user.answer_count, stack_user.question_count, stack_user.up_vote_count, stack_user.down_vote_count]
+              data: [65, 59, 80, 81, 56, 55]
           },
           {
-              label: "Average all users",
+              label: "My Second dataset",
               fillColor: "rgba(151,187,205,0.2)",
               strokeColor: "rgba(151,187,205,1)",
               pointColor: "rgba(151,187,205,1)",
               pointStrokeColor: "#fff",
               pointHighlightFill: "#fff",
               pointHighlightStroke: "rgba(151,187,205,1)",
-              data: [average.so_users_answers, average.so_users_questions, average.so_users_up_votes, average.so_users_down_votes]
+              data: [28, 48, 40, 19, 86, 27]
           }
+        ]
+      };
+
+      var so_piedata = [
+        {
+            value: stack_user.bc_bronze,
+            color:"#CD7F32",
+            highlight: "#D7995B",
+            label: "Bronze"
+        },
+        {
+            value: stack_user.bc_silver,
+            color: "#C0C0C0 ",
+            highlight: "#DADADA",
+            label: "Silver"
+        },
+        {
+            value: stack_user.bc_gold,
+            color: "#FFD700",
+            highlight: "#FFDF33",
+            label: "Gold"
+        }
       ]
+
+      var so_radardata = {
+        labels: ["Answers", "Questions", "Up-Votes", "Down-Votes"],
+        datasets: [
+            {
+                label: user.full_name,
+                fillColor: "rgba(220,220,220,0.2)",
+                strokeColor: "rgba(220,220,220,1)",
+                pointColor: "rgba(220,220,220,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(220,220,220,1)",
+                data: [stack_user.answer_count, stack_user.question_count, stack_user.up_vote_count, stack_user.down_vote_count]
+            },
+            {
+                label: "Average all users",
+                fillColor: "rgba(151,187,205,0.2)",
+                strokeColor: "rgba(151,187,205,1)",
+                pointColor: "rgba(151,187,205,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(151,187,205,1)",
+                data: [average.so_users_answers, average.so_users_questions, average.so_users_up_votes, average.so_users_down_votes]
+            }
+        ]
+      };
     };
 
 // Changes graphs between GH and SO
@@ -283,7 +302,14 @@ $(function(){
       myLineChart = new Chart(ctx7).Line(linedata);
 
       ctx8 = $("#myPie8").get(0).getContext("2d");
-      myBarChart = new Chart(ctx8).Bar(bardata);
+      myBarChart = new Chart(ctx8).Bar(bardata, {
+        labelLength: 4,
+        animation: true,
+        barValueSpacing : 5,
+        barDatasetSpacing : 1,
+        tooltipFillColor: "rgba(0,0,0,0.8)",                
+        multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>"
+      });
     };
     creategraphs();
 
@@ -298,31 +324,35 @@ $(function(){
       creategraphs();
     };
 
-    // Button to switch from GitHub to StackOverflow
-    $(".stackoverflow-btn").on('click', function(){
-      if ($(this).hasClass('active')) return;
-      $(this).addClass("active");
-      $(".github-btn").removeClass("active");
-      // Change first stat to reputation
-      $(".ap-1 h3").text("Reputation ");
-      $(".ap-1 .current_total").text(stack_user.reputation);
-      $(".ap-1 .current_changed").text();
-      // Change second stat to views
-      $(".ap-2 h3").text("Views ");
-      $(".ap-2 .current_total").text(stack_user.view_count);
-      $(".ap-2 .current_changed").text();
-      // Change third stat to answers
-      $(".ap-3 h3").text("Answers ");
-      $(".ap-3 .current_total").text(stack_user.answer_count);
-      $(".ap-3 .current_changed").text();
-       // Change 4 graph titles
-      $(".graph1 h3").text("General");
-      $(".graph2 h3").text("Badges");
-      $(".graph3 h3").text("Reputation");
-      $(".graph4 h3").text("Influence");
-    
-      updategraphs();
-    }); 
+    // Button to switch from GitHub to StackOverflow'=
+    if (stack_user) {
+      $(".stackoverflow-btn").on('click', function(){
+        if ($(this).hasClass('active')) return;
+        $(this).addClass("active");
+        $(".github-btn").removeClass("active");
+        // Change first stat to reputation
+        $(".ap-1 h3").text("Reputation ");
+        $(".ap-1 .current_total").text(stack_user.reputation);
+        $(".ap-1 .current_changed").text();
+        // Change second stat to views
+        $(".ap-2 h3").text("Views ");
+        $(".ap-2 .current_total").text(stack_user.view_count);
+        $(".ap-2 .current_changed").text();
+        // Change third stat to answers
+        $(".ap-3 h3").text("Answers ");
+        $(".ap-3 .current_total").text(stack_user.answer_count);
+        $(".ap-3 .current_changed").text();
+         // Change 4 graph titles
+        $(".graph1 h3").text("General");
+        $(".graph2 h3").text("Badges");
+        $(".graph3 h3").text("Reputation");
+        $(".graph4 h3").text("Influence");
+
+        updategraphs();
+      }); 
+    } else {
+      
+    }
 
     function ff_ratio() { 
       if (github_user.following > 0) {
@@ -349,8 +379,8 @@ $(function(){
       // Change 4 graph titles
       $(".graph1 h3").text("General");
       $(".graph2 h3").text("Languages");
-      $(".graph3 h3").text("Repositories");
-      $(".graph4 h3").text("Followers");
+      $(".graph3 h3").text("DUNNO");
+      $(".graph4 h3").text("Repositories");
 
       updategraphs();
     });

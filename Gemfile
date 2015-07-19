@@ -25,13 +25,15 @@ gem "octokit", "~> 3.0"
 gem 'foundation-rails'
 
 # Chart.js gem
-gem 'chart-js-rails'
+
 
 # HTTPparty gem to handle HTTP requests from the server
 gem 'httparty'
 
 # Gem required by Heroku to work better with Rails
 gem 'rails_12factor'
+
+gem 'railroady'
 
 gem 'rack', '~> 1.6.4'
 
