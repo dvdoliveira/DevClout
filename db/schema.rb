@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150718213421) do
+ActiveRecord::Schema.define(version: 20150719173300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,17 @@ ActiveRecord::Schema.define(version: 20150718213421) do
 
   add_index "github_users", ["user_id"], name: "index_github_users_on_user_id", using: :btree
 
+  create_table "relationships", force: :cascade do |t|
+    t.integer  "follower_id", limit: 8
+    t.integer  "followed_id", limit: 8
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
+  add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
+
   create_table "stack_users", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "about_me"
@@ -192,15 +203,16 @@ ActiveRecord::Schema.define(version: 20150718213421) do
     t.string   "full_name"
     t.string   "password"
     t.string   "user_type"
-    t.integer  "user_score",        default: 0
+    t.integer  "user_score",                  default: 0
     t.string   "access_token"
     t.string   "user_bio"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "profile_image_url"
     t.string   "user_name"
     t.string   "blog"
     t.string   "user_level"
+    t.integer  "tw_id",             limit: 8
   end
 
 end

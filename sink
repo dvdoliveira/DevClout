@@ -4,4 +4,3 @@ git checkout master
 git pull origin master
 git checkout ${CURRENT}
 git merge master ${CURRENT}
-

@@ -26,5 +26,33 @@ class CreateTwitterUser
       listed_count: context.auth[:extra][:raw_info][:listed_count],
       statuses_count: context.auth[:extra][:raw_info][:statuses_count]
     )
+    update_user_twitter_id(@twitter_user)
+    save_twitter_followers_to_relationships(@twitter_user)
+    save_twitter_following_to_relationships(@twitter_user)
+  end
+
+  def update_user_twitter_id(user)
+    @user = User.find_by(id: user.user.id)
+    @user.update_attribute(:tw_id, user.twitter_id)
+  end
+
+  def save_twitter_followers_to_relationships(user)
+    @followers = $twitter.follower_ids(user.screen_name)
+    @followers.each do |follower|
+      Relationship.create(
+        follower_id: follower,
+        followed_id: user.twitter_id
+      )
+    end
+  end
+
+  def save_twitter_following_to_relationships(user)
+    @following = $twitter.friend_ids(user.screen_name)
+    @following.each do |following|
+      Relationship.create(
+        follower_id: user.twitter_id,
+        followed_id: following
+      )
+    end
   end
 end

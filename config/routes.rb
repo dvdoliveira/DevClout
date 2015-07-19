@@ -31,6 +31,6 @@ Rails.application.routes.draw do
   get 'profile', to: 'users#profile', :as => :profile
 
   # User Update
-  resources :users, only: [:update]
+  resources :users, only: [:show, :update]
 
 end
