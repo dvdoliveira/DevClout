@@ -140,34 +140,11 @@
 
   <!-- Profile Friends -->
   <div class="profile-friends">
-    <h3>My Friends</h3>
+    <h3>Followers</h3>
     <ul>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+      <% @user.followers.uniq.each do |user| %>
+        <li><a class="friend-profile" href="<%= user_path(user.id) %>"><img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile"></a></li>
+      <% end %>
     </ul>
   </div>
   <!-- #/End of Friends -->
