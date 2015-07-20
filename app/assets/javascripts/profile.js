@@ -26,7 +26,7 @@ $(function(){
 
     var piedata, radardata, linedata, bardata, pieoptions;
 
-    var colors =["rgb(198, 110, 112)", "rgb(181,143,175)", "rgb(124,151,178)", "rgb(131,173,209)", "rgb(173,152,140)", "rgb(227,213,184)", "rgb(236,202,133)", "rgb(239,187,154)", "rgb(217,158,139)", "rgb(234,174,191)"];
+    var colors =["rgb(202,203,203)","rgb(228,215,226)","rgb(208,217,227)","rgb(210,225,238)","rgb(225,218,214)","rgb(245,240,229)","rgb(248,236,211)","rgb(249,230,219)","rgb(241,220,213)","rgb(247,226,232)","rgb(217,228,228)"];
     var lighter_colors = [];
 
     // Updates the github stats page
@@ -126,10 +126,10 @@ $(function(){
     var count = 0;
     for(var index in languages_associative) {
       languages_data.push({
-            value: languages_associative[index],
-            color: colors[count],
-            highlight: lighter_colors[count],
-            label: index
+        value: languages_associative[index],
+        color: colors[count],
+        highlight: lighter_colors[count],
+        label: index
       });
       if (count < 10){
         count += 1;
@@ -410,7 +410,7 @@ $(function(){
         }
         if (old_down > 0) {
           old_stat = (old_up / old_down);
-        } else {old_stat = 0;};
+        } else {old_stat = (old_up / 1);};
 
       } else {
 
@@ -435,7 +435,7 @@ $(function(){
     function up_down_ratio() {
       if (stack_user.down_vote_count > 0) {
         return(stack_user.up_vote_count / stack_user.down_vote_count);
-      } else {return 0;};
+      } else {return(stack_user.up_vote_count / 1);};
     }
 
     // Button to switch from GitHub to StackOverflow'=
