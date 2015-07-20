@@ -1,6 +1,4 @@
 $(function(){
-  if ($(".users.profile").length == 0) return;
-
 // Function called in AJAX request below
   initialize = function(user) {
     console.log(user);
@@ -45,9 +43,9 @@ $(function(){
       $(".ap-2 .current_total").text(github_user.public_repos);
       $(".ap-2 .current_changed").html("Pls do");
       // Change third stat to f.f ratio
-      $(".ap-3 h3").text("F.F Ratio ");
-      $(".ap-3 .current_total").text(ff_ratio());
-      $(".ap-3 .current_changed").html(change_in(ff_ratio(), "gh_friends_following_ratio"));
+      $(".ap-3 h3").text("Leaderboard Rank ");
+      $(".ap-3 .current_total").text(user.current_rank);
+      $(".ap-3 .current_changed").html(change_in(user.current_rank, "leaderboard_rank"));
       // Change 4 graph titles
       $(".graph1 h3").text("General");
       $(".graph2 h3").text("Languages");
@@ -84,7 +82,7 @@ $(function(){
     var repos_watchers = [];
     var repos_stars = [];
     var languages_associative = {};
-    for (i = 0;i < github_repos.length; i++) {
+    for (i = 0;i < 5; i++) {
       var current_repo = user.github_repos[i];
       repos_names.push(current_repo.name);
       total_watchers += current_repo.watchers_count
@@ -481,7 +479,6 @@ $(function(){
   };
 
 // Makes AJAX request then creates graphs
-  console.log(window.location.pathname);
 
   if (window.location.pathname.match(/profile/)) {
     $.ajax({
