@@ -47,7 +47,7 @@ $(function() {
     var windowWidth = $(window).width();
     $('.profile-menu').on('click', function(){
         $(this).toggleClass('active');
-        $('.offset-profile-menu').slideToggle();
+        $('.offset-profile-menu').slideToggle().toggleClass('active');
     });
 
     $(window).resize(function() {
