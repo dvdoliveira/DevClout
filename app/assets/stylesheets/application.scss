@@ -62,8 +62,8 @@
      font-size: 1rem;
      line-height: 1.5rem;
  }
-
-     /** Mobile View When window is smaller 767px  **/
+    
+ /** Mobile View When window is smaller 767px  **/
  @media (max-width: 767px){
      h1{
          font-size: 3.125rem;
@@ -84,6 +84,18 @@
          line-height: 1.575rem;
      }
  }
+ @media (max-width: 640px){
+        .title{
+            h1{
+                font-size: 1.875rem;
+                line-height: 2.375rem;
+            }
+            h2{
+                font-size: 1.25rem;
+                line-height: 1.75rem;
+            }
+        }
+    }
 
  /************ BUTTONS + LINKS ****************/
  a{
@@ -149,6 +161,9 @@
     &:hover{
         text-decoration: none;
     }
+ }
+ .title a.btn{
+    margin-bottom:20px;
  }
 
  /************ NAV **************/
