@@ -28,8 +28,8 @@
   						<%= rank += 1 %>
   					</td>
   					<td>
-              <%old_position = user.statistics.where(user_id: user.id, score_type: 'leaderboard_rank').order(created_at: :desc).first.score %>
-              <%current_position = @users.map(&:id).index(user.id) + 1 %> 
+              <%old_position = user.statistics.where(user_id: user.id, score_type: 'leaderboard_rank').order(created_at: :desc).limit(1).first.score %>
+              <%current_position = rank %> 
   						<% if old_position == current_position %>
   							<i class="fa fa-minus">
   						<% elsif old_position > current_position  %>
