@@ -1,11 +1,11 @@
 <section class="profile leaderboard">
 	<div class="row centered-text">
-	  <div class="large-3 columns">
+	  <div class="large-3 columns offset-profile-menu">
 			<%= render partial: 'shared/profile_sidebar', locals: { :user => current_user, :github_user => current_user.github_user, :stack_user => current_user.stack_user, :avg_user_score => current_user.avg_user_score  } %>
 	  </div>
 	  <div class="large-9 background-grey columns">
 	    <div class="leaderBoard-pane">
-	    	<table id="leaderboard">
+	    	<table id="leaderboard" width="100%">
 	    		<thead>
 	    		<tr>
 	    			<th>Rank</th>
@@ -24,7 +24,7 @@
 	    		<% else %>
 	    			<tr>
 	    		<% end %>
-  					<td>
+  					<td class="rank">
   						<%= rank += 1 %>
   					</td>
   					<td>
