@@ -6,10 +6,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @users = User.all
+    @users = User.order(user_score: :desc)
     @average_user_score = (@users.sum(:user_score) / @users.length)
     @repos = GithubRepo.where(github_user_id: @user.github_user.gh_id)
     @newest_stats = @user.statistics.order(created_at: :desc).limit(20)
+    @leaderboard_pos = @users.map(&:id).index(@user.id) + 1
     respond_to do |format|
       format.html
       format.json {render json: {
@@ -19,17 +20,19 @@ class UsersController < ApplicationController
         :avg_user_score => @average_user_score, 
         :github_repos => @repos, 
         :average => Average.first, 
-        :newest_stats => @newest_stats
+        :newest_stats => @newest_stats,
+        :current_rank => @leaderboard_pos
       }}
     end
   end
 
   def profile
     @user = current_user
-    @users = User.all
+    @users = User.order(user_score: :desc)
     @average_user_score = (@users.sum(:user_score) / @users.length)
     @repos = GithubRepo.where(github_user_id: @user.github_user.gh_id)
     @newest_stats = @user.statistics.order(created_at: :desc).limit(20)
+    @leaderboard_pos = @users.map(&:id).index(@user.id) + 1
     respond_to do |format|
       format.html
       format.json {render json: {
@@ -39,7 +42,8 @@ class UsersController < ApplicationController
         :avg_user_score => @average_user_score, 
         :github_repos => @repos, 
         :average => Average.first, 
-        :newest_stats => @newest_stats
+        :newest_stats => @newest_stats,
+        :current_rank => @leaderboard_pos
       }}
     end
   end

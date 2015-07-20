@@ -98,6 +98,14 @@
 	//Profile Pane
 	.profile-pane{
 
+		min-width: 260px;
+		position: relative;
+		z-index: 1;
+
+		.profile-information-part{
+			padding-left: 30px;
+		}
+
 		.profile-details{
 			background:#e6e6e6;
 			min-width: 260px;

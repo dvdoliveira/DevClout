@@ -21,6 +21,7 @@ $(function() {
     $(document).foundation();
 
     $('#leaderboard').dataTable( {
+        responsive: true,
         "lengthMenu": [ [25, 50, 100, 250, -1], [25, 50, 100, 250, "All"] ],
 
         "oLanguage": {
@@ -42,4 +43,21 @@ $(function() {
         $('.popup').find('.disable').show();
         window.location.replace("/signin");
     });
+
+    var windowWidth = $(window).width();
+    $('.profile-menu').on('click', function(){
+        $('.offset-profile-menu').toggle();
+    });
+
+    var stringWithShorterURLs = getReplacementString($(".profile-extra-info span.profile-blog-url a").text());
+
+    function getReplacementString(str){
+        return str.replace(/https?\:\/\/([^\s]*)/gi,function(match){
+            return match.substring(0,25) + "..."
+        });
+    }
+
+    $('.profile-extra-info span.profile-blog-url a').text(stringWithShorterURLs);
+
+
 });

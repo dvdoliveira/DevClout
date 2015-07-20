@@ -1,6 +1,4 @@
 $(function(){
-  if ($(".users.profile").length == 0) return;
-
 // Function called in AJAX request below
   initialize = function(user) {
     console.log(user);
@@ -26,7 +24,7 @@ $(function(){
 
     var piedata, radardata, linedata, bardata, pieoptions;
 
-    var colors =["rgb(202,203,203)","rgb(228,215,226)","rgb(208,217,227)","rgb(210,225,238)","rgb(225,218,214)","rgb(245,240,229)","rgb(248,236,211)","rgb(249,230,219)","rgb(241,220,213)","rgb(247,226,232)","rgb(217,228,228)"];
+    var colors =["rgb(168,194,194)","rgb(86,144,193)","rgb(217,157,135)","rgb(242,199,172)","rgb(239,212,155)","rgb(232,221,197)","rgb(188,171,161)","rgb(153,188,217)","rgb(148,170,192)","rgb(194,163,189)","rgb(135,136,138)"];
     var lighter_colors = [];
 
     // Updates the github stats page
@@ -45,9 +43,9 @@ $(function(){
       $(".ap-2 .current_total").text(github_user.public_repos);
       $(".ap-2 .current_changed").html("Pls do");
       // Change third stat to f.f ratio
-      $(".ap-3 h3").text("F.F Ratio ");
-      $(".ap-3 .current_total").text(ff_ratio());
-      $(".ap-3 .current_changed").html(change_in(ff_ratio(), "gh_friends_following_ratio"));
+      $(".ap-3 h3").text("Leaderboard Rank ");
+      $(".ap-3 .current_total").text(user.current_rank);
+      $(".ap-3 .current_changed").html(change_in(user.current_rank, "leaderboard_rank"));
       // Change 4 graph titles
       $(".graph1 h3").text("General");
       $(".graph2 h3").text("Languages");
@@ -84,7 +82,7 @@ $(function(){
     var repos_watchers = [];
     var repos_stars = [];
     var languages_associative = {};
-    for (i = 0;i < github_repos.length; i++) {
+    for (i = 0;i < 5; i++) {
       var current_repo = user.github_repos[i];
       repos_names.push(current_repo.name);
       total_watchers += current_repo.watchers_count
@@ -221,7 +219,7 @@ $(function(){
       ]
     };
 
-// Data set for StackOverflow
+  // Data set for StackOverflow
     if (stack_user) {
       var so_bardata = {
           labels: last_six_months,
@@ -392,6 +390,7 @@ $(function(){
     // Finds the change in certain stats since the last update
     function change_in(new_stat, stat_field) {
       var old_stat;
+      var change;
 
       if (stat_field === "so_up_down_ratio") {
         var old_up;
@@ -422,7 +421,12 @@ $(function(){
         }
       }
 
-      var change = parseFloat((new_stat - old_stat).toFixed(2));
+      if (stat_field === "leaderboard_rank") {
+        change = parseFloat((old_stat - new_stat).toFixed(2));
+      } else {
+        change = parseFloat((new_stat - old_stat).toFixed(2));
+      }
+      
       if (change > 0) {
         return('+' + change + ' <i class="fa fa-long-arrow-up"></i>');
       } else if (change < 0) {
@@ -464,6 +468,10 @@ $(function(){
 
         updategraphs();
       }); 
+    }else{
+      $(".stackoverflow-btn").on('click', function(){
+       $('#stack-overflow-sign-in').foundation('reveal', 'open');
+      });
     }
 
     $(".github-btn").on('click', function(){
@@ -477,7 +485,6 @@ $(function(){
   };
 
 // Makes AJAX request then creates graphs
-  console.log(window.location.pathname);
 
   if (window.location.pathname.match(/profile/)) {
     $.ajax({

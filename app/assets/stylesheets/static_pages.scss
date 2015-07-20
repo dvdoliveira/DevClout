@@ -70,11 +70,18 @@
         background-color: rgba(0, 0, 0, 0.6);
     }
     @media (max-width: 640px){
+        background-color: rgba(20, 20, 20, 1) !important;
         position:absolute;
         width: 100%;
         display:block;
         .toggle-topbar.menu-icon{
-            top:0px;
+            top:22px;
+        }
+        ul.title-area li.name h2{
+            text-align: center;
+        }
+        .title-area{
+            background-color: rgba(0, 0, 0, 0.0) !important;
         }
     }
 }
