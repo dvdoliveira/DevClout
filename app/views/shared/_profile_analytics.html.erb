@@ -39,7 +39,7 @@
 	</div>
 	<!-- #/End of github + stack overflow options -->
 
-	<% if !@user.stack_user %>
+	<% if current_user && !@user.stack_user %>
 		<!-- STACKOVERFLOW POP UP -->
 	    <div id="stack-overflow-sign-in" class="reveal-modal popup sign-in text-align-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 	    <div class="popup-logo">
