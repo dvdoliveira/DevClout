@@ -12,11 +12,11 @@ Rails.application.routes.draw do
   get 'contact' => 'static_pages#contact'
   get 'leaderboard' => 'static_pages#leaderboard'
 
-  
+
   # Omniauth Routes
   get '/stackoverflow' => 'stack_users#new', :as => :stackoverflow
   get '/twitter' => 'twitter_users#new', :as => :twitter
-  
+
   # Omniauth CallBack Routes
   get '/auth/stackexchange/callback', to: 'stack_users#create'
   get '/auth/github/callback', to: 'sessions#create'
@@ -30,7 +30,12 @@ Rails.application.routes.draw do
   get '/logout', to: 'users#logout', :as => :logout
   get 'profile', to: 'users#profile', :as => :profile
 
+  #test Routes
+  get '/update', to: 'update_check#update_check', :as => :update
   # User Update
   resources :users, only: [:show, :update]
+
+
+
 
 end

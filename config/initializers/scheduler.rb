@@ -1,22 +1,23 @@
+# #
+# # config/initializers/scheduler.rb
 #
-# config/initializers/scheduler.rb
-
 require 'rufus-scheduler'
-
-# Let's use the rufus-scheduler singleton
 #
+# # # Let's use the rufus-scheduler singleton
+
 s = Rufus::Scheduler.singleton
 
-
-# Stupid recurrent task...
-#
-s.every '180m' do
-
-  # Rails.logger.info "hello, it's #{Time.now}"
-  get_users = User.all
-  get_users.each do |user|
+s.every '1m' do
+  GithubUser.find_each do |user|
+    response = UpdateGithubSchedule.call({user: user})
     user_score = UserGithubScore.call({user: user})
-    stack_score = UserStackScore.call({user: user,total_score: user.user_score})
-  end
 
+    gh_user_account = User.find_by(id: user.id)
+    user_stack_account = StackUser.find_by(user_id: user.id)
+    if user_stack_account
+      response = UpdateStackoverflowSchedule.call({user: user_stack_account})
+      stack_score = UserStackScore.call({user: user,total_score: gh_user_account.user_score})
+    end
+
+  end
 end
