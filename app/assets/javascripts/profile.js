@@ -477,12 +477,25 @@ $(function(){
   };
 
 // Makes AJAX request then creates graphs
-  $.ajax({
-    url: '/profile',
-    type: 'get',
-    dataType: 'json',
-    data: { format: 'json' },
-    contentType: 'application/json; charset=UTF-8',
-    success: initialize
-  })
+  console.log(window.location.pathname);
+
+  if (window.location.pathname.match(/profile/)) {
+    $.ajax({
+      url: '/profile',
+      type: 'get',
+      dataType: 'json',
+      data: { format: 'json' },
+      contentType: 'application/json; charset=UTF-8',
+      success: initialize
+    })
+  } else if (window.location.pathname.match(/users\/\d+/g)) {
+    $.ajax({
+      url: window.location.pathname,
+      type: 'get',
+      dataType: 'json',
+      data: { format: 'json' },
+      contentType: 'application/json; charset=UTF-8',
+      success: initialize
+    })
+  }
 })
