@@ -139,10 +139,20 @@
   <% end %>
 
   <!-- Profile Friends -->
+  <div class="twitter-option-buttons">
+    <span class="twitter-followers-btn active">Followers</span>
+    <span class="twitter-followings-btn">Following</span>
+  </div>
+  <div style="clear:both;"></div>
+
   <div class="profile-friends">
-    <h3>Followers</h3>
-    <ul>
+    <ul class="twitter-followers">
       <% @user.followers.uniq.each do |user| %>
+        <li><a class="friend-profile" href="<%= user_path(user.id) %>"><img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile"></a></li>
+      <% end %>
+    </ul>
+    <ul class="twitter-followings">
+      <% @user.followed_users.uniq.each do |user| %>
         <li><a class="friend-profile" href="<%= user_path(user.id) %>"><img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile"></a></li>
       <% end %>
     </ul>
