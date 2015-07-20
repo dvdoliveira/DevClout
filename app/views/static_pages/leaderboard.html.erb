@@ -33,9 +33,9 @@
   						<% if old_position == current_position %>
   							<i class="fa fa-minus">
   						<% elsif old_position > current_position  %>
-  							<%=current_position - old_position%> <i class="fa fa-long-arrow-up">
+  							<%=(old_position - current_position).to_i%> <i class="fa fa-long-arrow-up">
   						<% else %>
-  							<%=current_position - old_position%> <i class="fa fa-long-arrow-down">
+  							<%=(current_position - old_position).to_i%> <i class="fa fa-long-arrow-down">
   						<% end %>
   					</td>
   					<td>
