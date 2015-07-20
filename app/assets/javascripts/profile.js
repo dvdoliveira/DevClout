@@ -221,7 +221,7 @@ $(function(){
       ]
     };
 
-// Data set for StackOverflow
+  // Data set for StackOverflow
     if (stack_user) {
       var so_bardata = {
           labels: last_six_months,
