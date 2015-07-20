@@ -26,7 +26,7 @@ $(function(){
 
     var piedata, radardata, linedata, bardata, pieoptions;
 
-    var colors =["rgb(202,203,203)","rgb(228,215,226)","rgb(208,217,227)","rgb(210,225,238)","rgb(225,218,214)","rgb(245,240,229)","rgb(248,236,211)","rgb(249,230,219)","rgb(241,220,213)","rgb(247,226,232)","rgb(217,228,228)"];
+    var colors =["rgb(168,194,194)","rgb(86,144,193)","rgb(217,157,135)","rgb(242,199,172)","rgb(239,212,155)","rgb(232,221,197)","rgb(188,171,161)","rgb(153,188,217)","rgb(148,170,192)","rgb(194,163,189)","rgb(135,136,138)"];
     var lighter_colors = [];
 
     // Updates the github stats page
