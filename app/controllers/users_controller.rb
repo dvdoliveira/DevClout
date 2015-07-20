@@ -62,6 +62,7 @@ class UsersController < ApplicationController
   end
 
   def followers
+    @user = User.find_by(id: params[:id])
     @users = @user.followers.uniq
     respond_to do |format|
       format.html
@@ -70,8 +71,12 @@ class UsersController < ApplicationController
   end
 
   def following
+    @user = User.find_by(id: params[:id])
     @users = @user.followed_users.uniq
-
+    respond_to do |format|
+      format.html
+      format.json { render json: @users }
+    end
   end
 
   private
