@@ -28,12 +28,14 @@
   						<%= rank += 1 %>
   					</td>
   					<td>
-  						<% if 3 == 0 %>
-  							0
-  						<% elsif 3 > 0 %>
-  							+3 <i class="fa fa-long-arrow-up">
+              <%old_position = user.statistics.where(user_id: user.id, score_type: 'leaderboard_rank').order(created_at: :desc).first.score %>
+              <%current_position = @users.map(&:id).index(user.id) + 1 %> 
+  						<% if old_position == current_position %>
+  							<i class="fa fa-minus">
+  						<% elsif old_position > current_position  %>
+  							<%=(old_position - current_position).to_i%> <i class="fa fa-long-arrow-up">
   						<% else %>
-  							-3 <i class="fa fa-long-arrow-down">
+  							<%=(current_position - old_position).to_i%> <i class="fa fa-long-arrow-down">
   						<% end %>
   					</td>
   					<td>

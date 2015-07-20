@@ -82,8 +82,18 @@
           <th>Change</th>
         </tr>
         <tr>
+          <%new_score = @user.user_score%>
           <td><%=@user.user_score%></td>
-          <td class="total-score-changed"></td>
+          <td class="total-score-changed">
+            <%old_score = @user.statistics.where(user_id: @user.id, score_type: 'gh_total_score').order(created_at: :desc).first.score %>
+            <% if old_score == new_score %>
+              <i class="fa fa-minus">
+            <% elsif old_score < new_score  %>
+              +<%=(new_score - old_score).to_i%> <i class="fa fa-long-arrow-up">
+            <% else %>
+              <%=(new_score - old_score).to_i%> <i class="fa fa-long-arrow-down">
+            <% end %>
+          </td>
         </tr>
       </table>
     </div>
