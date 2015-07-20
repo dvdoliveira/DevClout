@@ -1,6 +1,7 @@
 .leaderBoard-pane{
 
 	margin-top:20px;
+	margin-bottom: 20px;
 	
 	// bypassing some TableData CSS
 	.dataTables_wrapper .dataTables_filter input{
@@ -57,6 +58,15 @@
 					line-height: 1.4375rem;
 				}
 			}
+		}
+	}
+	li{
+		list-style: none;
+	}
+	.child{ 
+		background: #e6e6e6;
+		ul{
+			width:100%;
 		}
 	}
 	/** Tablet View When window is smaller than 960px but above 768px  **/
