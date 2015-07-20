@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # Omniauth Routes
   get '/stackoverflow', to: 'stack_users#new', as: :stackoverflow
   get '/twitter', to: 'twitter_users#new', as: :twitter
-  
+
   # Omniauth CallBack Routes
   get '/auth/stackexchange/callback', to: 'stack_users#create'
   get '/auth/github/callback', to: 'sessions#create'
@@ -28,6 +28,10 @@ Rails.application.routes.draw do
   get '/signin', to: 'sessions#new', as: :signin
   get '/logout', to: 'users#logout', as: :logout
   get 'profile', to: 'users#profile', as: :profile
+
+
+  # User Update
+  resources :users, only: [:show, :update]
 
   # User Update and other users profile
   resources :users, only: [:show, :update]

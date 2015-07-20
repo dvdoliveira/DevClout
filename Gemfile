@@ -7,10 +7,7 @@ gem 'omniauth'
 
 # gem 'whenever', :require => false
 gem 'rufus-scheduler', '~> 3.1.3'
-#async jobs
-# gem 'delayed_job_active_record'
 
-# gem "daemons"
 # omniauth-github strategy gem
 gem 'omniauth-github', :github => 'intridea/omniauth-github'
 

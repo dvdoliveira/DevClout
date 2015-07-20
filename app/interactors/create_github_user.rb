@@ -75,7 +75,8 @@ class CreateGithubUser
       mirror_url: repo["mirror_url"],
       open_issues_count: repo["open_issues_count"],
       watchers: repo["watchers"],
-      default_branch: repo["default_branch"]
+      default_branch: repo["default_branch"],
+      repo_id: repo["id"]
     )
     end
     user_score = UserGithubScore.call({user: @user})
