@@ -35,10 +35,28 @@
 	<!-- github + stack overflow options -->
 	<div class="analytic-view-options">
   	<span class="github-btn active">GitHub</span>
-		<span class="stackoverflow-btn">Stack Overflow</span>
+		<span class="stackoverflow-btn">StackOverflow</span>
 	</div>
 	<!-- #/End of github + stack overflow options -->
 
+	<% if !@user.stack_user %>
+		<!-- STACKOVERFLOW POP UP -->
+	    <div id="stack-overflow-sign-in" class="reveal-modal popup sign-in text-align-center" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+	    <div class="popup-logo">
+	    <img class="stack-overflow-text-icon" src="../images/icons/stack-overflow-with-text-icon.svg" alt="StackOverflow Logo" />
+	    </div>
+	    <h3 class="title">Log into your StackOverflow account</h3>
+	    <h3 class="disable">Authenticating Your Account...</h3>
+	    <img class="disable" src="./loader/wheel.svg" alt="loader"/>
+	    <a class="btn" href="/stackoverflow">Login to StackOverflow</a>
+	    <div class="spacer-teritary"></div>
+	    <div class="disclaimer">
+	    <p>By clicking login, you agree to the <a href="#" class="black">terms of service</a> and <a href="#" class="black">privacy statement</a>.<br/>You may delete your account at anytime.</p>
+	    </div>
+	    <a class="close-reveal-modal" aria-label="Close">X</a>
+	    </div>
+	  <!-- #/END OF STACKOVERFLOW POP UP -->
+  <% end %>
 	<div style="clear:both;"></div>
 
 	<!-- Main Analytics -->

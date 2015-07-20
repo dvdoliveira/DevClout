@@ -464,6 +464,10 @@ $(function(){
 
         updategraphs();
       }); 
+    }else{
+      $(".stackoverflow-btn").on('click', function(){
+       $('#stack-overflow-sign-in').foundation('reveal', 'open');
+      });
     }
 
     $(".github-btn").on('click', function(){
