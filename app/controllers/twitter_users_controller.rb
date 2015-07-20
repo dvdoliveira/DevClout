@@ -9,7 +9,7 @@ class TwitterUsersController < ApplicationController
     unless @twitter_user then
       new_user_twitter = CreateTwitterUser.call({auth: @auth, session_user_id: session[:user_id]})
     end
-    redirect_to profile_path
+    redirect_to profile_path, notice: "You are now connected with Twitter."
   end
 
   protected

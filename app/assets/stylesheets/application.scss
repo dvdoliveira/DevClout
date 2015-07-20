@@ -202,6 +202,12 @@ body > nav > section.top-bar-section > ul.right > li > h2{
      list-style-type: decimal;
  }
  /************ MISC ****************/
+.alert-box{
+    margin-bottom: 0px;
+    text-align: center;
+    font-size: 15px;
+    font-family: 'lato', 'sans-serif';
+} 
 *:focus {
     outline:none !important;
 }
