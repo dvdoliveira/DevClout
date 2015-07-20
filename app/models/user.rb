@@ -4,10 +4,14 @@ class User < ActiveRecord::Base
   has_one :stack_user
   has_one :twitter_user
   has_many :github_repos
-  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
-  has_many :followed_users, through: :relationships, source: :followed
+  has_many :relationships, foreign_key: "follower_id", primary_key: "tw_id",
+                           dependent: :destroy
+  has_many :followed_users, foreign_key: "followed_id", primary_key: "tw_id", 
+                            through: :relationships, 
+                            source: :followed
   has_many :reverse_relationships, foreign_key: "followed_id",
                                    class_name: 'Relationship',
+                                   primary_key: "tw_id",
                                    dependent: :destroy
   has_many :followers, through: :reverse_relationships, source: :follower
 
