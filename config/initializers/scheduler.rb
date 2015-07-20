@@ -7,7 +7,7 @@ require 'rufus-scheduler'
 
 s = Rufus::Scheduler.singleton
 
-s.every '1m' do
+s.every '1440m' do
   GithubUser.find_each do |user|
     response = UpdateGithubSchedule.call({user: user})
     user_score = UserGithubScore.call({user: user})
