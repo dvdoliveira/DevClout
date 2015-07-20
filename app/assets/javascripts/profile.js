@@ -390,6 +390,7 @@ $(function(){
     // Finds the change in certain stats since the last update
     function change_in(new_stat, stat_field) {
       var old_stat;
+      var change;
 
       if (stat_field === "so_up_down_ratio") {
         var old_up;
@@ -420,7 +421,12 @@ $(function(){
         }
       }
 
-      var change = parseFloat((new_stat - old_stat).toFixed(2));
+      if (stat_field === "leaderboard_rank") {
+        change = parseFloat((old_stat - new_stat).toFixed(2));
+      } else {
+        change = parseFloat((new_stat - old_stat).toFixed(2));
+      }
+      
       if (change > 0) {
         return('+' + change + ' <i class="fa fa-long-arrow-up"></i>');
       } else if (change < 0) {
