@@ -15,9 +15,7 @@
  *= require foundation_and_overrides
 
  */
-
  /*THIS FILE INCLUDES ALL STYLING FOR BASIC ASSESTS SUCH AS HEADERS/LINKS/BUTTONS/TEXT-ALIGNING/RESPONSIVE MEDIA*/
-
  body h1,h2,h3,h4,h5,h6,p,ul,ol,li,div,a, span, form, input, label, textarea {
      font-family: 'lato', 'helvetica', 'arial', 'sans-serif';
      color: #222222;
@@ -64,8 +62,8 @@
      font-size: 1rem;
      line-height: 1.5rem;
  }
-
-     /** Mobile View When window is smaller 767px  **/
+    
+ /** Mobile View When window is smaller 767px  **/
  @media (max-width: 767px){
      h1{
          font-size: 3.125rem;
@@ -86,6 +84,18 @@
          line-height: 1.575rem;
      }
  }
+ @media (max-width: 640px){
+        .title{
+            h1{
+                font-size: 1.875rem;
+                line-height: 2.375rem;
+            }
+            h2{
+                font-size: 1.25rem;
+                line-height: 1.75rem;
+            }
+        }
+    }
 
  /************ BUTTONS + LINKS ****************/
  a{
@@ -152,6 +162,9 @@
         text-decoration: none;
     }
  }
+ .title a.btn{
+    margin-bottom:20px;
+ }
 
  /************ NAV **************/
  nav.top-bar{
@@ -202,6 +215,12 @@ body > nav > section.top-bar-section > ul.right > li > h2{
      list-style-type: decimal;
  }
  /************ MISC ****************/
+.alert-box{
+    margin-bottom: 0px;
+    text-align: center;
+    font-size: 15px;
+    font-family: 'lato', 'sans-serif';
+} 
 *:focus {
     outline:none !important;
 }
@@ -373,6 +392,11 @@ footer{
         width: 150px;
         margin-bottom:50px;
     }
+    .popup-logo img.stack-overflow-text-icon{
+        max-height: 90px;
+        width: auto;
+        padding: 0px 30px;
+    }    
     .popup-logo.stackoverflow img{
         width: 300px;
         margin-bottom:20px;
@@ -458,3 +482,59 @@ footer{
         }
     }
 }
+.profile-menu{
+    display:none;
+}
+@media (min-width: 1024px){
+    .profile-menu{
+        display:none;
+    }
+    .offset-profile-menu{
+        display: block !important;
+    }
+}
+@media (max-width: 1024px){
+    body > nav > section.top-bar-section > ul.right > li > h2 a{
+        margin-left:20px;
+    }
+    .profile-menu{
+        display:inline-block;
+        position: absolute;
+        background: white;
+        font-size: 1.5rem;
+        padding: 0px 20px;
+        font-weight: 400;
+        font-family: 'lato', 'sans-serif';
+        text-decoration: none;
+        background: -moz-linear-gradient(center top, #ededed 5%, #dfdfdf 100%);
+        background: -ms-linear-gradient(top, #ededed 5%, #dfdfdf 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #ededed), color-stop(100%, #dfdfdf));
+        background-color: #ededed;
+        color: #222;
+        cursor: pointer;
+        &.active{
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #7E7E7E), color-stop(100%, #7E7E7E));
+        }
+    }
+    .title-area{
+        margin-left: 75px !important;
+        li{
+            list-style: none !important;
+        }
+    }
+    .offset-profile-menu{
+          position: absolute;
+          z-index: 1;
+          background-color: #f1f1f1;
+          box-shadow: 10px 10px 52px #888888;
+          display: none;
+          padding-top:20px;
+          &.active{
+            background: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0.05, rgb(126, 126, 126)), to(rgb(126, 126, 126)));
+            padding-top:20px;
+          }
+    }
+}
+
+

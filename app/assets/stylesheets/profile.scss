@@ -98,6 +98,14 @@
 	//Profile Pane
 	.profile-pane{
 
+		min-width: 260px;
+		position: relative;
+		z-index: 1;
+
+		.profile-information-part{
+			padding-left: 30px;
+		}
+
 		.profile-details{
 			background:#e6e6e6;
 			min-width: 260px;
@@ -465,7 +473,7 @@
 					padding-bottom: 0px;
 					margin-bottom: 0px;
 				}
-				.replace-so-pie {
+				.has-tip {
 					
 				}
 				.chartset3 {

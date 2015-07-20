@@ -1,5 +1,15 @@
 class CreateTwitterUser
   include Interactor
+  require 'twitter'
+
+  def connect_twitter(twitter_user)
+    $twitter = Twitter::REST::Client.new do |config|
+      config.consumer_key = Rails.application.secrets.omniauth_twitter_key
+      config.consumer_secret = Rails.application.secrets.omniauth_twitter_secret
+      config.access_token = twitter_user.access_token
+      config.access_token_secret = twitter_user.secret
+    end
+  end
 
   def call
     @twitter_user = TwitterUser.create(
@@ -26,7 +36,13 @@ class CreateTwitterUser
       listed_count: context.auth[:extra][:raw_info][:listed_count],
       statuses_count: context.auth[:extra][:raw_info][:statuses_count]
     )
+    # Save twitter_id to users table
     update_user_twitter_id(@twitter_user)
+    
+    # User user twitter credentials to connect to Twitter REST API to avoid rate limits
+    connect_twitter(@twitter_user)
+
+    # Pull twitter followers and following from twitter and save to relationships table
     save_twitter_followers_to_relationships(@twitter_user)
     save_twitter_following_to_relationships(@twitter_user)
   end

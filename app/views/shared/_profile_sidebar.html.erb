@@ -9,7 +9,7 @@
                 <%=image_tag(@user.profile_image_url, alt: "profile-image")%>
               </div>
             </div>
-            <div class="large-8 medium-8 small-8 columns">
+            <div class="large-8 medium-8 small-8 columns profile-information-part">
               <h3><%=@user.full_name%></h3>
               <h4><%=@user.user_level%></h4>
               <% if current_user.id == @user.id %>
@@ -82,94 +82,69 @@
           <th>Change</th>
         </tr>
         <tr>
+          <%new_score = @user.user_score%>
           <td><%=@user.user_score%></td>
-          <td>-9 <i class="fa fa-long-arrow-down"></i></td>
+          <td class="total-score-changed">
+            <%old_score = @user.statistics.where(user_id: @user.id, score_type: 'gh_total_score').order(created_at: :desc).first.score %>
+            <% if old_score == new_score %>
+              <i class="fa fa-minus">
+            <% elsif old_score < new_score  %>
+              +<%=(new_score - old_score).to_i%> <i class="fa fa-long-arrow-up">
+            <% else %>
+              <%=(new_score - old_score).to_i%> <i class="fa fa-long-arrow-down">
+            <% end %>
+          </td>
         </tr>
       </table>
     </div>
-  <!-- #/End of Profile Score -->
-  <div class="profile-btn">
-    <table>
-      <tr>
-        <td width="70%">
+    
+  <% if current_user.id == @user.id %>
+      <% if !@user.stack_user %>
+        <div class="profile-btn">
           <table>
             <tr>
-              <% if !@user.stack_user %>
-              <td><img class="stack-overflow-icon" src="../images/icons/stack-overflow-icon.svg" /></td>
-              <td class="link"><a class="connect-link" href="/stackoverflow">Connect to Stack&nbsp;Overflow</a></td>
-              <% else %>
-              <td><img class="stack-overflow-icon-connected" src="../images/icons/stack-overflow-icon.svg" /></td>
-              <td class="link">Connected</td>
-              <% end %>
-
+              <td width="70%">
+                <table>
+                  <tr>
+                    <td><img class="stack-overflow-icon" src="../images/icons/stack-overflow-icon.svg" /></td>
+                    <td class="link"><a class="connect-link" href="/stackoverflow">Connect to Stack&nbsp;Overflow</a></td>
+                  </tr>
+                </table>
+              </td>
+              <td width="30%"></td>
             </tr>
           </table>
-        </td>
-        <td width="30%"></td>
-      </tr>
-    </table>
-    <% if !@user.stack_user %>
-    <a class="connect-btn" href="/stackoverflow">+</a>
-    <% else %>
-    <span class="connect-btn"><i class="fa fa-check"></i></span>
+          <a class="connect-btn" href="/stackoverflow">+</a>
+      </div>
     <% end %>
-  </div>
 
-  <div class="profile-btn">
-    <table>
-      <tr>
-        <td width="70%">
-          <table>
-            <tr>
-              <td><img src="../images/icons/twitter-icon.svg" width="50" height="50" /></td>
-              <% if !@user.twitter_user %>
-              <td class="link"><a class="connect-link" href="/twitter">Connect to Twitter</a></td>
-              <% else %>
-              <td class="link">Connected</td>
-              <% end %>
-            </tr>
-          </table>
-        </td>
-        <td width="30%"></td>
-      </tr>
-    </table>
     <% if !@user.twitter_user %>
-    <a class="connect-btn" href="/twitter">+</a>
-    <% else %>
-    <span class="connect-btn"><i class="fa fa-check"></i></span>
+      <div class="profile-btn">
+        <table>
+          <tr>
+            <td width="70%">
+              <table>
+                <tr>
+                  <td><img src="../images/icons/twitter-icon.svg" width="50" height="50" /></td>
+                  <td class="link"><a class="connect-link" href="/twitter">Connect to Twitter</a></td>
+                </tr>
+              </table>
+            </td>
+            <td width="30%"></td>
+          </tr>
+        </table>
+        <a class="connect-btn" href="/twitter">+</a>
+      </div>
     <% end %>
-  </div>
+  <% end %>
 
   <!-- Profile Friends -->
   <div class="profile-friends">
-    <h3>My Friends</h3>
+    <h3>Followers</h3>
     <ul>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
-      <li><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a></li>
+      <% @user.followers.uniq.each do |user| %>
+        <li><a class="friend-profile" href="<%= user_path(user.id) %>"><img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile"></a></li>
+      <% end %>
     </ul>
   </div>
   <!-- #/End of Friends -->

@@ -1,22 +1,50 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
 
-
   def index
   end
 
   def show
     @user = User.find_by(id: params[:id])
+    @users = User.order(user_score: :desc)
+    @average_user_score = (@users.sum(:user_score) / @users.length)
+    @repos = GithubRepo.where(github_user_id: @user.github_user.gh_id)
+    @newest_stats = @user.statistics.order(created_at: :desc).limit(20)
+    @leaderboard_pos = @users.map(&:id).index(@user.id) + 1
+    respond_to do |format|
+      format.html
+      format.json {render json: {
+        :user => @user, 
+        :github_user => @user.github_user, 
+        :stack_user => @user.stack_user, 
+        :avg_user_score => @average_user_score, 
+        :github_repos => @repos, 
+        :average => Average.first, 
+        :newest_stats => @newest_stats,
+        :current_rank => @leaderboard_pos
+      }}
+    end
   end
 
   def profile
     @user = current_user
-    @users = User.all
+    @users = User.order(user_score: :desc)
     @average_user_score = (@users.sum(:user_score) / @users.length)
     @repos = GithubRepo.where(github_user_id: @user.github_user.gh_id)
+    @newest_stats = @user.statistics.order(created_at: :desc).limit(20)
+    @leaderboard_pos = @users.map(&:id).index(@user.id) + 1
     respond_to do |format|
       format.html
-      format.json {render json: {:user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @average_user_score, :github_repos => @repos, :average => Average.first, :statistics => @user.statistics}}
+      format.json {render json: {
+        :user => @user, 
+        :github_user => @user.github_user, 
+        :stack_user => @user.stack_user, 
+        :avg_user_score => @average_user_score, 
+        :github_repos => @repos, 
+        :average => Average.first, 
+        :newest_stats => @newest_stats,
+        :current_rank => @leaderboard_pos
+      }}
     end
   end
 
@@ -35,6 +63,24 @@ class UsersController < ApplicationController
   def logout
     session.clear
     redirect_to root_path
+  end
+
+  def followers
+    @user = User.find_by(id: params[:id])
+    @users = @user.followers.uniq
+    respond_to do |format|
+      format.html
+      format.json { render json: @users }
+    end
+  end
+
+  def following
+    @user = User.find_by(id: params[:id])
+    @users = @user.followed_users.uniq
+    respond_to do |format|
+      format.html
+      format.json { render json: @users }
+    end
   end
 
   private
