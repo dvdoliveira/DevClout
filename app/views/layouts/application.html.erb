@@ -52,7 +52,9 @@
     </nav>
     <% else %>
     <nav class="top-bar" data-topbar role="navigation">
-      <div class="profile-menu"><i class="fa fa-user"></i></div>
+      <% unless request.fullpath == "/" %>
+        <div class="profile-menu"><%=image_tag(@user.profile_image_url, alt: "profile-image")%></div>
+      <% end %>
       <ul class="title-area">
         <li class="name">
           <h2><a href="/">DevStack</a></h2>
