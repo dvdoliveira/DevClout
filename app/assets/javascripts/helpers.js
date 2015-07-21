@@ -30,6 +30,33 @@ $(function(){
 	    $('.offset-profile-menu').slideToggle().toggleClass('active');
 	});
 
+
+$('.offset-profile-menu').mouseleave(function() {
+	$('body').on('click',function(){
+		$('.profile-menu').removeClass('active');
+	  $('.offset-profile-menu').slideToggle().toggleClass('active');
+	  $('body').unbind('click');
+	});
+});
+
+$('.offset-profile-menu').blur(function() {
+	$('body').on('click',function(){
+		$('.profile-menu').removeClass('active');
+	  $('.offset-profile-menu').slideToggle().toggleClass('active');
+	  $('body').unbind('click');
+	});
+});
+
+$('.offset-profile-menu, .profile-menu').mouseenter(function() {
+	$('body').unbind('click');
+});
+
+$('.offset-profile-menu, .profile-menu').focus(function() {
+	$('body').unbind('click');
+});
+
+
+
 	$(window).resize(function() {
 	    windowWidth = $(window).width();
 	    socialProfileLabelBalancer();
