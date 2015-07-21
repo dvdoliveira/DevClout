@@ -9,8 +9,8 @@ class TwitterUsersController < ApplicationController
     unless @twitter_user then
       new_user_twitter = CreateTwitterUser.call({auth: @auth, session_user_id: session[:user_id]})
     end
-    @user = User.find_by(id: session[:user_id])
-    update_display_values = UpdateUserProfile.call({user: @user})
+    # @user = User.find_by(id: session[:user_id])
+    # update_display_values = UpdateUserProfile.call({user: @user})
     redirect_to profile_path, notice: "You are now connected with Twitter."
   end
 
