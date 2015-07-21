@@ -35,13 +35,13 @@ $(function(){
     }
     function update_gh_stats() {
       // Change first stat to followers
-      $(".ap-1 h3").text("Followers ");
+      $(".ap-1 h3").html("Followers ");
       $(".ap-1 .current_total").text(github_user.followers);
       $(".ap-1 .current_changed").html(change_in(github_user.followers, "gh_followers"));
       // Change second stat to pub repos
       $(".ap-2 h3").text("Public Repositories ");
       $(".ap-2 .current_total").text(github_user.public_repos);
-      $(".ap-2 .current_changed").html("Pls do");
+      $(".ap-2 .current_changed").html(change_in(github_user.public_repos, "gh_repo_count"));
       // Change third stat to f.f ratio
       $(".ap-3 h3").text("Leaderboard Rank ");
       $(".ap-3 .current_total").text(user.current_rank);
@@ -341,9 +341,9 @@ $(function(){
         linedata = so_linedata;
         bardata = so_bardata;
         if (stack_user.bc_bronze + stack_user.bc_silver + stack_user.bc_gold > 0){
-          pieoptions = {animateScale: true, tooltipTemplate: "No Badges"}
+          pieoptions = {animateScale: true}
         } else {
-          pieoptions = {animateScale: true};
+          pieoptions = {animateScale: true, tooltipTemplate: "No Badges"};
         }
       }
     }
