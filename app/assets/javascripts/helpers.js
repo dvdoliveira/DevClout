@@ -35,6 +35,7 @@ $('.offset-profile-menu').mouseleave(function() {
 	$('body').on('click',function(){
 		$('.profile-menu').removeClass('active');
 	  $('.offset-profile-menu').slideToggle().toggleClass('active');
+	  $('body').unbind('click');
 	});
 });
 
