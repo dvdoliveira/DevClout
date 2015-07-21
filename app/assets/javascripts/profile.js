@@ -35,7 +35,7 @@ $(function(){
     }
     function update_gh_stats() {
       // Change first stat to followers
-      $(".ap-1 h3").text("Followers ");
+      $(".ap-1 h3").html("Followers ");
       $(".ap-1 .current_total").text(github_user.followers);
       $(".ap-1 .current_changed").html(change_in(github_user.followers, "gh_followers"));
       // Change second stat to pub repos
