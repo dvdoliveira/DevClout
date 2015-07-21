@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   get '/signin', to: 'sessions#new', as: :signin
   get '/logout', to: 'users#logout', as: :logout
   get 'profile', to: 'users#profile', as: :profile
+  get 'compare', to: 'users#compare', as: :compare
 
 
   # User Update
