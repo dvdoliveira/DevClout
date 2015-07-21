@@ -9,20 +9,18 @@ $(function(){
     Chart.defaults.global.responsive = true;
 
     // Initializing variables for charts and data
-    var Line = {};
+    var repos_height;
+
     var ctx5;
     var myDoughnutChart;
 
     var ctx6;
     var myRadarChart;
 
-    var ctx7;
-    var myLineChart;
-
     var ctx8;
     var myBarChart;
 
-    var piedata, radardata, linedata, bardata, pieoptions;
+    var piedata, radardata, bardata, pieoptions;
 
     var colors =["rgb(168,194,194)","rgb(86,144,193)","rgb(217,157,135)","rgb(242,199,172)","rgb(239,212,155)","rgb(232,221,197)","rgb(188,171,161)","rgb(153,188,217)","rgb(148,170,192)","rgb(194,163,189)","rgb(135,136,138)"];
     var lighter_colors = [];
@@ -49,7 +47,6 @@ $(function(){
       // Change 4 graph titles
       $(".graph1 h3").text("General");
       $(".graph2 h3").text("Languages");
-      $(".graph3 h3").text("DUNNO");
       $(".graph4 h3").text("Repositories");
     }
     function update_total_score() {
@@ -82,7 +79,7 @@ $(function(){
     var repos_watchers = [];
     var repos_stars = [];
     var languages_associative = {};
-    for (i = 0;i < 5; i++) {
+    for (i = 0;i < user.github_repos.length; i++) {
       var current_repo = user.github_repos[i];
       repos_names.push(current_repo.name);
       total_watchers += current_repo.watchers_count
@@ -166,31 +163,7 @@ $(function(){
             }
         ]
     };
-    var gh_linedata = {
-      labels: last_six_months,
-      datasets: [
-        {
-          label: user.user.full_name,
-          fillColor: rgb_to_rgba(colors[0], 0.2),
-          strokeColor: rgb_to_rgba(colors[0], 1),
-          pointColor: rgb_to_rgba(colors[0], 1),
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: rgb_to_rgba(colors[0], 1),
-          data: [65, 59, 80, 81, 56, 55]
-        },
-        {
-          label: "Average All Users",
-          fillColor: rgb_to_rgba(colors[1], 0.2),
-          strokeColor: rgb_to_rgba(colors[1], 1),
-          pointColor: rgb_to_rgba(colors[1], 1),
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: rgb_to_rgba(colors[1], 1),
-          data: [28, 48, 40, 19, 86, 27]
-        }
-      ]
-    };
+
     var gh_piedata = languages_data;
 
     var gh_radardata = {
@@ -241,31 +214,6 @@ $(function(){
                 data: [28, 48, 40, 19, 86, 27]
               }
           ]
-      };
-      var so_linedata = {
-        labels: last_six_months,
-        datasets: [
-          {
-            label: "My First dataset",
-            fillColor: rgb_to_rgba(colors[0], 0.2),
-            strokeColor: rgb_to_rgba(colors[0], 1),
-            pointColor: rgb_to_rgba(colors[0], 1),
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: rgb_to_rgba(colors[0], 1),
-            data: [65, 59, 80, 81, 56, 55]
-          },
-          {
-            label: "My Second dataset",
-            fillColor: rgb_to_rgba(colors[1], 0.2),
-            strokeColor: rgb_to_rgba(colors[1], 1),
-            pointColor: rgb_to_rgba(colors[1], 1),
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: rgb_to_rgba(colors[1], 1),
-            data: [28, 48, 40, 19, 86, 27]
-          }
-        ]
       };
 
       if (stack_user.bc_bronze + stack_user.bc_silver + stack_user.bc_gold > 0) {
@@ -332,13 +280,11 @@ $(function(){
       if ($(".github-btn").hasClass('active')) {
         piedata = gh_piedata;
         radardata = gh_radardata;
-        linedata = gh_linedata;
         bardata = gh_bardata;
         pieoptions = {animateScale: true};
       } else if ($(".stackoverflow-btn").hasClass('active')) {
         piedata = so_piedata;
         radardata = so_radardata;
-        linedata = so_linedata;
         bardata = so_bardata;
         if (stack_user.bc_bronze + stack_user.bc_silver + stack_user.bc_gold > 0){
           pieoptions = {animateScale: true}
@@ -350,7 +296,6 @@ $(function(){
     changedataset();
 
     creategraphs = function() {
-      // First checks if the user has any stackoverflow badges to display the badges pie graph
       ctx6 = $("#myPie6").get(0).getContext("2d");
       myRadarChart = new Chart(ctx6).Radar(radardata, {animateScale: true});
       legend(document.getElementById('radar-legend'), radardata, myRadarChart);
@@ -358,21 +303,27 @@ $(function(){
       ctx5 = $("#myPie4").get(0).getContext("2d");
       myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
       legend(document.getElementById('pie-legend'), piedata, myDoughnutChart);
-     
-      ctx7 = $("#myPie7").get(0).getContext("2d");
-      myLineChart = new Chart(ctx7).Line(linedata);
-      legend(document.getElementById('line-legend'), linedata, myLineChart);
 
-      ctx8 = $("#myPie8").get(0).getContext("2d");
-      myBarChart = new Chart(ctx8).Bar(bardata, {
-        labelLength: 4,
-        animation: true,
-        barValueSpacing : 5,
-        barDatasetSpacing : 1,
-        tooltipFillColor: "rgba(0,0,0,0.8)",                
-        multiTooltipTemplate: "<%= datasetLabel %> = <%= value %>",
-      });
-      legend(document.getElementById('bar-legend'), bardata, myBarChart);
+
+      if ($('.github-btn').hasClass('active')) {
+        $("#myPie8").attr('hidden', false);
+        $(".graph4 .comparing-with").attr('hidden', false);
+
+        ctx8 = $("#myPie8").get(0).getContext("2d");
+        myBarChart = new Chart(ctx8).Bar(bardata, {
+          labelLength: 4,
+          animation: true,
+          barValueSpacing : 5,
+          barDatasetSpacing : 1,
+          tooltipFillColor: "rgba(0,0,0,0.8)",                
+          multiTooltipTemplate: "<%= datasetLabel %> = <%= value %>",
+        });
+        legend(document.getElementById('bar-legend'), bardata, myBarChart);
+      } else {
+        $("#myPie8").attr('hidden', true);
+        $(".graph4 .comparing-with").attr('hidden', true);
+        $(".graph4").css('min-height', '200px');
+      }
     };
     creategraphs();
 
@@ -380,7 +331,6 @@ $(function(){
       changedataset();
 
       myBarChart.destroy();
-      myLineChart.destroy();
       myDoughnutChart.destroy();
       myRadarChart.destroy();
 
@@ -447,6 +397,9 @@ $(function(){
       $(".stackoverflow-btn").on('click', function(){
         if ($(this).hasClass('active')) return;
         $(this).addClass("active");
+
+        repos_height = $(".graph4").height();
+
         $(".github-btn").removeClass("active");
         // Change first stat to reputation
         $(".ap-1 h3").text("Reputation ");
@@ -463,8 +416,7 @@ $(function(){
          // Change 4 graph titles
         $(".graph1 h3").text("General");
         $(".graph2 h3").text("Badges");
-        $(".graph3 h3").text("Reputation");
-        $(".graph4 h3").text("Influence");
+        $(".graph4 h3").text("Badge List");
 
         updategraphs();
       }); 
