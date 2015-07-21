@@ -486,14 +486,14 @@ footer{
     display:none;
 }
 @media (min-width: 1024px){
-    .profile-menu{
-        display:none;
-    }
     .offset-profile-menu{
-        display: block !important;
+        display: block;
     }
 }
 @media (max-width: 1024px){
+    .profile-menu{
+        display:none;
+    }
     body > nav > section.top-bar-section > ul.right > li > h2 a{
         margin-left:20px;
     }
