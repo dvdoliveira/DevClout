@@ -14,6 +14,8 @@
 	<div id="select-friends-popup" class="comparing-profiles select-friends reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 		<h2 id="modalTitle">Compare Your Friends</h2>
 		<p class="lead">Select on Your Friends Below to Start Comparing!</p>
+		<button class="compare-twitter-followers-btn active">Followers</button>
+		<button class="compare-twitter-followings-btn active">Following</button>
 		<ul>
 			<div class="compare-twitter-followers active">
 		    <% @user.followers.uniq.each do |user| %>
@@ -30,7 +32,7 @@
 				<% end %>
 			</div>
 
-			<div class="compare-twitter-followings active" style="display: none;"> 
+			<div class="compare-twitter-followings" style="display: none;"> 
 		    <% @user.followed_users.uniq.each do |user| %>
 					<li>
 						<div class="profile-compared text-align-center">
