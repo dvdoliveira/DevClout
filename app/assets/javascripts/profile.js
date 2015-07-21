@@ -457,13 +457,9 @@ $(function(){
       success: initialize
     })
   }
-<<<<<<< HEAD
-  $('.twitter-followings-container').hide();
-  
-=======
 
   // Switch between followers and following on sidebar
->>>>>>> master
+  $('.twitter-followings-container').hide();
   $('.twitter-followers-btn').on("click", function(){
       $('.twitter-followings-btn').removeClass('active');
       $('.twitter-followers-container, .twitter-followers').show();
