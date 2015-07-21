@@ -458,6 +458,7 @@ $(function(){
     })
   }
 
+  // Switch between followers and following on sidebar
   $('.twitter-followers-btn').on("click", function(){
       $('.twitter-followings-btn').removeClass('active');
       $('.twitter-followings').hide();
@@ -469,6 +470,22 @@ $(function(){
       $('.twitter-followers-btn').removeClass('active');
       $('.twitter-followers').hide();
       $('.twitter-followings').show();
+      $(this).addClass('active');
+  });
+
+
+  // Switch between followers and following on compare modal!
+  $('.compare-twitter-followers-btn').on("click", function(){
+      $('.compare-twitter-followings-btn').removeClass('active');
+      $('.compare-twitter-followings').hide();
+      $('.compare-twitter-followers').show();
+      $(this).addClass('active');
+  });
+
+  $('.compare-twitter-followings-btn').on("click", function(){
+      $('.compare-twitter-followers-btn').removeClass('active');
+      $('.compare-twitter-followers').hide();
+      $('.compare-twitter-followings').show();
       $(this).addClass('active');
   });
 })

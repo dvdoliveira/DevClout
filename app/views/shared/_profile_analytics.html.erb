@@ -14,20 +14,41 @@
 	<div id="select-friends-popup" class="comparing-profiles select-friends reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 		<h2 id="modalTitle">Compare</h2>
 		<p class="lead">Select on Your Followers Below to Start Comparing!</p>
+		<div class="twitter-option-buttons">
+    	<button class="compare-twitter-followers-btn active">Followers</button>
+    	<button class="compare-twitter-followings-btn">Following</button>
+  	</div>
 		
 		<ul>
-	    <% @user.followers.uniq.each do |user| %>
-				<li>
-					<div class="profile-compared text-align-center">
-						<span class="score"><%= user.user_score %></span>
-						<a class="friend-profile" href="<%= user_path(user.id) %>">
-							<img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile">
-						</a>
-						<p><%= user.full_name %></p>
-						<p><a class="black" href="#">Compare</a>
-					</div>
-				</li>
-			<% end %>
+			<div class="compare-twitter-followers active">
+		    <% @user.followers.uniq.each do |user| %>
+					<li>
+						<div class="profile-compared text-align-center">
+							<span class="score"><%= user.user_score %></span>
+							<a class="friend-profile" href="<%= user_path(user.id) %>">
+								<img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile">
+							</a>
+							<p><%= user.full_name %></p>
+							<p><a class="black" href="#">Compare</a>
+						</div>
+					</li>
+				<% end %>
+			</div>
+
+			<div class="compare-twitter-followings active" style="display: none;"> 
+		    <% @user.followed_users.uniq.each do |user| %>
+					<li>
+						<div class="profile-compared text-align-center">
+							<span class="score"><%= user.user_score %></span>
+							<a class="friend-profile" href="<%= user_path(user.id) %>">
+								<img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile">
+							</a>
+							<p><%= user.full_name %></p>
+							<p><a class="black" href="#">Compare</a>
+						</div>
+					</li>
+				<% end %>
+			</div>
 		</ul>
 		<a class="close-reveal-modal" aria-label="Close">X</a>
 	</div>
