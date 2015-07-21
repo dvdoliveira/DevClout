@@ -21,7 +21,7 @@ class UpdateUserProfile
       check_stackoverflow_bio_data
     end
 
-    if @user.user_blog.blank?
+    if @user.blog.blank?
       check_twitter_blog_data
     end
 
