@@ -11,7 +11,6 @@ class UserGithubScore
     end
   end
 
-
   def total_forks_count(repo)
     if repo.forks_count
       @total_forks_count += repo.forks_count
@@ -101,7 +100,7 @@ class UserGithubScore
         @friend_ratio_score = 3
       elsif followers >=10 && followers<20
         @friend_ratio_score = 2
-      elsif followers >=0 && followers<10
+      elsif followers >=1 && followers<10
         @friend_ratio_score = 2
       end
     end
@@ -133,7 +132,7 @@ class UserGithubScore
         user_id: user.id,
         score: index+1,
         score_type: "leaderboard_rank"
-      )
+        )
     end
 
   end

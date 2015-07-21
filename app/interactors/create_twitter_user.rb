@@ -38,7 +38,7 @@ class CreateTwitterUser
     )
     # Save twitter_id to users table
     update_user_twitter_id(@twitter_user)
-    
+
     # User user twitter credentials to connect to Twitter REST API to avoid rate limits
     connect_twitter(@twitter_user)
 
