@@ -341,9 +341,9 @@ $(function(){
         linedata = so_linedata;
         bardata = so_bardata;
         if (stack_user.bc_bronze + stack_user.bc_silver + stack_user.bc_gold > 0){
-          pieoptions = {animateScale: true, tooltipTemplate: "No Badges"}
+          pieoptions = {animateScale: true}
         } else {
-          pieoptions = {animateScale: true};
+          pieoptions = {animateScale: true, tooltipTemplate: "No Badges"};
         }
       }
     }
