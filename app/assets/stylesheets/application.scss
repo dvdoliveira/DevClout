@@ -487,7 +487,7 @@ footer{
 }
 @media (min-width: 1024px){
     .offset-profile-menu{
-        display: block;
+        display: block !important;
     }
 }
 @media (max-width: 1024px){
