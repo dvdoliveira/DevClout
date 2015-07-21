@@ -12,21 +12,22 @@
 
 	<!-- COMPARE FRIENDS POP UP -->
 	<div id="select-friends-popup" class="comparing-profiles select-friends reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-		<h2 id="modalTitle">Compare Your Friends</h2>
-		<p class="lead">Select on Your Friends Below to Start Comparing!</p>
+		<h2 id="modalTitle">Compare</h2>
+		<p class="lead">Select on Your Followers Below to Start Comparing!</p>
+		
 		<ul>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
+	    <% @user.followers.uniq.each do |user| %>
+				<li>
+					<div class="profile-compared text-align-center">
+						<span class="score"><%= user.user_score %></span>
+						<a class="friend-profile" href="<%= user_path(user.id) %>">
+							<img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile">
+						</a>
+						<p><%= user.full_name %></p>
+						<p><a class="black" href="#">Compare</a>
+					</div>
+				</li>
+			<% end %>
 		</ul>
 		<a class="close-reveal-modal" aria-label="Close">X</a>
 	</div>
