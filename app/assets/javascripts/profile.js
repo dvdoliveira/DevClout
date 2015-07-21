@@ -505,4 +505,18 @@ $(function(){
       success: initialize
     })
   }
+
+  $('.twitter-followers-btn').on("click", function(){
+      $('.twitter-followings-btn').removeClass('active');
+      $('.twitter-followings').hide();
+      $('.twitter-followers').show();
+      $(this).addClass('active');
+  });
+
+  $('.twitter-followings-btn').on("click", function(){
+      $('.twitter-followers-btn').removeClass('active');
+      $('.twitter-followers').hide();
+      $('.twitter-followings').show();
+      $(this).addClass('active');
+  });
 })

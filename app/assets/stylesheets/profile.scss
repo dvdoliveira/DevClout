@@ -287,14 +287,51 @@
 			}
 
 		}
+
+		.twitter-option-buttons{
+			margin-top: 20px; 
+			display: block;
+
+				.twitter-followers-btn, .twitter-followings-btn{
+					width: 50%; 
+					display: block; 
+					float: left; 
+					padding: 10px 20px;
+					cursor: pointer;
+					background: #e6e6e6; 
+					&:hover{
+						background: #fff;
+					}
+					&.active{
+						background: #fff;
+					}
+				}
+
+				.twitter-followers-btn{
+					cursor: pointer;
+
+				}
+				.twitter-followings-btn{
+					
+				}
+
+			}
+		.twitter-followings ul, .twitter-followers ul{
+			margin-bottom: none;
+		}
+		.twitter-followings{
+			display:none;
+		}
+
 		.profile-friends{
-			margin:20px 0px;
-			background: #e6e6e6;
+			margin-bottom:20px;
+			background: #fff;
 			padding:20px;
 	
 			ul{
 				margin-left: 0px;
 				margin-bottom:10px;
+				min-height: 160px;
 				max-height: 160px;
 			  overflow: scroll;
 			  overflow: -moz-scrollbars-vertical;
