@@ -217,8 +217,11 @@ body > nav > section.top-bar-section > ul.right > li > h2{
  /************ MISC ****************/
  .close-reveal-modal{
     background: #fff;
-    width: 46px;
-    right: 10px;
+    width: 80px;
+    padding-top:10px;
+    height: 80px;
+    right: 0px !important;
+    top:0px !important;
  }
 .alert-box{
     margin-bottom: 0px;
