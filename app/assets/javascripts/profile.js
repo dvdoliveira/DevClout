@@ -41,7 +41,7 @@ $(function(){
       // Change second stat to pub repos
       $(".ap-2 h3").text("Public Repositories ");
       $(".ap-2 .current_total").text(github_user.public_repos);
-      $(".ap-2 .current_changed").html("Pls do");
+      $(".ap-2 .current_changed").html(change_in(github_user.public_repos, "gh_repo_count"));
       // Change third stat to f.f ratio
       $(".ap-3 h3").text("Leaderboard Rank ");
       $(".ap-3 .current_total").text(user.current_rank);
