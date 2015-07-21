@@ -1,5 +1,6 @@
 class StackUser < ActiveRecord::Base
   belongs_to :user
+  has_many :stack_badges
   after_commit :update_users_stackoverflow_averages
   # after_create :calculate_so_score
 

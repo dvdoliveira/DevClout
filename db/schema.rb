@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721024014) do
+ActiveRecord::Schema.define(version: 20150720174029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,20 +122,6 @@ ActiveRecord::Schema.define(version: 20150721024014) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id", using: :btree
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
-
-  create_table "stack_badges", force: :cascade do |t|
-    t.integer "stack_user_id"
-    t.integer "so_user_id"
-    t.string  "badge_type"
-    t.integer "award_count"
-    t.string  "badge_rank"
-    t.integer "so_badge_id"
-    t.string  "badge_link"
-    t.string  "description"
-    t.string  "badge_name"
-  end
-
-  add_index "stack_badges", ["stack_user_id"], name: "index_stack_badges_on_stack_user_id", using: :btree
 
   create_table "stack_users", force: :cascade do |t|
     t.integer  "user_id"

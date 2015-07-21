@@ -10,6 +10,8 @@ class CreateStackBadges < ActiveRecord::Migration
       t.string :badge_link
       t.string :description
       t.string :badge_name
+
+      t.timestamps null: false
     end
   end
 end
