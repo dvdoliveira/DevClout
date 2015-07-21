@@ -146,16 +146,29 @@
   <div style="clear:both;"></div>
 
   <div class="profile-friends">
-    <ul class="twitter-followers">
-      <% @user.followers.uniq.each do |user| %>
-        <li><a class="friend-profile" href="<%= user_path(user.id) %>"><img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile"></a></li>
+    <div class="twitter-followers-container">
+      <% if @user.followers.uniq.length < 1 %>
+        <h3 class="no-friends-message">No Followers</h3>
+      <% else %>
+        <ul class="twitter-followers">
+            <% @user.followers.uniq.each do |user| %>
+              <li><a class="friend-profile" href="<%= user_path(user.id) %>"><img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile"></a></li>
+            <% end %>
+        </ul>
       <% end %>
-    </ul>
-    <ul class="twitter-followings">
-      <% @user.followed_users.uniq.each do |user| %>
-        <li><a class="friend-profile" href="<%= user_path(user.id) %>"><img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile"></a></li>
+    </div>
+
+    <div class="twitter-followings-container">
+      <% if @user.followed_users.uniq.length < 1 %>
+        <h3 class="no-friends-message">No Following</h3>
+      <% else %>
+      <ul class="twitter-followings">
+        <% @user.followed_users.uniq.each do |user| %>
+          <li><a class="friend-profile" href="<%= user_path(user.id) %>"><img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile"></a></li>
+        <% end %>
+      </ul>
       <% end %>
-    </ul>
+    </div>
   </div>
   <!-- #/End of Friends -->
 </div>
