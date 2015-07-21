@@ -215,6 +215,14 @@ body > nav > section.top-bar-section > ul.right > li > h2{
      list-style-type: decimal;
  }
  /************ MISC ****************/
+ .profile-menu img{
+    height: 33px;
+    width: 33px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    margin-bottom: 6px;
+ }
  .close-reveal-modal{
     background: #fff;
     width: 80px;
