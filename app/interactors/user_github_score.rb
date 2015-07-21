@@ -90,13 +90,19 @@ class UserGithubScore
   end
 
   def friend_ratio_score_calculation(following,followers)
-    unless following == 0
+    if following != 0 && followers > 0
       @friend_ratio_score = (followers/following)
     else
-      if followers > 10
-        @friend_ratio_score = (followers/1)
-      elsif followers >= 5 && followers < 10
+      if followers > 50
+        @friend_ratio_score = 5
+      elsif followers >= 40 && followers<50
+        @friend_ratio_score = 4
+      elsif followers >=20 && followers<40
+        @friend_ratio_score = 3
+      elsif followers >=10 && followers<20
         @friend_ratio_score = 2
+      elsif followers >0 && followers<10
+        @friend_ratio_score = 1
       else
         @friend_ratio_score = 0
       end

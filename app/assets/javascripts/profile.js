@@ -459,17 +459,18 @@ $(function(){
   }
 
   // Switch between followers and following on sidebar
+  $('.twitter-followings-container').hide();
   $('.twitter-followers-btn').on("click", function(){
       $('.twitter-followings-btn').removeClass('active');
-      $('.twitter-followings-container').hide();
-      $('.twitter-followers-container').show();
+      $('.twitter-followers-container, .twitter-followers').show();
+      $('.twitter-followings-container, .twitter-followings').hide();
       $(this).addClass('active');
   });
 
   $('.twitter-followings-btn').on("click", function(){
       $('.twitter-followers-btn').removeClass('active');
-      $('.twitter-followers-container').hide();
-      $('.twitter-followings-container').show();
+      $('.twitter-followers-container, .twitter-followers').hide();
+      $('.twitter-followings-container, .twitter-followings').show();
       $(this).addClass('active');
   });
 
