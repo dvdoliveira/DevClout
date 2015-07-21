@@ -29,7 +29,7 @@
 								<img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile">
 							</a>
 							<p><%= user.full_name %></p>
-							<p><a class="black" href="#">Compare</a>
+							<p><a class="black" href="/compare/<%= user.id %>">Compare</a>
 						</div>
 					</li>
 				<% end %>
