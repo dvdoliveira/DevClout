@@ -524,16 +524,17 @@ footer{
         }
     }
     .offset-profile-menu{
-          position: absolute;
-          z-index: 1;
-          background-color: #f1f1f1;
-          box-shadow: 10px 10px 52px #888888;
-          display: none;
-          padding-top:20px;
-          &.active{
+        max-width: 350px;
+        position: absolute;
+        z-index: 1;
+        background-color: #f1f1f1;
+        box-shadow: 10px 10px 52px #888888;
+        display: none;
+        padding-top:20px;
+        &.active{
             background: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0.05, rgb(126, 126, 126)), to(rgb(126, 126, 126)));
             padding-top:20px;
-          }
+        }
     }
 }
 
