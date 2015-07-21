@@ -14,14 +14,14 @@ class UpdateUserProfile
     end
 
     if @user.email.blank?
-      @user.update_attribute(:user_email_display,"none")
+      @user.update_attribute(:user_email_display,nil)
     end
 
     if @user.user_bio.blank?
       check_stackoverflow_bio_data
     end
 
-    if @user.user_blog_display.blank?
+    if @user.user_blog.blank?
       check_twitter_blog_data
     end
 
@@ -53,7 +53,7 @@ class UpdateUserProfile
 
   def check_twitter_bio_data
     if @user_twitter_data.description.blank?
-      @user.update_attribute(:user_bio_display, "Bio information not available")
+      @user.update_attribute(:user_bio_display, nil)
     else
       @user.update_attribute(:user_bio_display, @user_twitter_data.description)
     end
@@ -61,7 +61,7 @@ class UpdateUserProfile
 
   def check_twitter_blog_data
     if @user_twitter_data.url.blank?
-      @user.update_attribute(:user_blog_display, "Blog information not available")
+      @user.update_attribute(:user_blog_display, nil)
     else
       @user.update_attribute(:user_blog_display, @user_twitter_data.url)
     end
