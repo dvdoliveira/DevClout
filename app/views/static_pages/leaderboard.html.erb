@@ -31,11 +31,11 @@
               <%old_position = user.statistics.where(user_id: user.id, score_type: 'leaderboard_rank').order(created_at: :desc).limit(1).first.score %>
               <%current_position = rank %> 
   						<% if old_position == current_position %>
-  							<i class="fa fa-minus">
+  							<text hidden>0</text> <i class="fa fa-minus">
   						<% elsif old_position > current_position  %>
   							<%=(old_position - current_position).to_i%> <i class="fa fa-long-arrow-up">
   						<% else %>
-  							<%=(current_position - old_position).to_i%> <i class="fa fa-long-arrow-down">
+  							<text hidden>-</text><%=(current_position - old_position).to_i%> <i class="fa fa-long-arrow-down">
   						<% end %>
   					</td>
   					<td>

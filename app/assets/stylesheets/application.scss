@@ -215,6 +215,22 @@ body > nav > section.top-bar-section > ul.right > li > h2{
      list-style-type: decimal;
  }
  /************ MISC ****************/
+ .profile-menu img{
+    height: 33px;
+    width: 33px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    margin-bottom: 6px;
+ }
+ .close-reveal-modal{
+    background: #fff;
+    width: 80px;
+    padding-top:10px;
+    height: 80px;
+    right: 0px !important;
+    top:0px !important;
+ }
 .alert-box{
     margin-bottom: 0px;
     text-align: center;
@@ -485,15 +501,15 @@ footer{
 .profile-menu{
     display:none;
 }
-@media (min-width: 1024px){
-    .profile-menu{
-        display:none;
-    }
+@media (min-width: 1025px){
     .offset-profile-menu{
         display: block !important;
     }
 }
 @media (max-width: 1024px){
+    .profile-menu{
+        display:none;
+    }
     body > nav > section.top-bar-section > ul.right > li > h2 a{
         margin-left:20px;
     }
@@ -524,16 +540,17 @@ footer{
         }
     }
     .offset-profile-menu{
-          position: absolute;
-          z-index: 1;
-          background-color: #f1f1f1;
-          box-shadow: 10px 10px 52px #888888;
-          display: none;
-          padding-top:20px;
-          &.active{
+        max-width: 350px;
+        position: absolute;
+        z-index: 1;
+        background-color: #f1f1f1;
+        box-shadow: 10px 10px 52px #888888;
+        display: none;
+        padding-top:20px;
+        &.active{
             background: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0.05, rgb(126, 126, 126)), to(rgb(126, 126, 126)));
             padding-top:20px;
-          }
+        }
     }
 }
 

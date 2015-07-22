@@ -18,6 +18,14 @@ s.every '1440m' do
       response = UpdateStackoverflowSchedule.call({user: user_stack_account})
       stack_score = UserStackScore.call({user: user,total_score: gh_user_account.user_score})
     end
-
   end
+
+  s.every '1440m' do
+   User.find_each do |user|
+     update_display_fields = UpdateUserProfile.call({user: user})
+   end
+  end
+
+  
+
 end

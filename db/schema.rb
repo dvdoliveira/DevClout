@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721033232) do
+ActiveRecord::Schema.define(version: 20150721161922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,7 +80,6 @@ ActiveRecord::Schema.define(version: 20150721033232) do
   create_table "github_users", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "login"
-    t.string   "gh_id"
     t.string   "avatar_url"
     t.string   "gravatar_id"
     t.string   "url"
@@ -108,6 +107,7 @@ ActiveRecord::Schema.define(version: 20150721033232) do
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
     t.string   "user_type"
+    t.integer  "gh_id"
   end
 
   add_index "github_users", ["user_id"], name: "index_github_users_on_user_id", using: :btree
@@ -220,16 +220,20 @@ ActiveRecord::Schema.define(version: 20150721033232) do
     t.string   "full_name"
     t.string   "password"
     t.string   "user_type"
-    t.integer  "user_score",                  default: 0
+    t.integer  "user_score",                       default: 0
     t.string   "access_token"
     t.string   "user_bio"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "profile_image_url"
     t.string   "user_name"
     t.string   "blog"
     t.string   "user_level"
-    t.integer  "tw_id",             limit: 8
+    t.integer  "tw_id",                  limit: 8
+    t.string   "user_bio_display"
+    t.string   "user_full_name_display"
+    t.string   "user_email_display"
+    t.string   "user_blog_display"
   end
 
 end

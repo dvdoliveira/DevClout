@@ -90,13 +90,19 @@ class UserGithubScore
   end
 
   def friend_ratio_score_calculation(following,followers)
-    unless following == 0
+    if following != 0 && followers > 0
       @friend_ratio_score = (followers/following)
     else
-      if followers > 10
-        @friend_ratio_score = (followers/1)
-      elsif followers >= 5 && followers < 10
+      if followers > 50
+        @friend_ratio_score = 5
+      elsif followers >= 40 && followers<50
+        @friend_ratio_score = 4
+      elsif followers >=20 && followers<40
+        @friend_ratio_score = 3
+      elsif followers >=10 && followers<20
         @friend_ratio_score = 2
+      elsif followers >0 && followers<10
+        @friend_ratio_score = 1
       else
         @friend_ratio_score = 0
       end
@@ -116,36 +122,24 @@ class UserGithubScore
     friend_ratio_score_calculation(@following_count,@total_followers_count)
     get_value_from_repos(@githubUser)
     calculate_score
-    @user.update_attribute(:user_score, @total_score)
+    @user.update user_score: @total_score
      update_stats_table(@user)
      update_user_level(@user)
      update_user_rank
   end
 
-  def update_user_rank
-    user_ranked_data = User.order(user_score: :desc)
-    user_ranked_data.each_with_index do |user,index|
-      Statistic.create(
-        user_id: user.id,
-        score: index+1,
-        score_type: "leaderboard_rank"
-      )
-    end
-
-  end
-
 def update_user_level(user)
   case user.user_score
   when 1..8
-    @user.update_attribute(:user_level,"Apprentice")
+    @user.update user_level: "Apprentice"
   when 8..20
-    @user.update_attribute(:user_level,"Enthusiast")
+    @user.update user_level: "Enthusiast"
   when 20..44
-    @user.update_attribute(:user_level,"Creator")
+    @user.update user_level: "Creator"
   when 44..77
-    @user.update_attribute(:user_level,"Collaborator")
+    @user.update user_level: "Collaborator"
   else
-    @user.update_attribute(:user_level,"Guru")
+    @user.update user_level: "Guru"
   end
 end
 
@@ -157,8 +151,26 @@ end
     end
   end
 
+  def update_user_rank
+    user_ranked_data = User.order(user_score: :desc)
+    user_ranked_data.each_with_index do |user,index|
+      Statistic.create(
+        user_id: user.id,
+        score: index+1,
+        score_type: "leaderboard_rank"
+        )
+    end
+  end
+
 
   def update_stats_table(user)
+
+    Statistic.create(
+      user_id: user.id,
+      score: @total_stars_count.to_f,
+      score_type: "leaderboard_rank"
+    )
+
     Statistic.create(
       user_id: user.id,
       score: @total_stars_count.to_f,

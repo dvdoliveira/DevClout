@@ -14,19 +14,38 @@
 	<div id="select-friends-popup" class="comparing-profiles select-friends reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
 		<h2 id="modalTitle">Compare Your Friends</h2>
 		<p class="lead">Select on Your Friends Below to Start Comparing!</p>
+		<button class="compare-twitter-followers-btn active">Followers</button>
+		<button class="compare-twitter-followings-btn active">Following</button>
 		<ul>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
-		<li><div class="profile-compared text-align-center"><span class="score">66</span><a class="friend-profile" href="#"><img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/3/000/22c/22b/12e6183.jpg" alt="Brian Li's Profile"></a><p>Brian</p><p><a class="black" href="#">Compare</a></div></li>
+			<div class="compare-twitter-followers active">
+		    <% @user.followers.uniq.each do |user| %>
+					<li>
+						<div class="profile-compared text-align-center">
+							<span class="score"><%= user.user_score %></span>
+							<a class="friend-profile" href="<%= user_path(user.id) %>">
+								<img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile">
+							</a>
+							<p><%= user.full_name %></p>
+							<p><a class="black" href="/compare/<%= user.id %>">Compare</a>
+						</div>
+					</li>
+				<% end %>
+			</div>
+
+			<div class="compare-twitter-followings" style="display: none;"> 
+		    <% @user.followed_users.uniq.each do |user| %>
+					<li>
+						<div class="profile-compared text-align-center">
+							<span class="score"><%= user.user_score %></span>
+							<a class="friend-profile" href="<%= user_path(user.id) %>">
+								<img src="<%= user.profile_image_url %>" alt="<%= user.full_name %> Profile">
+							</a>
+							<p><%= user.full_name %></p>
+							<p><a class="black" href="#">Compare</a>
+						</div>
+					</li>
+				<% end %>
+			</div
 		</ul>
 		<a class="close-reveal-modal" aria-label="Close">X</a>
 	</div>
@@ -65,23 +84,23 @@
 		<div class="row centered-text">
 	    <div class="medium-4 large-4 columns">
 	      <div class="analytic-panel ap-1">
-	      	<h3>Followers <span data-tooltip aria-haspopup="true" class="has-tip" title="Followers: Put Some Text Here..."><i class="fa fa-question-circle"></i></span></h3>
+      		<h3>Followers <!-- <span data-tooltip aria-haspopup="true" class="has-tip" title="Followers: Put Some Text Here..."><i class="fa fa-question-circle"></i></span> --></h3>
 	      	<span class="current_total"><%=@user.github_user.followers%></span>
-	      	<span class="current_changed">0 <i class="fa fa-minus"></i></span>
+	      	<span class="current_changed"><i class="fa fa-minus"></i></span>
 	      </div>
 	    </div>
 	    <div class="medium-4 large-4 columns">
 	      <div class="analytic-panel ap-2">
-	      	<h3>Public Repositories <span data-tooltip aria-haspopup="true" class="has-tip" title="Followers: Put Some Text Here..."><i class="fa fa-question-circle"></i></span></h3>
+	      	<h3>Public Repositories <!-- <span data-tooltip aria-haspopup="true" class="has-tip" title="Followers: Put Some Text Here..."><i class="fa fa-question-circle"></i></span> --></h3>
 	      	<span class="current_total"><%=@user.github_user.public_repos%></span>
-	      	<span class="current_changed">0 <i class="fa fa-minus"></i></span>
+	      	<span class="current_changed"><i class="fa fa-minus"></i></span>
 	      </div>
 	    </div>
 	    <div class="medium-4 large-4 columns">
 	      <div class="analytic-panel ap-3">
-	      	<h3>F.F Ratio <span data-tooltip aria-haspopup="true" class="has-tip" title="Followers: Put Some Text Here..."><i class="fa fa-question-circle"></i></span></h3>
-	      	<span class="current_total"><%=@user.followers_to_following%></span>
-	      	<span class="current_changed">0 <i class="fa fa-minus"></i></span>
+	      	<h3>Leaderboard Rank <!-- <span data-tooltip aria-haspopup="true" class="has-tip" title="Followers: Put Some Text Here..."><i class="fa fa-question-circle"></i></span> --></h3>
+	      	<span class="current_total"><%=@leaderboard_pos%></span>
+	      	<span class="current_changed"><i class="fa fa-minus"></i></span>
 	      </div>
 	    </div>
 	  </div>
@@ -113,19 +132,8 @@
 	  </div>
 	  <!-- #/End of 2nd level -->
 	  <!-- 3rd level -->
-	  <div class="row centered-text">
-	    <div class="medium-6 large-6 columns">
-	      <div class="analytic-panel graph3">
-	      	<h3>DUNNO</h3>
-	      	<canvas id="myPie7" class="chartset3"></canvas>
-	      	<!-- comparing with -->
-	      	<div class="comparing-with">
-	      		<div id="line-legend"></div>
-	      	</div>
-	      	<!-- #/End of comparing with -->
-	      </div>
-	    </div>
-	    <div class="medium-6 large-6 columns">
+	  <div class="row centered-text">    
+	    <div class="medium-12 large-12 columns">
 	      <div class="analytic-panel graph4">
 	      	<h3>Repositories</h3>
 	      	<canvas id="myPie8" class="chartset3"></canvas>
