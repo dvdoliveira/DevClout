@@ -22,6 +22,12 @@
 	.leaderboard_filter input{
 		font-weight: 100;
 	}
+	table.dataTable thead .sorting_asc{
+		background-image:url(../images/helpers/sort_asc.png) !important;
+	}
+	table.dataTable thead .sorting_desc{
+		background-image:url(../images/helpers/sort_desc.png) !important;
+	}
 	
 
 	#leaderboard{
