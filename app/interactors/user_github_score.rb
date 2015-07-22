@@ -125,6 +125,7 @@ class UserGithubScore
     @user.update user_score: @total_score
      update_stats_table(@user)
      update_user_level(@user)
+     update_user_rank
   end
 
 def update_user_level(user)
@@ -150,8 +151,26 @@ end
     end
   end
 
+  def update_user_rank
+    user_ranked_data = User.order(user_score: :desc)
+    user_ranked_data.each_with_index do |user,index|
+      Statistic.create(
+        user_id: user.id,
+        score: index+1,
+        score_type: "leaderboard_rank"
+        )
+    end
+  end
+
 
   def update_stats_table(user)
+
+    Statistic.create(
+      user_id: user.id,
+      score: @total_stars_count.to_f,
+      score_type: "leaderboard_rank"
+    )
+
     Statistic.create(
       user_id: user.id,
       score: @total_stars_count.to_f,

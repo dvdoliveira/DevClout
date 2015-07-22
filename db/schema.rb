@@ -123,6 +123,22 @@ ActiveRecord::Schema.define(version: 20150721161922) do
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", using: :btree
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id", using: :btree
 
+  create_table "stack_badges", force: :cascade do |t|
+    t.integer  "stack_user_id"
+    t.integer  "so_user_id"
+    t.string   "badge_type"
+    t.integer  "award_count"
+    t.string   "badge_rank"
+    t.integer  "so_badge_id"
+    t.string   "badge_link"
+    t.string   "description"
+    t.string   "badge_name"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "stack_badges", ["stack_user_id"], name: "index_stack_badges_on_stack_user_id", using: :btree
+
   create_table "stack_users", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "about_me"

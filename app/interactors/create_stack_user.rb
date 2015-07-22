@@ -38,10 +38,23 @@ class CreateStackUser
       creation_date: Time.at(context.response["items"][0]["creation_date"]).to_datetime,
       last_access_date: Time.at(context.response["items"][0]["last_access_date"]).to_datetime,
       last_modified_date: @new_modified_time
+    )
+    context.badges["items"].each do |badge|
+      @badge = StackBadge.create(
+        stack_user_id: @stack_user.id,
+        so_user_id: badge["user"]["user_id"],
+        badge_type: badge["badge_type"],
+        award_count: badge["award_count"],
+        badge_rank: badge["rank"],
+        so_badge_id: badge["badge_id"],
+        badge_link: badge["link"],
+        description: badge["description"],
+        badge_name: badge["name"]
       )
-
-      @user = User.find_by(id: context.session_user_id)
-      stack_score = UserStackScore.call({user: @user,total_score: @user.user_score})
+    end
+      
+    @user = User.find_by(id: context.session_user_id)
+    stack_score = UserStackScore.call({user: @user,total_score: @user.user_score})
   end
 
 end
