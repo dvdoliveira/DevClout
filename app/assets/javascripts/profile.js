@@ -359,16 +359,26 @@ $(function(){
       myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
       legend(document.getElementById('pie-legend'), piedata, myDoughnutChart);
 
-      ctx8 = $("#myPie8").get(0).getContext("2d");
-      myBarChart = new Chart(ctx8).Bar(bardata, {
-        labelLength: 4,
-        animation: true,
-        barValueSpacing : 5,
-        barDatasetSpacing : 1,
-        tooltipFillColor: "rgba(0,0,0,0.8)",                
-        multiTooltipTemplate: "<%= datasetLabel %> = <%= value %>",
-      });
-      legend(document.getElementById('bar-legend'), bardata, myBarChart);
+
+      if ($('.github-btn').hasClass('active')) {
+          $("#myPie8").attr('hidden', false);
+          $(".graph4 .comparing-with").attr('hidden', false);
+
+          ctx8 = $("#myPie8").get(0).getContext("2d");
+          myBarChart = new Chart(ctx8).Bar(bardata, {
+            labelLength: 4,
+            animation: true,
+            barValueSpacing : 5,
+            barDatasetSpacing : 1,
+            tooltipFillColor: "rgba(0,0,0,0.8)",                
+            multiTooltipTemplate: "<%= datasetLabel %> = <%= value %>",
+          });
+          legend(document.getElementById('bar-legend'), bardata, myBarChart);
+        } else {
+          $("#myPie8").attr('hidden', true);
+          $(".graph4 .comparing-with").attr('hidden', true);
+          $(".graph4").css('min-height', '200px');
+        }
     };
     creategraphs();
 
@@ -458,8 +468,7 @@ $(function(){
          // Change 4 graph titles
         $(".graph1 h3").text("General");
         $(".graph2 h3").text("Badges");
-        $(".graph3 h3").text("Reputation");
-        $(".graph4 h3").text("Influence");
+        $(".graph4 h3").text("Badge List");
 
         updategraphs();
       }); 
