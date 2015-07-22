@@ -358,10 +358,6 @@ $(function(){
       ctx5 = $("#myPie4").get(0).getContext("2d");
       myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
       legend(document.getElementById('pie-legend'), piedata, myDoughnutChart);
-     
-      ctx7 = $("#myPie7").get(0).getContext("2d");
-      myLineChart = new Chart(ctx7).Line(linedata);
-      legend(document.getElementById('line-legend'), linedata, myLineChart);
 
       ctx8 = $("#myPie8").get(0).getContext("2d");
       myBarChart = new Chart(ctx8).Bar(bardata, {
@@ -380,7 +376,6 @@ $(function(){
       changedataset();
 
       myBarChart.destroy();
-      myLineChart.destroy();
       myDoughnutChart.destroy();
       myRadarChart.destroy();
 
