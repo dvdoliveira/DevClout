@@ -8,7 +8,6 @@ class Average < ActiveRecord::Base
     @gh_users_forks = Statistic.where(score_type: "gh_forks")
     @average.update_attribute(:gh_users_followers, @github_users.average(:followers))
     @average.update_attribute(:gh_users_following, @github_users.average(:following))
-    binding.pry
     @average.update_attribute(:gh_users_stars, @gh_users_stars.average(:score))
     @average.update_attribute(:gh_users_forks, @gh_users_forks.average(:score))
   end
