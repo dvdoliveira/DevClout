@@ -84,7 +84,36 @@ $(function(){
 				$(this).fadeOut('fast');
 			});
 		});
-
-
 	});
+
+$('.pop-up-follow-btn').on('click', function(){
+  $.ajax(
+    {
+      url: "./follow/" + $(this).data('twid'),
+      type: "get",
+      success: function(result){
+        console.log ('pass');          
+      },
+      error: function(result){
+        console.log ('fail');
+      },
+    }
+  );
+});
+
+$('.pop-up-unfollow-btn').on('click', function(){
+  $.ajax(
+    {
+      url: "./unfollow/" + $(this).data('twid'),
+      type: "get",
+      success: function(result){
+        console.log ('pass');          
+      },
+      error: function(result){
+        console.log ('fails');
+      },
+    }
+  );
+});
+
 });

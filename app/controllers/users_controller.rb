@@ -103,6 +103,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow
+    current_user.follow!(User.find(params[:tw_id]))
+    format.json { render json: final_obj, status: :ok }
+  end
+
+  def unfollow
+    current_user.unfollow!(User.find(params[:tw_id]))
+    format.json { render json: final_obj, status: :ok }
+  end
+
   private
 
   def user_params
