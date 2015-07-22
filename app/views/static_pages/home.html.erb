@@ -6,13 +6,12 @@
             <div class="title">
                 <h1>devClout</h1>
                 <%= image_tag("beta.png", class: "beta-img") %>
-                <h2>Compare yourself with your friends</h2>
+                <h2>UNLEASH YOUR DEVELOPER SKILLS</h2>
                 <% if current_user %>
                   <a class="btn" href="/profile">I'm a Developer</a>
                 <% else %>
                   <a class="btn" href="#" data-reveal-id="developer-sign-in">I'm a Developer</a>
                 <% end %>
-                <a class="btn btn-secondary" href="#">I'm a Recruiter</a>
                 <a href="#main" class="down-arrow hide-for-small-down"></a>
             </div>
         </div>
@@ -39,16 +38,16 @@
         <div class="spacer-primary"></div>
         <div class="homepage-section-module">
             <div class="row">
-                <h2>Thousands of people already use devClout</h2>
+                <h2>GRAPHICAL REPRESENTATION OF YOUR DEVELOPMENT ACTIVITIES</h2>
                 <div class="spacer-secondary"></div>
                 <div class="large-9 columns">
                     <canvas id="myChart" class="chartset1"></canvas>
                 </div>
                 <!-- <div class="medium-1 columns"></div> -->
                 <div class="large-3 columns side-text">
-                    <h3> We are growing fast!</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt leo ex, quis congue elit feugiat a. Sed scelerisque congue dolor, sed cursus neque ornare at. Fusce ac mauris nunc. Vestibulum nec eleifend erat.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis tincidunt leo ex, quis congue elit feugiat a. Sed scelerisque congue dolor, sed cursus neque ornare at. Fusce ac mauris nunc. Vestibulum nec eleifend erat.</p>
+                    <h3> Find areas where you can contribute to becoming a top developer in your community!</h3>
+                    <p>devClout provides you with pertinent information enabling you to become a better developer.</p>
+                    <p>Get your devClout score based on your actvity in Github and Stackoverflow profiles</p>
                 </div>
             </div>
             <div class="spacer-primary hide-for-medium-down"></div>
@@ -70,15 +69,15 @@
             <h2>Review your own analytics & compare</h2>
             <div class="spacer-secondary"></div>
             <div class="medium-4 columns text-align-center chartset2-animation-column">
-                <h3>Subtitle 1</h3>
+                <h3>Language Break Down</h3>
                 <canvas id="myPie1" class="chartset2"></canvas>
             </div>
             <div class="medium-4 columns text-align-center chartset2-animation-column">
-                <h3 class="chartset-scroll">Subtitle 2</h3>
+                <h3 class="chartset-scroll">Compare your score</h3>
                 <canvas id="myPie3" class="chartset2"></canvas>
             </div>
             <div class="medium-4 columns text-align-center chartset2-animation-column">
-                <h3>Subtitle 3</h3>
+                <h3>Score Break Up</h3>
                 <canvas id="myPie2" class="chartset2"></canvas>
             </div>
         </div>
