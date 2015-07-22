@@ -86,34 +86,52 @@ $(function(){
 		});
 	});
 
-$('.pop-up-follow-btn').on('click', function(){
-  $.ajax(
-    {
-      url: "./follow/" + $(this).data('twid'),
-      type: "get",
-      success: function(result){
-        console.log ('pass');          
-      },
-      error: function(result){
-        console.log ('fail');
-      },
-    }
-  );
-});
+// Follow and Unfollow Buttons
+follow();
+unfollow();
+function follow(){
+	$('.pop-up-follow-btn').on('click', function(){
+		var twitID = $(this).data('twid');
+		$(this).closest('.pop-up-follow-unfollow-btn-container').append('<a data-twid="'+twitID+'" href="#" href="/unfollow/<%= user.tw_id %>" class="pop-up-unfollow-btn">unfollow</a>');
+		$(this).remove();
+		unfollow();
 
-$('.pop-up-unfollow-btn').on('click', function(){
-  $.ajax(
-    {
-      url: "./unfollow/" + $(this).data('twid'),
-      type: "get",
-      success: function(result){
-        console.log ('pass');          
-      },
-      error: function(result){
-        console.log ('fails');
-      },
-    }
-  );
-});
+		$(this).removeClass('pop-up-follow-btn').addClass('pop-up-unfollow-btn').text('unfollow');
+	  $.ajax(
+	    {
+	      url: "./follow/" + $(this).data('twid') + '.json',
+	      method: "post",
+	      success: function(result){
+	      	console.log('success');
+	      },
+	      error: function(result){
+	        console.log ('fail');
+	      },
+	    }
+	  );
+	});
+}
+
+function unfollow(){
+		$('.pop-up-unfollow-btn').on('click', function(){
+		var twitID = $(this).data('twid');
+		$(this).closest('.pop-up-follow-unfollow-btn-container').append('<a data-twid="'+twitID+'" href="#" href="/follow/<%= user.tw_id %>" class="pop-up-follow-btn">unfollow</a>');
+		$(this).remove();
+		follow();
+
+	  $.ajax(
+	    {
+	      url: "./unfollow/" + $(this).data('twid') + '.json',
+	      method: "post",
+	      success: function(result){
+	        console.log('success')
+	      },
+	      error: function(result){
+	        console.log ('fails');
+	      },
+	    }
+	  );
+	});
+}
 
 });
