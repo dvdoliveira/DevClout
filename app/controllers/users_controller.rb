@@ -55,6 +55,7 @@ class UsersController < ApplicationController
     @newest_stats = @user.statistics.order(created_at: :desc).limit(20)
     @leaderboard_pos = @users.map(&:id).index(@user.id) + 1
     respond_to do |format|
+      format.html
       format.json { render json: {
         user: @user,
         github_user: @user.github_user,

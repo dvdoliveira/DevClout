@@ -11,6 +11,7 @@ class UserGithubScore
     end
   end
 
+
   def total_forks_count(repo)
     if repo.forks_count
       @total_forks_count += repo.forks_count
@@ -121,10 +122,33 @@ class UserGithubScore
     friend_ratio_score_calculation(@following_count,@total_followers_count)
     get_value_from_repos(@githubUser)
     calculate_score
-    @user.update_attribute(:user_score, @total_score)
+    @user.update user_score: @total_score
      update_stats_table(@user)
      update_user_level(@user)
      update_user_rank
+  end
+
+def update_user_level(user)
+  case user.user_score
+  when 1..8
+    @user.update user_level: "Apprentice"
+  when 8..20
+    @user.update user_level: "Enthusiast"
+  when 20..44
+    @user.update user_level: "Creator"
+  when 44..77
+    @user.update user_level: "Collaborator"
+  else
+    @user.update user_level: "Guru"
+  end
+end
+
+  def get_value_from_repos(user)
+    repos_for_user = GithubRepo.where(github_user_id: user.gh_id)
+    repos_for_user.each do |repo|
+      total_stars_count(repo)
+      total_forks_count(repo)
+    end
   end
 
   def update_user_rank
@@ -136,30 +160,6 @@ class UserGithubScore
         score_type: "leaderboard_rank"
         )
     end
-
-  end
-
-def update_user_level(user)
-  case user.user_score
-  when 1..8
-    @user.update_attribute(:user_level,"Apprentice")
-  when 8..20
-    @user.update_attribute(:user_level,"Enthusiast")
-  when 20..44
-    @user.update_attribute(:user_level,"Creator")
-  when 44..77
-    @user.update_attribute(:user_level,"Collaborator")
-  else
-    @user.update_attribute(:user_level,"Guru")
-  end
-end
-
-  def get_value_from_repos(user)
-    @repos_for_user = GithubRepo.where(github_user_id: user.gh_id)
-    @repos_for_user.each do |repo|
-      total_stars_count(repo)
-      total_forks_count(repo)
-    end
   end
 
 
@@ -167,8 +167,8 @@ end
 
     Statistic.create(
       user_id: user.id,
-      score: @repos_for_user.count,
-      score_type: "gh_repo_count"
+      score: @total_stars_count.to_f,
+      score_type: "leaderboard_rank"
     )
 
     Statistic.create(
