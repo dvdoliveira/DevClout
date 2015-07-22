@@ -74,5 +74,17 @@ $(function(){
 	    });
 	}
 
-	$('.profile-extra-info span.profile-blog-url a').text(stringWithShorterURLs);    
+	$('.profile-extra-info span.profile-blog-url a').text(stringWithShorterURLs);  
+	//when over on persons face, there should be a popup
+	$('img.pop-up-profile-init').on('mouseover', function() {
+		$('.pop-up-profile').fadeOut('fast');
+		$(this).closest('.pop-up-profile-container').find('.pop-up-profile').fadeIn('fast');
+		$(this).closest('.pop-up-profile-container').find('.pop-up-profile').on('mouseenter', function(){
+			$(this).closest('.pop-up-profile-container').find('.pop-up-profile').on('mouseleave', function(){
+				$(this).fadeOut('fast');
+			});
+		});
+
+
+	});
 });
