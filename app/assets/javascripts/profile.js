@@ -84,7 +84,7 @@ $(function(){
       repos_names.push(current_repo.name);
       total_watchers += current_repo.watchers_count
       total_forks += current_repo.forks_count
-      total_stars =+ current_repo.stars_count
+      total_stars += current_repo.stars_count
       repos_forks.push(current_repo.forks_count);
       repos_stars.push(current_repo.stars_count);
       repos_watchers.push(current_repo.watchers_count);
