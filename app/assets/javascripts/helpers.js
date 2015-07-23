@@ -74,5 +74,64 @@ $(function(){
 	    });
 	}
 
-	$('.profile-extra-info span.profile-blog-url a').text(stringWithShorterURLs);    
+	$('.profile-extra-info span.profile-blog-url a').text(stringWithShorterURLs);  
+	//when over on persons face, there should be a popup
+	$('img.pop-up-profile-init').on('mouseover', function() {
+		$('.pop-up-profile').fadeOut('fast');
+		$(this).closest('.pop-up-profile-container').find('.pop-up-profile').fadeIn('fast');
+		$(this).closest('.pop-up-profile-container').find('.pop-up-profile').on('mouseenter', function(){
+			$(this).closest('.pop-up-profile-container').find('.pop-up-profile').on('mouseleave', function(){
+				$(this).fadeOut('fast');
+			});
+		});
+	});
+
+// Follow and Unfollow Buttons
+follow();
+unfollow();
+function follow(){
+	$('.pop-up-follow-btn').on('click', function(){
+		var twitID = $(this).data('twid');
+		$(this).closest('.pop-up-follow-unfollow-btn-container').append('<a data-twid="'+twitID+'" href="#" href="/unfollow/<%= user.tw_id %>" class="pop-up-unfollow-btn">unfollow</a>');
+		$(this).remove();
+		unfollow();
+
+		$(this).removeClass('pop-up-follow-btn').addClass('pop-up-unfollow-btn').text('unfollow');
+	  $.ajax(
+	    {
+	      url: "./follow/" + $(this).data('twid'),
+	      method: "post",
+	      success: function(result){
+	      	console.log('success');
+	      },
+	      error: function(result){
+	        console.log ('fail');
+	      },
+	    }
+	  );
+	});
+}
+
+function unfollow(){
+		$('.pop-up-unfollow-btn').on('click', function(){
+		var twitID = $(this).data('twid');
+		$(this).closest('.pop-up-follow-unfollow-btn-container').append('<a data-twid="'+twitID+'" href="#" href="/follow/<%= user.tw_id %>" class="pop-up-follow-btn">follow</a>');
+		$(this).remove();
+		follow();
+
+	  $.ajax(
+	    {
+	      url: "./unfollow/" + $(this).data('twid'),
+	      method: "post",
+	      success: function(result){
+	        console.log('success')
+	      },
+	      error: function(result){
+	        console.log ('fails');
+	      },
+	    }
+	  );
+	});
+}
+
 });

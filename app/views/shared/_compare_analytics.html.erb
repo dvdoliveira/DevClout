@@ -1,0 +1,56 @@
+
+	<div style="clear:both;"></div>
+
+	<!-- Main Analytics -->
+	<div class="main-analytics">
+		<!-- 1st level -->
+		<div class="row centered-text">
+			<div class="medium-12 large-12 columns">
+	      <div class="analytic-panel">
+	      	<p hidden class="user_id"><%=user.id%></p>
+      		<h3><%=user.full_name%></h3>
+      		<div class="compare-image-container">
+	      		<%=image_tag(user.profile_image_url, alt: "profile-image")%>
+	      	</div>
+	      	<h4><%=user.user_level%></h4>
+	      </div>
+	    </div>
+	    <div class="medium-12 large-12 columns">
+	      <div class="analytic-panel ap-1">
+      		<h3>Followers <!-- <span data-tooltip aria-haspopup="true" class="has-tip" title="Followers: Put Some Text Here..."><i class="fa fa-question-circle"></i></span> --></h3>
+	      	<span class="current_total"><%=user.github_user.followers%></span>
+	      	<span class="current_changed"><i class="fa fa-minus"></i></span>
+	      </div>
+	    </div>
+	    <div class="medium-12 large-12 columns">
+	      <div class="analytic-panel ap-2">
+	      	<h3>Public Repositories <!-- <span data-tooltip aria-haspopup="true" class="has-tip" title="Followers: Put Some Text Here..."><i class="fa fa-question-circle"></i></span> --></h3>
+	      	<span class="current_total"><%=user.github_user.public_repos%></span>
+	      	<span class="current_changed"><i class="fa fa-minus"></i></span>
+	      </div>
+	    </div>
+	    <div class="medium-12 large-12 columns">
+	      <div class="analytic-panel ap-3">
+	      	<h3>Leaderboard Rank <!-- <span data-tooltip aria-haspopup="true" class="has-tip" title="Followers: Put Some Text Here..."><i class="fa fa-question-circle"></i></span> --></h3>
+	      	<span class="current_total"><%=@users.map(&:id).index(user.id) + 1%></span>
+	      	<span class="current_changed"><i class="fa fa-minus"></i></span>
+	      </div>
+	    </div>
+	  </div>
+	  <!-- #/end of 1st level -->
+	  <!-- 2nd level -->
+	  <div class="row centered-text">
+	    <div class="medium-12 large-12 columns">
+	      <div class="analytic-panel graph2">
+	      	<h3>Languages</h3>
+	      	<canvas class="myPie4" class="chartset3"></canvas>
+	      	<!-- comparing with -->
+	      	<div class="comparing-with">
+	      		<div id="pie-legend1"></div>
+	      	</div>
+	      	<!-- #/End of comparing with -->
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!-- #/End of Main Analytics -->

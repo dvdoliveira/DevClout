@@ -130,13 +130,13 @@ class UserGithubScore
 
 def update_user_level(user)
   case user.user_score
-  when 1..8
+  when 1..20
     @user.update user_level: "Apprentice"
-  when 8..20
+  when 21..40
     @user.update user_level: "Enthusiast"
-  when 20..44
+  when 41..70
     @user.update user_level: "Creator"
-  when 44..77
+  when 71..90
     @user.update user_level: "Collaborator"
   else
     @user.update user_level: "Guru"

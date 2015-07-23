@@ -448,7 +448,7 @@ $(function(){
     }
 
     // Button to switch from GitHub to StackOverflow'=
-    if (stack_user) {
+    if (user.stack_user) {
       $(".stackoverflow-btn").on('click', function(){
         if ($(this).hasClass('active')) return;
         $(this).addClass("active");
@@ -469,6 +469,9 @@ $(function(){
         $(".graph1 h3").text("General");
         $(".graph2 h3").text("Badges");
         $(".graph4 h3").text("Badge List");
+
+        //badges
+        console.log('wdf');
 
         updategraphs();
       }); 
@@ -510,17 +513,19 @@ $(function(){
     })
   }
 
+  //profile sidebar - show followers/following
+  $('.twitter-followings-container').hide();
   $('.twitter-followers-btn').on("click", function(){
       $('.twitter-followings-btn').removeClass('active');
-      $('.twitter-followings').hide();
-      $('.twitter-followers').show();
+      $('.twitter-followings-container').hide();
+      $('.twitter-followers-container').show();
       $(this).addClass('active');
   });
 
   $('.twitter-followings-btn').on("click", function(){
       $('.twitter-followers-btn').removeClass('active');
-      $('.twitter-followers').hide();
-      $('.twitter-followings').show();
+      $('.twitter-followers-container').hide();
+      $('.twitter-followings-container').show();
       $(this).addClass('active');
   });
 })

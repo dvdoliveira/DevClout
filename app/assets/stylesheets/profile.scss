@@ -267,7 +267,7 @@
 				position: absolute;
 			  top: 27px;
 			  right: 23px;
-			  background: #719c54;
+			  background: #8abf67;
 			  padding: 8px 15px;
 			  text-decoration: none;
 			  color: white;
@@ -319,7 +319,7 @@
 		.twitter-followings ul, .twitter-followers ul{
 			margin-bottom: none;
 		}
-		.twitter-followings{
+		.twitter-followings-container{
 			display:none;
 		}
 
@@ -385,6 +385,12 @@
 
 	//Analytics Pane
 	.analytics-pane{
+		#td1 {
+			width: 50%;
+		}
+		#td2 {
+			width: 50%;
+		}
 
 		.comparing-profiles{
 			padding:25px 20px 20px 30px;
@@ -502,6 +508,15 @@
 				margin-bottom:30px;
 				background: #f1f1f1;
 				text-align: center;
+
+				.compare-image-container img{
+					height: 75px;
+					width: 75px;
+					min-width: 75px;
+					border-radius: 50%;
+					-webkit-border-radius: 50%;
+					-moz-border-radius: 50%;
+				}
 
 				h3{
 					font-weight: 400;
