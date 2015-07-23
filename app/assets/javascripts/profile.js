@@ -471,6 +471,7 @@ $(function(){
         $(".graph4 h3").text("Badge List");
 
         //badges
+        userz = user;
         if (user.stack_badges){
           if (user.stack_badges.length > 0){
             $('.graph4').append('<div class="stack-badges">');
