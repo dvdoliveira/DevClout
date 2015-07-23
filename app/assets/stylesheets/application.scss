@@ -323,6 +323,7 @@ footer{
         padding: 20px 20px 0px 20px;
         background-color: #333333;
         color: #fff;
+        padding-bottom: 30px;
 
         .columns{
             margin-bottom:20px;
@@ -556,6 +557,9 @@ footer{
 
 .pop-up-profile-container{
     position: relative;
+    .text-align-center{
+        margin-top: 10px;
+    }
 }
 .pop-up-profile-init{
     cursor: pointer;
@@ -630,6 +634,10 @@ footer{
      color: #222;
     }
 }
-
+/*** CHAT ***/
+span#fchat-header-label, #fchat-arrow{
+    color: #fff !important;
+    background: #222;
+}
 
 

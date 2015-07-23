@@ -61,7 +61,7 @@
               </div>
             </div>
           <% end %>
-          <a class="close-reveal-modal" aria-label="Close">X</a>
+          <a class="close-reveal-modal" aria-label="Close">&times;</a>
         </div>
       <!-- #/END OF PROFILE UPDATE POP UP -->
     <% end %>
@@ -109,14 +109,14 @@
                 <table>
                   <tr>
                     <td><img class="stack-overflow-icon" src="../images/icons/stack-overflow-icon.svg" /></td>
-                    <td class="link"><a class="connect-link" href="/stackoverflow">Connect to Stack&nbsp;Overflow</a></td>
+                    <td class="link"><a class="connect-link" href="<%= root_url %>stackoverflow">Connect to Stack&nbsp;Overflow</a></td>
                   </tr>
                 </table>
               </td>
               <td width="30%"></td>
             </tr>
           </table>
-          <a class="connect-btn" href="/stackoverflow">+</a>
+          <a class="connect-btn" href="<%= root_url %>stackoverflow">+</a>
       </div>
     <% end %>
 
@@ -128,14 +128,14 @@
               <table>
                 <tr>
                   <td><img src="../images/icons/twitter-icon.svg" width="50" height="50" /></td>
-                  <td class="link"><a class="connect-link" href="/twitter">Connect to Twitter</a></td>
+                  <td class="link"><a class="connect-link" href="<%= root_url %>twitter">Connect to Twitter</a></td>
                 </tr>
               </table>
             </td>
             <td width="30%"></td>
           </tr>
         </table>
-        <a class="connect-btn" href="/twitter">+</a>
+        <a class="connect-btn" href="<%= root_url %>twitter">+</a>
       </div>
     <% end %>
   <% end %>

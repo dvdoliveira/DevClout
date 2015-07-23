@@ -384,6 +384,7 @@
 
 	//Analytics Pane
 	.analytics-pane{
+		overflow: scroll;
 		#td1 {
 			width: 50%;
 		}
@@ -558,6 +559,7 @@
   					padding:0px;
 						margin:0px;
 						font-size:13px;
+						min-height: 58px;
 
 						.title {
 					    display: inline-block;
@@ -577,7 +579,7 @@
 			}
 		}
 	}
-	h3.no-friends-message{
+	h3.no-friends-message, h3.no-badges-message{
 		text-align: center;
 		color:#ccc;
 		margin-top: 15px;

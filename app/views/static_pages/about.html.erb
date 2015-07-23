@@ -1,62 +1,65 @@
 <% provide(:title, "About Us") %>
-<div class="row centered-text">
+<div class="row centered-text about-us">
+  <div class="large-12 columns text-align-center">
   <br>
   <br>
   <h4>DevClout provides a unique score to evaluate your developer skills and influence on Github and StackOverflow. You can compare your score with friends, know your ranking among them, quickly find their strengths and find areas you can improve to become a better developer.</h4>
   <p>Have a question? Check out our <a href="/help">help</a>.</p>
   <h4><strong>Our Team</strong></h4>
   <br>
-  <div>
-    <div class="profile-image-container">
-      <%= image_tag("brian.png", alt: "profile-image") %>
+  <div class="row">
+    <div class="large-3 medium-3 columns about-contact">
+      <div class="about-contact-image">
+        <%= image_tag("brian.png", alt: "profile-image") %>
+      </div>
+      <div class="about-contact-name">
+        <h3>Brian Li</h3>
+      </div>
+      <div class="about-role">
+        <h4>Full-Stack Developer</h4>
+      </div>
+      <div>
+        <a class="about-linkedin-link" target="_blank" href="https://ca.linkedin.com/in/briankasingli">Linked-in</a>
+      </div>
     </div>
-    <div>
-      Brian Li
+    <div class="large-3 medium-3 columns about-contact">
+      <div class="about-contact-image"><%= image_tag("deivide.png", alt: "deivide-profile-image") %>
+      </div>
+      <div class="about-contact-name">
+        <h3>Deivide Oliveira</h3>
+      </div>
+      <div class="about-role">
+        <h4>Full-Stack Developer</h4>
+      </div>
+      <div>
+        <a class="about-linkedin-link" target="_blank" href="https://ca.linkedin.com/in/deivideoliveira">Linked-in</a>
+      </div>
     </div>
-    <div>
-      Full-Stack Developer
+    <div class="large-3 medium-3 columns about-contact">
+      <div class="about-contact-image"><%= image_tag("nathan.png", alt: "nathan-profile-image") %>
+      </div>
+      <div class="about-contact-name">
+        <h3>Nathan Kift</h3>
+      </div>
+      <div class="about-role">
+        <h4>Full-Stack Developer</h4>
+      </div>
+      <div>
+        <a class="about-linkedin-link" target="_blank" href="https://ca.linkedin.com/in/nathankift">Linked-in</a>
+      </div>
     </div>
-    <div>
-      <a href="https://ca.linkedin.com/in/briankasingli">Linked-in</a>
-    </div>
-  </div>
-  <div>
-    <div class="profile-image-container"><%= image_tag("deivide.png", alt: "deivide-profile-image") %>
-    </div>
-    <div>
-      Deivide Oliveira
-    </div>
-    <div>
-      Full-Stack Developer
-    </div>
-    <div>
-      <a href="https://ca.linkedin.com/in/deivideoliveira">Linked-in</a>
-    </div>
-  </div>
-  <div>
-    <div class="profile-image-container"><%= image_tag("nathan.png", alt: "nathan-profile-image") %>
-    </div>
-    <div>
-      Nathan Kift
-    </div>
-    <div>
-      Full-Stack Developer
-    </div>
-    <div>
-      <a href="https://ca.linkedin.com/in/nathankift">Linked-in</a>
-    </div>
-  </div>
-  <div>
-    <div class="profile-image-container"><%= image_tag("phil.png", alt: "phil-profile-image") %>
-    </div>
-    <div>
-      Philemon Selvaraj
-    </div>
-    <div>
-      Full-Stack Developer
-    </div>
-    <div>
-      <a href="https://ca.linkedin.com/in/philemonlloyd">Linked-in</a>
+    <div class="large-3 medium-3 columns about-contact">
+      <div class="about-contact-image"><%= image_tag("phil.png", alt: "phil-profile-image") %>
+      </div>
+      <div class="about-contact-name">
+        <h3>Philemon Selvaraj</h3>
+      </div>
+      <div class="about-role">
+        <h4>Full-Stack Developer</h4>
+      </div>
+      <div>
+        <a class="about-linkedin-link" target="_blank" href="https://ca.linkedin.com/in/philemonlloyd">Linked-in</a>
+      </div>
     </div>
   </div>
 </div>
