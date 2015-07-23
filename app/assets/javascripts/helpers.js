@@ -91,7 +91,8 @@ $(function(){
 follow();
 unfollow();
 function follow(){
-	$('.pop-up-follow-btn').on('click', function(){
+	$('.pop-up-follow-btn').on('click', function(e){
+		e.preventDefault();
 		var twitID = $(this).data('twid');
 		$(this).closest('.pop-up-follow-unfollow-btn-container').append('<a data-twid="'+twitID+'" href="#" href="/unfollow/<%= user.tw_id %>" class="pop-up-unfollow-btn">unfollow</a>');
 		$(this).remove();
@@ -114,23 +115,24 @@ function follow(){
 }
 
 function unfollow(){
-		$('.pop-up-unfollow-btn').on('click', function(){
-		var twitID = $(this).data('twid');
-		$(this).closest('.pop-up-follow-unfollow-btn-container').append('<a data-twid="'+twitID+'" href="#" href="/follow/<%= user.tw_id %>" class="pop-up-follow-btn">follow</a>');
-		$(this).remove();
-		follow();
+		$('.pop-up-unfollow-btn').on('click', function(e){
+			e.preventDefault();
+			var twitID = $(this).data('twid');
+			$(this).closest('.pop-up-follow-unfollow-btn-container').append('<a data-twid="'+twitID+'" href="#" href="/follow/<%= user.tw_id %>" class="pop-up-follow-btn">follow</a>');
+			$(this).remove();
+			follow();
 
-	  $.ajax(
-	    {
-	      url: "./unfollow/" + $(this).data('twid'),
-	      method: "post",
-	      success: function(result){
-	        console.log('success')
-	      },
-	      error: function(result){
-	        console.log ('fails');
-	      },
-	    }
+		  $.ajax(
+		    {
+		      url: "./unfollow/" + $(this).data('twid'),
+		      method: "post",
+		      success: function(result){
+		        console.log('success')
+		      },
+		      error: function(result){
+		        console.log ('fails');
+		      },
+		    }
 	  );
 	});
 }
