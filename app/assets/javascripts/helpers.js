@@ -100,7 +100,7 @@ function follow(){
 	  $.ajax(
 	    {
 	      url: "./follow/" + $(this).data('twid'),
-	      method: "get",
+	      method: "post",
 	      success: function(result){
 	      	console.log('success');
 	      },
@@ -122,7 +122,7 @@ function unfollow(){
 	  $.ajax(
 	    {
 	      url: "./unfollow/" + $(this).data('twid'),
-	      method: "get",
+	      method: "post",
 	      success: function(result){
 	        console.log('success')
 	      },

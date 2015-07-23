@@ -43,16 +43,17 @@
   					<td class="pop-up-profile-container">
   						<div class="pop-up-profile"><img class="pop-up-triangle" src="../images/helpers/triangle_icon.png"><div class="pop-up-image"><img src="<%= user.profile_image_url %>"/></div><h3 class="pop-up-name"><%= user.full_name %></h3><p class="pop-up-tier">Enthusiast</p>
 
-  						<div class="pop-up-follow-unfollow-btn-container">
-	  						<% unless current_user && current_user.id == user.id %>
-		  						<% if current_user.following?(User.find(user.tw_id)) %>
-					    			<a data-twid="<%= user.tw_id %>" href="#" href="/unfollow/<%= user.tw_id %>" class="pop-up-unfollow-btn">unfollow</a>
-					    		<% else %>
-					    			<a data-twid="<%= user.tw_id %>" class="pop-up-follow-btn" href="#">follow</a>
+  						<% if user.tw_id %>
+	  						<div class="pop-up-follow-unfollow-btn-container">
+		  						<% unless current_user && current_user.id == user.id %>
+			  						<% if current_user.following?(User.find(user.tw_id)) %>
+						    			<a data-twid="<%= user.tw_id %>" href="#" href="/unfollow/<%= user.tw_id %>" class="pop-up-unfollow-btn">unfollow</a>
+						    		<% else %>
+						    			<a data-twid="<%= user.tw_id %>" class="pop-up-follow-btn" href="#">follow</a>
+						    		<% end %>
 					    		<% end %>
-				    		<% end %>
-			    		</div>
-							
+				    		</div>
+			    		<% end %>
 						</div>
 
 							<img data-user="<%= user.id %>" class="pop-up-profile-init" src="<%= user.profile_image_url %>" alt="<%= user.full_name %>" />
