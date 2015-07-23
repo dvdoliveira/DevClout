@@ -109,7 +109,7 @@ $(function(){
 
       var languages_data = [];
       var languages_associative = {};
-      for (i = 0;i < 5; i++) {
+      for (i = 0;i < user.github_repos.length; i++) {
         var current_repo = user.github_repos[i];
         if(languages_associative[current_repo.language]==undefined){
           languages_associative[current_repo.language]=1;
