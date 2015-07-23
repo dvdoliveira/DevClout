@@ -471,18 +471,20 @@ $(function(){
         $(".graph4 h3").text("Badge List");
 
         //badges
-        if (user.stack_badges.length > 0){
-          $('.graph4').append('<div class="stack-badges">');
-          user.stack_badges.forEach(function(value, index){
-          $('.stack-badges').append('<div class="stack-badge">\
-              <div class="stack-badge-image-and-text">\
-              <img src="../images/helpers/badges/'+value.badge_rank+'.svg">\
-                <div class="stack-badge-label">\
-                <span>'+value.badge_name+'</span>\
+        if (user.stack_badges){
+          if (user.stack_badges.length > 0){
+            $('.graph4').append('<div class="stack-badges">');
+            user.stack_badges.forEach(function(value, index){
+            $('.stack-badges').append('<div class="stack-badge">\
+                <div class="stack-badge-image-and-text">\
+                <img src="../images/helpers/badges/'+value.badge_rank+'.svg">\
+                  <div class="stack-badge-label">\
+                  <span>'+value.badge_name+'</span>\
+                </div>\
               </div>\
-            </div>\
-          </div>');
-          });
+            </div>');
+            });
+          }
         }else{
           $('.graph4').append('<h3 class="no-friends-message" style="margin-top: 55px;">No Badges</h3>');
         }
