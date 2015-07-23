@@ -4,7 +4,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>devClout | <%= yield(:title) %></title>
+    <title>DevClout | <%= yield(:title) %></title>
+
+    <%= favicon_link_tag 'favicon.ico' %>
 
     <%= stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lato:100,200,300,400,700" %>
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/jquery.slick/1.5.0/slick.css" %>
@@ -36,7 +38,7 @@
     <nav class="top-bar" data-topbar role="navigation">
       <ul class="title-area">
         <li class="name">
-          <h2><a class="text-logo" href="/">devClout</a></h2>
+          <h2><a class="text-logo" href="/">DevClout</a></h2>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
       </ul>
@@ -44,7 +46,6 @@
       <section class="top-bar-section">
         <ul class="right">
           <li class="name" style="list-style-type: none;"><h2><a href="#">About</a></h2></li>
-          <li class="name" style="list-style-type: none;"><h2><a href="#">Contact Us</a></h2></li>
           <li class="name" style="list-style-type: none;"><h2><a data-reveal-id="developer-sign-in" class="signin-btn" href="/signin">Sign In</a></h2></li>
         </ul>
       </section>
@@ -57,7 +58,7 @@
       <% end %>
       <ul class="title-area">
         <li class="name">
-          <h2><a href="/">devClout</a></h2>
+          <h2><a href="/">DevClout</a></h2>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
       </ul>
@@ -79,13 +80,12 @@
     <footer>
       <div class="row">
         <div class="medium-6 large-6 columns text-mobile-align-center">
-          <span class="company-name-text"><a href="/">devClout</a> Copyright &copy; 2015</span>
+          <span class="company-name-text"><a href="/">DevClout</a> Copyright &copy; 2015</span>
         </div>
         <div class="medium-6 large-6 columns text-align-right text-mobile-align-center">
           <div class="quick-links">
             <a href="/help">Help</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/about">About</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="/contact">Contact</a>
+            <a href="/about">About</a>
           </div>
         </div>
       </div>

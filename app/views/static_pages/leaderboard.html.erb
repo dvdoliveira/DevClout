@@ -56,6 +56,10 @@
 					    		</div>
 				    		<% end %>
 			    		<% end %>
+              
+              <% unless current_user && current_user.id == user.id %>
+                <div class="text-align-center"><a class="" href="/compare?id=<%=user.id%>">Compare</a></div>
+              <% end %>
 						</div>
 
 							<img data-user="<%= user.id %>" class="pop-up-profile-init" src="<%= user.profile_image_url %>" alt="<%= user.full_name %>" />

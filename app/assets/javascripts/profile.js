@@ -81,7 +81,7 @@ $(function(){
     var repos_watchers = [];
     var repos_stars = [];
     var languages_associative = {};
-    for (i = 0;i < 5; i++) {
+    for (i = 0;i < user.github_repos.length; i++) {
       var current_repo = user.github_repos[i];
       repos_names.push(current_repo.name);
       total_watchers += current_repo.watchers_count
