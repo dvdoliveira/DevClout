@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   # Routes to deal with followers and following
   get 'following', to: 'users#following', as: :following
   get 'followers', to: 'users#followers', as: :followers
-  post 'follow/:tw_id', to: 'users#follow', as: :follow
-  post 'unfollow/:tw_id', to: 'users#unfollow', as: :unfollow
+  get 'follow/:tw_id', to: 'users#follow', as: :follow
+  get 'unfollow/:tw_id', to: 'users#unfollow', as: :unfollow
 
 end

@@ -104,27 +104,11 @@ class UsersController < ApplicationController
   end
 
   def follow
-    respond_to do |format|
-      @user = current_user
-      if @user.follow!(User.find(params[:tw_id]))
-        format.html { redirect_to profile_path, notice: 'Thing was successfully updated.' }
-        format.json { render json: @user }
-      else
-        format.json { render json: @thing.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
+    current_user.follow!(User.find(params[:tw_id]))
   end
 
   def unfollow
-    respond_to do |format|
-      @user = current_user
-      if @user.unfollow!(User.find(params[:tw_id]))
-        format.html { redirect_to profile_path, notice: 'Thing was successfully updated.' }
-        format.json { render json: @user }
-      else
-        format.json { render json: @thing.errors.full_messages, status: :unprocessable_entity }
-      end
-    end
+    current_user.unfollow!(User.find(params[:tw_id]))
   end
 
   private

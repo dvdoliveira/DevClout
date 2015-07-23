@@ -99,8 +99,8 @@ function follow(){
 		$(this).removeClass('pop-up-follow-btn').addClass('pop-up-unfollow-btn').text('unfollow');
 	  $.ajax(
 	    {
-	      url: "./follow/" + $(this).data('twid') + '.json',
-	      method: "post",
+	      url: "./follow/" + $(this).data('twid'),
+	      method: "get",
 	      success: function(result){
 	      	console.log('success');
 	      },
@@ -115,14 +115,14 @@ function follow(){
 function unfollow(){
 		$('.pop-up-unfollow-btn').on('click', function(){
 		var twitID = $(this).data('twid');
-		$(this).closest('.pop-up-follow-unfollow-btn-container').append('<a data-twid="'+twitID+'" href="#" href="/follow/<%= user.tw_id %>" class="pop-up-follow-btn">unfollow</a>');
+		$(this).closest('.pop-up-follow-unfollow-btn-container').append('<a data-twid="'+twitID+'" href="#" href="/follow/<%= user.tw_id %>" class="pop-up-follow-btn">follow</a>');
 		$(this).remove();
 		follow();
 
 	  $.ajax(
 	    {
-	      url: "./unfollow/" + $(this).data('twid') + '.json',
-	      method: "post",
+	      url: "./unfollow/" + $(this).data('twid'),
+	      method: "get",
 	      success: function(result){
 	        console.log('success')
 	      },
