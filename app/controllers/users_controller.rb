@@ -87,7 +87,7 @@ class UsersController < ApplicationController
   end
 
   def followers
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(tw_id: params[:tw_id])
     @users = @user.followers.uniq
     respond_to do |format|
       format.html
@@ -107,7 +107,7 @@ class UsersController < ApplicationController
   def follow
     respond_to do |format|
       @user = current_user
-      if @user.follow!(User.find(params[:tw_id]))
+      if @user.follow!(User.find_by(tw_id: params[:tw_id]))
         format.json { render json: @user }
       else
         format.json { render json: @thing.errors.full_messages, status: :unprocessable_entity }
@@ -118,7 +118,7 @@ class UsersController < ApplicationController
   def unfollow
     respond_to do |format|
       @user = current_user
-      if @user.unfollow!(User.find(params[:tw_id]))
+      if @user.unfollow!(User.find_by(tw_id: params[:tw_id]))
         format.json { render json: @user }
       else
         format.json { render json: @thing.errors.full_messages, status: :unprocessable_entity }
