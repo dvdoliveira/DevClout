@@ -182,11 +182,11 @@ $(function(){
       if (user.user.id == current_user_id) {
         ctx5 = $("#td1 .myPie4").get(0).getContext("2d");
         myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
-        legend(document.getElementById('pie-legend1'), piedata, myDoughnutChart);
+        // legend(document.getElementById('pie-legend1'), piedata, myDoughnutChart);
       } else {
         ctx6 = $("#td2 .myPie4").get(0).getContext("2d");
         myDoughnutChart2 = new Chart(ctx6).Doughnut(piedata, pieoptions);
-        legend(document.getElementById('pie-legend2'), piedata, myDoughnutChart2);
+        // legend(document.getElementById('pie-legend2'), piedata, myDoughnutChart2);
       }
 
     }
