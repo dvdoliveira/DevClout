@@ -639,5 +639,25 @@ span#fchat-header-label, #fchat-arrow{
     color: #fff !important;
     background: #222;
 }
-
-
+h3.user-full-name{
+font-size: 1.375rem !important;
+line-height: 1.875rem !important;
+padding-bottom: 0px !important;
+margin-bottom: 10px !important;
+font-weight: 400 !important;
+}
+.compare-container{
+    .current_changed{
+        margin-top:10px;
+    }
+    .current_total{
+        margin-top:10px;
+    }
+    h4{
+        font-size: 1.175rem !important;
+        line-height: 1.675rem !important;
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+        margin-top: 10px !important;
+    }
+}
