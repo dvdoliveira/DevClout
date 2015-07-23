@@ -49,6 +49,7 @@ class UsersController < ApplicationController
   end
 
   def compare
+    @current_user = current_user
     @user = User.find_by(id: params[:id])
     @users = User.order(user_score: :desc)
     @repos = GithubRepo.where(github_user_id: @user.github_user.gh_id)
@@ -95,7 +96,7 @@ class UsersController < ApplicationController
   end
 
   def following
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(tw_id: params[:tw_id])
     @users = @user.followed_users.uniq
     respond_to do |format|
       format.html
@@ -107,7 +108,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       @user = current_user
       if @user.follow!(User.find(params[:tw_id]))
-        format.html { redirect_to profile_path, notice: 'Thing was successfully updated.' }
         format.json { render json: @user }
       else
         format.json { render json: @thing.errors.full_messages, status: :unprocessable_entity }
@@ -119,7 +119,6 @@ class UsersController < ApplicationController
     respond_to do |format|
       @user = current_user
       if @user.unfollow!(User.find(params[:tw_id]))
-        format.html { redirect_to profile_path, notice: 'Thing was successfully updated.' }
         format.json { render json: @user }
       else
         format.json { render json: @thing.errors.full_messages, status: :unprocessable_entity }
