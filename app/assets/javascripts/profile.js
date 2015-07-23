@@ -448,7 +448,7 @@ $(function(){
     }
 
     // Button to switch from GitHub to StackOverflow'=
-    if (stack_user) {
+    if (user.stack_user) {
       $(".stackoverflow-btn").on('click', function(){
         if ($(this).hasClass('active')) return;
         $(this).addClass("active");

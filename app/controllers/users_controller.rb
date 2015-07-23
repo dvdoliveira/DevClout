@@ -49,6 +49,7 @@ class UsersController < ApplicationController
   end
 
   def compare
+    @current_user = current_user
     @user = User.find_by(id: params[:id])
     @users = User.order(user_score: :desc)
     @repos = GithubRepo.where(github_user_id: @user.github_user.gh_id)
