@@ -135,7 +135,7 @@ $(function(){
 
       gh_piedata = languages_data;
 
-      if (user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0) {
+      if (user.stack_user && user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0) {
         so_piedata = [
           {
               value: user.stack_user.bc_bronze,
@@ -172,7 +172,7 @@ $(function(){
         pieoptions = {animateScale: true};
       } else {
         piedata = so_piedata;
-        if (user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0){
+        if (user.stack_user && user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0){
           pieoptions = {animateScale: true}
         } else {
           pieoptions = {animateScale: true, tooltipTemplate: "No Badges"};
