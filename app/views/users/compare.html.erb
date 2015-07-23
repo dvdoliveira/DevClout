@@ -4,7 +4,7 @@
     <%@user = @current_user%>
       <%= render partial: 'shared/profile_sidebar', locals: { :user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score  } %>
     </div>
-    <div class="large-9 columns">
+    <div class="large-9 background-grey columns">
       <div class="analytics-pane">
         <div class="analytic-view-options">
           <span class="github-btn active">GitHub</span>
@@ -14,7 +14,7 @@
           <tr class="user-table">
           
           <%user = @current_user%>
-            <td id="td<%=user.id%>">
+            <td id="td1">
             <%= render partial: 'shared/compare_analytics', locals: { :user => user, :github_user => user.github_user, :stack_user => user.stack_user, :avg_user_score => user.avg_user_score  } %>
             </td>
 

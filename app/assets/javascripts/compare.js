@@ -8,6 +8,8 @@ $(function(){
     var ctx8;
     var myBarChart;
     var piedata, pieoptions;
+    var gh_piedata;
+    var so_piedata;
 
     $.ajax({
       url: '/compare' + window.location.search,
@@ -16,10 +18,8 @@ $(function(){
       data: { format: 'json' },
       contentType: 'application/json; charset=UTF-8',
       success: function(data) {
-        console.log(data);
         user2 = data;
         add_user_col(user2);
-        update_users(user2);
         both_ajax_done += 1;
         if (both_ajax_done == 2) {
           update_gh_stats();
@@ -34,9 +34,7 @@ $(function(){
       data: { format: 'json' },
       contentType: 'application/json; charset=UTF-8',
       success: function(data) {
-        console.log(data);
         user = data;
-        update_users(user);
         both_ajax_done += 1;
         if (both_ajax_done == 2) {
           update_gh_stats();
@@ -89,10 +87,10 @@ $(function(){
               <div class="medium-12 large-12 columns"> \
                 <div class="analytic-panel graph2"> \
                   <h3>Languages</h3> \
-                  <canvas id="myPie4" class="chartset3"></canvas> \
+                  <canvas class="myPie4" class="chartset3"></canvas> \
                   <!-- comparing with --> \
                   <div class="comparing-with"> \
-                    <div id="pie-legend"></div> \
+                    <div id="pie-legend2"></div> \
                   </div> \
                   <!-- #/End of comparing with --> \
                 </div> \
@@ -103,14 +101,90 @@ $(function(){
         </div> \
       </td>')
     }
-    function update_users(user) {
+    function update_graphs(user) {
       var colors =["rgb(168,194,194)","rgb(86,144,193)","rgb(217,157,135)","rgb(242,199,172)","rgb(239,212,155)","rgb(232,221,197)","rgb(188,171,161)","rgb(153,188,217)","rgb(148,170,192)","rgb(194,163,189)","rgb(135,136,138)"];
       var lighter_colors = [];
 
-      function up_down_ratio(user) {
-        if (user.stack_user.down_vote_count > 0) {
-          return(user.stack_user.up_vote_count / user.stack_user.down_vote_count);
-        } else {return(user.stack_user.up_vote_count / 1);};
+      var languages_data = [];
+      var languages_associative = {};
+      for (i = 0;i < 5; i++) {
+        var current_repo = user.github_repos[i];
+        if(languages_associative[current_repo.language]==undefined){
+          languages_associative[current_repo.language]=1;
+        }else{
+          languages_associative[current_repo.language] +=1;
+        }
+      }
+
+      var count = 0;
+      for(var index in languages_associative) {
+        languages_data.push({
+          value: languages_associative[index],
+          color: colors[count],
+          highlight: lighter_colors[count],
+          label: index
+        });
+        if (count < 10){
+          count += 1;
+        } else{
+          count = 0;
+        };
+      };
+
+      gh_piedata = languages_data;
+
+      if (user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0) {
+        so_piedata = [
+          {
+              value: user.stack_user.bc_bronze,
+              color:"#CD7F32",
+              highlight: "#D7995B",
+              label: "Bronze"
+          },
+          {
+              value: user.stack_user.bc_silver,
+              color: "#C0C0C0 ",
+              highlight: "#DADADA",
+              label: "Silver"
+          },
+          {
+              value: user.stack_user.bc_gold,
+              color: "#FFD700",
+              highlight: "#FFDF33",
+              label: "Gold"
+          }
+        ]
+      }else{
+        so_piedata = [
+          {
+              value: 1,
+              color:"#f1f1f1",
+              highlight: "#D8D8D8",
+              label: "No Badges"
+          }
+        ]
+      }
+
+      if ($('.github-btn').hasClass('active')) {
+        piedata = gh_piedata;
+        pieoptions = {animateScale: true};
+      } else {
+        piedata = so_piedata;
+        if (user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0){
+          pieoptions = {animateScale: true}
+        } else {
+          pieoptions = {animateScale: true, tooltipTemplate: "No Badges"};
+        }
+      }
+
+      if (user.user.id == current_user_id) {
+        ctx5 = $("#td1 .myPie4").get(0).getContext("2d");
+        myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
+        legend(document.getElementById('pie-legend1'), piedata, myDoughnutChart);
+      } else {
+        ctx6 = $("#td2 .myPie4").get(0).getContext("2d");
+        myDoughnutChart = new Chart(ctx6).Doughnut(piedata, pieoptions);
+        legend(document.getElementById('pie-legend2'), piedata, myDoughnutChart);
       }
 
     }
@@ -148,7 +222,9 @@ $(function(){
        // Change 4 graph titles
       $("#td2 .graph2 h3").text("Badges");
 
-      // updategraphs();
+      myDoughnutChart.destroy();
+      update_graphs(user);
+      update_graphs(user2);
     });
     $(".github-btn").on('click', function(){
       if ($(this).hasClass('active')) return;
@@ -187,6 +263,10 @@ $(function(){
       $("#td2 .ap-3 .current_changed").html(change_in(user2.current_rank, "leaderboard_rank", user2));
       // Change 4 graph titles
       $("#td2 .graph2 h3").text("Languages");
+
+
+      update_graphs(user);
+      update_graphs(user2);
     }
     function update_total_score() {
       $("#td1 .total-score-changed").html(change_in(user.user.user_score, "gh_total_score", user))
