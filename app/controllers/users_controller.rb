@@ -21,7 +21,8 @@ class UsersController < ApplicationController
         :github_repos => @repos, 
         :average => Average.first, 
         :newest_stats => @newest_stats,
-        :current_rank => @leaderboard_pos
+        :current_rank => @leaderboard_pos,
+        :stack_badges => @user.stack_user.stack_badges
       }}
     end
   end
@@ -43,7 +44,8 @@ class UsersController < ApplicationController
         github_repos: @repos, 
         average: Average.first, 
         newest_stats: @newest_stats,
-        current_rank: @leaderboard_pos
+        current_rank: @leaderboard_pos,
+        stack_badges: @user.stack_user.stack_badges
       }}
     end
   end

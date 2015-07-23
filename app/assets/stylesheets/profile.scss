@@ -330,8 +330,7 @@
 	
 			ul{
 				margin-left: 0px;
-				margin-bottom:10px;
-				min-height: 160px;
+				margin-bottom:0px;
 				max-height: 160px;
 			  overflow: scroll;
 			  overflow: -moz-scrollbars-vertical;
@@ -585,3 +584,27 @@
 		font-size: 120% !important;
 	}
 }
+
+// Badges //
+.stack-badges{
+	text-align:left;	
+	.stack-badge{
+		width:120px; display:inline;
+		.stack-badge-image-and-text{
+			display: inline-block; 
+			margin-right:20px; 
+			text-align:center;
+			width: 130px;
+			padding: 30px 0px;
+			img{
+				height: 76px !important;
+			}
+			.stack-badge-label{
+				text-align:center;
+				width: 100%;
+				margin-top: 20px;
+			}
+		}
+	}
+}
+
