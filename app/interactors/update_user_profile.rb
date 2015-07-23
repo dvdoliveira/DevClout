@@ -10,7 +10,13 @@ class UpdateUserProfile
 
   def update_display_fields
     if @user.full_name.blank?
-      check_stackoverflow_name_data
+      if @user_so_data
+        check_stackoverflow_name_data
+      elsif @user_twitter_data
+        check_twitter_name_data
+      else
+        @user.update_attribute(:user_full_name_display, @user.user_name)
+      end
     end
 
     if @user.email.blank?
@@ -18,51 +24,51 @@ class UpdateUserProfile
     end
 
     if @user.user_bio.blank?
-      check_stackoverflow_bio_data
+      if @user_so_data
+        check_stackoverflow_bio_data
+      elsif @user_twitter_data
+        check_twitter_bio_data
+      else
+        @user.update_attribute(:user_bio_display, nil)
+      end
     end
 
     if @user.blog.blank?
-      check_twitter_blog_data
+      if @user_so_data
+        check_twitter_blog_data
+      else
+        @user.update_attribute(:user_blog_display, nil)
+      end
     end
 
   end
 
   def check_stackoverflow_name_data
-    if @user_so_data.display_name.blank?
-      check_twitter_name_data
-    else
+    if @user_so_data.display_name.present?
       @user.update_attribute(:user_full_name_display, @user_so_data.display_name)
     end
   end
 
   def check_twitter_name_data
-    if @user_twitter_data.name.blank?
-      @user.update_attribute(:user_full_name_display, @user.user_name)
-    else
+    if @user_twitter_data.name.present?
       @user.update_attribute(:user_full_name_display, @user_twitter_data.user_name)
     end
   end
 
   def check_stackoverflow_bio_data
-    if @user_so_data.about_me.blank?
-      check_twitter_bio_data
-    else
+    if @user_so_data.about_me.present?
       @user.update_attribute(:user_bio_display, @user_so_data.about_me)
     end
   end
 
   def check_twitter_bio_data
-    if @user_twitter_data.description.blank?
-      @user.update_attribute(:user_bio_display, nil)
-    else
+    if @user_twitter_data.description.present?
       @user.update_attribute(:user_bio_display, @user_twitter_data.description)
     end
   end
 
   def check_twitter_blog_data
-    if @user_twitter_data.url.blank?
-      @user.update_attribute(:user_blog_display, nil)
-    else
+    if @user_twitter_data.url.present?
       @user.update_attribute(:user_blog_display, @user_twitter_data.url)
     end
   end
