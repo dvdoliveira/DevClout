@@ -50,6 +50,7 @@ $(function(){
       $(".graph2 h3").text("Languages");
       $(".graph3 h3").text("DUNNO");
       $(".graph4 h3").text("Repositories");
+      $(".stack-badges").remove();
     }
     function update_total_score() {
       $(".total-score-changed").html(change_in(user.user.user_score, "gh_total_score"))
