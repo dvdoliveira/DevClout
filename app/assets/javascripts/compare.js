@@ -5,11 +5,13 @@ $(function(){
     var both_ajax_done = 0;
     var current_user_id = $(".user_id").text()
     
-    var ctx8;
-    var myBarChart;
+    var ctx5, ctx6;
     var piedata, pieoptions;
     var gh_piedata;
     var so_piedata;
+    var myDoughnutChart;
+    var myDoughnutChart2;
+    var some_num = 0;
 
     $.ajax({
       url: '/compare' + window.location.search,
@@ -133,7 +135,7 @@ $(function(){
 
       gh_piedata = languages_data;
 
-      if (user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0) {
+      if (user.stack_user && user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0) {
         so_piedata = [
           {
               value: user.stack_user.bc_bronze,
@@ -168,27 +170,29 @@ $(function(){
       if ($('.github-btn').hasClass('active')) {
         piedata = gh_piedata;
         pieoptions = {animateScale: true};
-        ctx5 = $("#td" + user.user.id + " .myPie4").get(0).getContext("2d");
-        myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
-        legend(document.getElementById('pie-legend' + user.user.id), piedata, myDoughnutChart);
       } else {
         piedata = so_piedata;
-        if (user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0){
+        if (user.stack_user && user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0){
           pieoptions = {animateScale: true}
-          ctx5 = $("#td" + user.user.id + " .myPie4").get(0).getContext("2d");
-          myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
-          legend(document.getElementById('pie-legend' + user.user.id), piedata, myDoughnutChart);
         } else {
           pieoptions = {animateScale: true, tooltipTemplate: "No Badges"};
-          ctx5 = $("#td" + user.user.id + " .myPie4").get(0).getContext("2d");
-          myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
-          legend(document.getElementById('pie-legend' + user.user.id), piedata, myDoughnutChart);
         }
+      }
+
+      if (user.user.id == current_user_id) {
+        ctx5 = $("#td1 .myPie4").get(0).getContext("2d");
+        myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
+        legend(document.getElementById('pie-legend1'), piedata, myDoughnutChart);
+      } else {
+        ctx6 = $("#td2 .myPie4").get(0).getContext("2d");
+        myDoughnutChart2 = new Chart(ctx6).Doughnut(piedata, pieoptions);
+        legend(document.getElementById('pie-legend2'), piedata, myDoughnutChart2);
       }
 
     }
     $(".stackoverflow-btn").on('click', function(){
       if ($(this).hasClass('active')) return;
+      if (!user.stack_user || !user2.stack_user) return;
       $(this).addClass("active");
       $(".github-btn").removeClass("active");
       // Change first stat to reputation
@@ -222,6 +226,7 @@ $(function(){
       $("#td2 .graph2 h3").text("Badges");
 
       myDoughnutChart.destroy();
+      myDoughnutChart2.destroy();
       update_graphs(user);
       update_graphs(user2);
     });
@@ -262,10 +267,14 @@ $(function(){
       $("#td2 .ap-3 .current_changed").html(change_in(user2.current_rank, "leaderboard_rank", user2));
       // Change 4 graph titles
       $("#td2 .graph2 h3").text("Languages");
-
-
+      if (some_num > 0){
+        myDoughnutChart.destroy();
+        myDoughnutChart2.destroy();
+      }
+      console.log(some_num);
       update_graphs(user);
       update_graphs(user2);
+      some_num += 1;
     }
     function update_total_score() {
       $("#td1 .total-score-changed").html(change_in(user.user.user_score, "gh_total_score", user))
