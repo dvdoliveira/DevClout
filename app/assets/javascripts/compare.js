@@ -168,22 +168,23 @@ $(function(){
       if ($('.github-btn').hasClass('active')) {
         piedata = gh_piedata;
         pieoptions = {animateScale: true};
-        ctx5 = $("#td" + user.user.id + " .myPie4").get(0).getContext("2d");
-        myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
-        legend(document.getElementById('pie-legend' + user.user.id), piedata, myDoughnutChart);
       } else {
         piedata = so_piedata;
         if (user.stack_user.bc_bronze + user.stack_user.bc_silver + user.stack_user.bc_gold > 0){
           pieoptions = {animateScale: true}
-          ctx5 = $("#td" + user.user.id + " .myPie4").get(0).getContext("2d");
-          myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
-          legend(document.getElementById('pie-legend' + user.user.id), piedata, myDoughnutChart);
         } else {
           pieoptions = {animateScale: true, tooltipTemplate: "No Badges"};
-          ctx5 = $("#td" + user.user.id + " .myPie4").get(0).getContext("2d");
-          myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
-          legend(document.getElementById('pie-legend' + user.user.id), piedata, myDoughnutChart);
         }
+      }
+
+      if (user.user.id == current_user_id) {
+        ctx5 = $("#td1 .myPie4").get(0).getContext("2d");
+        myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
+        legend(document.getElementById('pie-legend1'), piedata, myDoughnutChart);
+      } else {
+        ctx6 = $("#td2 .myPie4").get(0).getContext("2d");
+        myDoughnutChart = new Chart(ctx6).Doughnut(piedata, pieoptions);
+        legend(document.getElementById('pie-legend2'), piedata, myDoughnutChart);
       }
 
     }
