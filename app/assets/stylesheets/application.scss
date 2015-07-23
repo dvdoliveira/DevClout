@@ -554,4 +554,82 @@ footer{
     }
 }
 
+.pop-up-profile-container{
+    position: relative;
+}
+.pop-up-profile-init{
+    cursor: pointer;
+}
+.pop-up-profile{
+    background: #fff; 
+    width: 200px; 
+    display: block; 
+    position: absolute; 
+    z-index: 1; 
+    left: -105px; 
+    top: 55px; 
+    padding: 30px 10px 30px 10px; 
+    border: 1px solid #ccc;
+    display: none;
+}
+.pop-up-triangle{
+    position: absolute;
+    top: -10px;
+    right: 56px;
+    width: 10px !important;
+    min-width: 20px !important;
+    height: auto !important;
+}
+.pop-up-image{
+    text-align: center;
+
+    img{
+        margin-right: 0px !important; 
+        margin-bottom: 10px !important; 
+        height: 75px !important; 
+        width: 75px !important;
+    }
+}
+.pop-up-name{
+    text-align: center; 
+    padding-bottom:0px
+}
+.pop-up-tier{
+    text-align: center; 
+    margin-bottom:0px;
+}
+.pop-up-follow-btn{
+    text-align: center; 
+    background: #8abf67; 
+    max-width: 94px; 
+    margin: 0 auto; 
+    padding: 7px; 
+    color: white; 
+    border-radius: 20px;
+    display: block;
+    text-decoration: none;
+    &:hover{
+     background: #719c54;
+     text-decoration: none;
+     color: white;
+    }
+}
+.pop-up-unfollow-btn{
+    text-align: center; 
+    background: #E6E6E6; 
+    max-width: 94px; 
+    margin: 0 auto; 
+    padding: 7px; 
+    color: #222; 
+    border-radius: 20px;
+    display: block;
+    text-decoration: none;
+    &:hover{
+     background: #d3d3d3;
+     text-decoration: none;
+     color: #222;
+    }
+}
+
+
 

@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  # get 'averages/create'
-
-  # get 'averages/update'
-
   root 'static_pages#home'
 
   # Static pages routes
@@ -30,15 +26,16 @@ Rails.application.routes.draw do
   get 'profile', to: 'users#profile', as: :profile
   get 'compare', to: 'users#compare', as: :compare
 
-
-  # User Update
-  resources :users, only: [:show, :update]
-
   # User Update and other users profile
   resources :users, only: [:show, :update]
+
+  # Relationships routes to follow and unfollow users
+  resources :relationships, only: [:create, :destroy]
 
   # Routes to deal with followers and following
   get 'following', to: 'users#following', as: :following
   get 'followers', to: 'users#followers', as: :followers
+  get 'follow/:tw_id', to: 'users#follow', as: :follow
+  get 'unfollow/:tw_id', to: 'users#unfollow', as: :unfollow
 
 end

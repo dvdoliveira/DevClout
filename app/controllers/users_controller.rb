@@ -104,6 +104,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow
+    current_user.follow!(User.find(params[:tw_id]))
+  end
+
+  def unfollow
+    current_user.unfollow!(User.find(params[:tw_id]))
+  end
+
   private
 
   def user_params

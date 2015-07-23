@@ -21,7 +21,6 @@
     <%= javascript_include_tag "https://cdn.datatables.net/responsive/1.0.6/js/dataTables.responsive.js" %>
 
     <%= csrf_meta_tags %>
-
   </head>
   <body>
     <% if flash[:notice] %>
@@ -52,7 +51,8 @@
     </nav>
     <% else %>
     <nav class="top-bar" data-topbar role="navigation">
-      <% unless request.fullpath == "/" %>
+      <% if request.fullpath == "/profile" || request.fullpath == "/leaderboard" || request.fullpath.include?('users')
+ %>
         <div class="profile-menu"><%=image_tag(@user.profile_image_url, alt: "profile-image")%></div>
       <% end %>
       <ul class="title-area">
@@ -90,5 +90,9 @@
         </div>
       </div>
     </footer>
+    <script type="text/javascript">
+      var FHChat = {product_id: "7f6b1738a644"};
+      FHChat.properties={};FHChat.set=function(key,data){this.properties[key]=data};!function(){var a,b;return b=document.createElement("script"),a=document.getElementsByTagName("script")[0],b.src="https://chat-client-js.firehoseapp.com/chat-min.js",b.async=!0,a.parentNode.insertBefore(b,a)}();
+    </script>
   </body>
 </html>
