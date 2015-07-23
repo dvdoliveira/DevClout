@@ -96,7 +96,7 @@ class UsersController < ApplicationController
   end
 
   def following
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(tw_id: params[:tw_id])
     @users = @user.followed_users.uniq
     respond_to do |format|
       format.html
