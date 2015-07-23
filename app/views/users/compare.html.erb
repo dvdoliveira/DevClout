@@ -1,1 +1,26 @@
-<h1>Test</h1>
+<section class="profile <%= controller_name%> <%= action_name %>">
+  <div class="row centered-text">
+    <div class="large-3 columns offset-profile-menu">
+    <%@user = @current_user%>
+      <%= render partial: 'shared/profile_sidebar', locals: { :user => @user, :github_user => @user.github_user, :stack_user => @user.stack_user, :avg_user_score => @user.avg_user_score  } %>
+    </div>
+    <div class="large-9 columns">
+      <div class="analytics-pane">
+        <div class="analytic-view-options">
+          <span class="github-btn active">GitHub</span>
+          <span class="stackoverflow-btn">StackOverflow</span>
+        </div>
+        <table style="width:100%" rules="cols">
+          <tr class="user-table">
+          
+          <%user = @current_user%>
+            <td id="td<%=user.id%>">
+            <%= render partial: 'shared/compare_analytics', locals: { :user => user, :github_user => user.github_user, :stack_user => user.stack_user, :avg_user_score => user.avg_user_score  } %>
+            </td>
+
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
