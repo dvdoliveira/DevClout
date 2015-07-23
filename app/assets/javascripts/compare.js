@@ -192,6 +192,7 @@ $(function(){
     }
     $(".stackoverflow-btn").on('click', function(){
       if ($(this).hasClass('active')) return;
+      if (!user.stack_user || !user2.stack_user) return;
       $(this).addClass("active");
       $(".github-btn").removeClass("active");
       // Change first stat to reputation
