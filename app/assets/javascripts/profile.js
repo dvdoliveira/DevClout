@@ -470,6 +470,9 @@ $(function(){
         $(".graph2 h3").text("Badges");
         $(".graph4 h3").text("Badge List");
 
+        //badges
+        console.log('wdf');
+
         updategraphs();
       }); 
     }else{
