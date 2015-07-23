@@ -357,7 +357,7 @@ $(function(){
 
       ctx5 = $("#myPie4").get(0).getContext("2d");
       myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
-      legend(document.getElementById('pie-legend'), piedata, myDoughnutChart);
+      // legend(document.getElementById('pie-legend'), piedata, myDoughnutChart);
 
 
       if ($('.github-btn').hasClass('active')) {
