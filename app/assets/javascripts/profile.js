@@ -50,7 +50,7 @@ $(function(){
       $(".graph2 h3").text("Languages");
       $(".graph3 h3").text("DUNNO");
       $(".graph4 h3").text("Repositories");
-      $(".stack-badges").remove();
+      $(".stack-badges, .no-badges-message").remove();
     }
     function update_total_score() {
       $(".total-score-changed").html(change_in(user.user.user_score, "gh_total_score"))
@@ -357,7 +357,7 @@ $(function(){
 
       ctx5 = $("#myPie4").get(0).getContext("2d");
       myDoughnutChart = new Chart(ctx5).Doughnut(piedata, pieoptions);
-      // legend(document.getElementById('pie-legend'), piedata, myDoughnutChart);
+      legend(document.getElementById('pie-legend'), piedata, myDoughnutChart);
 
 
       if ($('.github-btn').hasClass('active')) {
@@ -471,23 +471,20 @@ $(function(){
         $(".graph4 h3").text("Badge List");
 
         //badges
-        userz = user;
-        if (user.stack_badges){
-          if (user.stack_badges.length > 0){
-            $('.graph4').append('<div class="stack-badges">');
-            user.stack_badges.forEach(function(value, index){
-            $('.stack-badges').append('<div class="stack-badge">\
-                <div class="stack-badge-image-and-text">\
-                <img src="../images/helpers/badges/'+value.badge_rank+'.svg">\
-                  <div class="stack-badge-label">\
-                  <span>'+value.badge_name+'</span>\
-                </div>\
+        if (user.stack_badges.length > 0){
+          $('.graph4').append('<div class="stack-badges">');
+          user.stack_badges.forEach(function(value, index){
+          $('.stack-badges').append('<div class="stack-badge">\
+              <div class="stack-badge-image-and-text">\
+              <img src="../images/helpers/badges/'+value.badge_rank+'.svg">\
+                <div class="stack-badge-label">\
+                <span>'+value.badge_name+'</span>\
               </div>\
-            </div>');
-            });
-          }
+            </div>\
+          </div>');
+          });
         }else{
-          $('.graph4').append('<h3 class="no-friends-message" style="margin-top: 55px;">No Badges</h3>');
+          $('.graph4').append('<h3 class="no-badges-message" style="margin-top: 55px;">No Badges</h3>');
         }
 
         updategraphs();
