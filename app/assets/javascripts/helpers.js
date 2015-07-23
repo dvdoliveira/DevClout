@@ -47,6 +47,7 @@ $(function(){
 
 	    $('.offset-profile-menu, .profile-menu').mouseenter(function() {
 				$('body').unbind('click');
+			  $('.offset-profile-menu, .profile-menu').unbind('mouseenter');
 			});
 	});
 
