@@ -10,7 +10,7 @@
               </div>
             </div>
             <div class="large-8 medium-8 small-8 columns profile-information-part">
-              <h3><%=@user.full_name%></h3>
+              <h3 class="user-full-name"><%=@user.full_name%></h3>
               <h4><%=@user.user_level%></h4>
               <% if current_user.id == @user.id %>
                 <a class="edit-profile" href="#" data-reveal-id="profile-update"><i class="fa fa-pencil fa-fw"></i>&nbsp; Edit Profile</a>

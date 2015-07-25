@@ -54,11 +54,11 @@ $(function(){
             <div class="row centered-text"> \
               <div class="medium-12 large-12 columns"> \
                 <div class="analytic-panel"> \
-                  <h3>'+ user.user.full_name +'</h3> \
+                  <h3 class="user-full-name">'+ user.user.full_name +'</h3> \
                   <div class="compare-image-container"> \
                     <img src="' + user.user.profile_image_url + '"> \
                   </div> \
-                  <h4>' + user.user.user_level + '</h4> \
+                  <h4 class="compare-role-name">' + user.user.user_level + '</h4> \
                 </div> \
               </div> \
               <div class="medium-12 large-12 columns"> \
