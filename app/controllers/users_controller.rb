@@ -11,17 +11,23 @@ class UsersController < ApplicationController
     @repos = GithubRepo.where(github_user_id: @user.github_user.gh_id)
     @newest_stats = @user.statistics.order(created_at: :desc).limit(20)
     @leaderboard_pos = @users.map(&:id).index(@user.id) + 1
+    if @user.stack_user
+      @stack_badges = @user.stack_user.stack_badges
+    else
+      @stack_badges = Object.new
+    end
     respond_to do |format|
       format.html
       format.json {render json: {
-        :user => @user, 
-        :github_user => @user.github_user, 
-        :stack_user => @user.stack_user, 
-        :avg_user_score => @average_user_score, 
-        :github_repos => @repos, 
-        :average => Average.first, 
-        :newest_stats => @newest_stats,
-        :current_rank => @leaderboard_pos
+        user: @user, 
+        github_user: @user.github_user, 
+        stack_user: @user.stack_user, 
+        avg_user_score: @average_user_score, 
+        github_repos: @repos, 
+        average: Average.first, 
+        newest_stats: @newest_stats,
+        current_rank: @leaderboard_pos,
+        stack_badges: @stack_badges
       }}
     end
   end
@@ -33,6 +39,11 @@ class UsersController < ApplicationController
     @repos = GithubRepo.where(github_user_id: @user.github_user.gh_id)
     @newest_stats = @user.statistics.order(created_at: :desc).limit(20)
     @leaderboard_pos = @users.map(&:id).index(@user.id) + 1
+    if @user.stack_user
+      @stack_badges = @user.stack_user.stack_badges
+    else
+      @stack_badges = Object.new
+    end
     respond_to do |format|
       format.html
       format.json {render json: {
@@ -43,7 +54,8 @@ class UsersController < ApplicationController
         github_repos: @repos, 
         average: Average.first, 
         newest_stats: @newest_stats,
-        current_rank: @leaderboard_pos
+        current_rank: @leaderboard_pos,
+        stack_badges: @stack_badges
       }}
     end
   end

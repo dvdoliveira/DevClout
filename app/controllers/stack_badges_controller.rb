@@ -1,0 +1,2 @@
+class StackBadgesController < ApplicationController
+end

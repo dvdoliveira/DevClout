@@ -1,7 +1,6 @@
 $(function(){
 // Function called in AJAX request below
   initialize = function(user) {
-    console.log(user);
     var stack_user = user.stack_user;
     var github_user = user.github_user;
     var average = user.average;
@@ -51,6 +50,7 @@ $(function(){
       $(".graph2 h3").text("Languages");
       $(".graph3 h3").text("DUNNO");
       $(".graph4 h3").text("Repositories");
+      $(".stack-badges, .no-badges-message").remove();
     }
     function update_total_score() {
       $(".total-score-changed").html(change_in(user.user.user_score, "gh_total_score"))
@@ -82,7 +82,7 @@ $(function(){
     var repos_watchers = [];
     var repos_stars = [];
     var languages_associative = {};
-    for (i = 0;i < 5; i++) {
+    for (i = 0;i < user.github_repos.length; i++) {
       var current_repo = user.github_repos[i];
       repos_names.push(current_repo.name);
       total_watchers += current_repo.watchers_count
@@ -471,7 +471,21 @@ $(function(){
         $(".graph4 h3").text("Badge List");
 
         //badges
-        console.log('wdf');
+        if (user.stack_badges.length > 0){
+          $('.graph4').append('<div class="stack-badges">');
+          user.stack_badges.forEach(function(value, index){
+          $('.stack-badges').append('<div class="stack-badge">\
+              <div class="stack-badge-image-and-text">\
+              <img src="../images/helpers/badges/'+value.badge_rank+'.svg">\
+                <div class="stack-badge-label">\
+                <span>'+value.badge_name+'</span>\
+              </div>\
+            </div>\
+          </div>');
+          });
+        }else{
+          $('.graph4').append('<h3 class="no-badges-message" style="margin-top: 55px;">No Badges</h3>');
+        }
 
         updategraphs();
       }); 

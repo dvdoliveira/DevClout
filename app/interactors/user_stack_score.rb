@@ -75,6 +75,7 @@ class UserStackScore
     reputation_score(@reputation_value)
     user_previous_score = @user.user_score
     @user.update_attribute(:user_score,@total_score+user_previous_score)
+    update_user_level(@user)
 
     Statistic.create(
       user_id: @user.id,
@@ -101,7 +102,21 @@ class UserStackScore
     )
 
   end
-
+  
+  def update_user_level(user)
+    case user.user_score
+    when 1..20
+      @user.update user_level: "Apprentice"
+    when 21..40
+      @user.update user_level: "Enthusiast"
+    when 41..70
+      @user.update user_level: "Creator"
+    when 71..90
+      @user.update user_level: "Collaborator"
+    else
+      @user.update user_level: "Guru"
+    end
+  end
 
 # context.value  = context.total_score
 end

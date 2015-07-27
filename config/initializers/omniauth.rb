@@ -12,7 +12,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :github, 
     Rails.application.secrets.omniauth_github_key, 
     Rails.application.secrets.omniauth_github_secret, 
-    scope: "user,repo"
+    scope: "user,public_repo"
   provider :stackexchange, 
     Rails.application.secrets.omniauth_stackexchange_client_id, 
     Rails.application.secrets.omniauth_stackexchange_client_secret, 
