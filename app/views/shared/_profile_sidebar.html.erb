@@ -10,10 +10,12 @@
               </div>
             </div>
             <div class="large-8 medium-8 small-8 columns profile-information-part">
-              <h3><%=@user.full_name%></h3>
+              <h3 class="user-full-name"><%=@user.full_name%></h3>
               <h4><%=@user.user_level%></h4>
               <% if current_user.id == @user.id %>
                 <a class="edit-profile" href="#" data-reveal-id="profile-update"><i class="fa fa-pencil fa-fw"></i>&nbsp; Edit Profile</a>
+              <% else %>
+                <a class="edit-profile" href="/compare?id=<%=@user.id%>">&nbsp; Compare</a>
               <% end %>
             </div>
           </div>
@@ -48,18 +50,18 @@
               </div>
               <div class="large-6 columns">
                 <label>Blog Url</label>
-                <%= f.text_field :blog, placeholder: "Blog Url", class: 'update-blog-url', type:'url', required: true %>
+                <%= f.text_field :blog, placeholder: "Blog Url", class: 'update-blog-url', type:'url' %>
               </div>
             </div>
             <div class="row">
               <div class="large-12 columns">
                 <label class="bio-label">Bio Description (0/140)</label>
-                <%= f.text_area(:user_bio, placeholder: "Profile Photo", size: '50x10', :class => "update-bio", maxlength: 140)%>
-               <%= f.submit :value => "Make Changes", class: 'profile-update-btn' %>
+                <%= f.text_area(:user_bio, placeholder: "Write something nice about you", size: '50x10', :class => "update-bio", maxlength: 140)%>
+               <%= f.submit :value => "Save Changes", class: 'profile-update-btn' %>
               </div>
             </div>
           <% end %>
-          <a class="close-reveal-modal" aria-label="Close">X</a>
+          <a class="close-reveal-modal" aria-label="Close">&times;</a>
         </div>
       <!-- #/END OF PROFILE UPDATE POP UP -->
     <% end %>
@@ -107,14 +109,14 @@
                 <table>
                   <tr>
                     <td><img class="stack-overflow-icon" src="../images/icons/stack-overflow-icon.svg" /></td>
-                    <td class="link"><a class="connect-link" href="/stackoverflow">Connect to Stack&nbsp;Overflow</a></td>
+                    <td class="link"><a class="connect-link" href="<%= root_url %>stackoverflow">Connect to Stack&nbsp;Overflow</a></td>
                   </tr>
                 </table>
               </td>
               <td width="30%"></td>
             </tr>
           </table>
-          <a class="connect-btn" href="/stackoverflow">+</a>
+          <a class="connect-btn" href="<%= root_url %>stackoverflow">+</a>
       </div>
     <% end %>
 
@@ -126,14 +128,14 @@
               <table>
                 <tr>
                   <td><img src="../images/icons/twitter-icon.svg" width="50" height="50" /></td>
-                  <td class="link"><a class="connect-link" href="/twitter">Connect to Twitter</a></td>
+                  <td class="link"><a class="connect-link" href="<%= root_url %>twitter">Connect to Twitter</a></td>
                 </tr>
               </table>
             </td>
             <td width="30%"></td>
           </tr>
         </table>
-        <a class="connect-btn" href="/twitter">+</a>
+        <a class="connect-btn" href="<%= root_url %>twitter">+</a>
       </div>
     <% end %>
   <% end %>
