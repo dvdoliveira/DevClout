@@ -9,7 +9,7 @@ s = Rufus::Scheduler.singleton
 
 # s.every '1440m' do
 #   GithubUser.find_each do |user|
-#     response = UpdateGithubSchedule.call({user: user})
+#     response = UpdateGthubSchedule.call({user: user})
 #     user_score = UserGithubScore.call({user: user})
 #
 #     gh_user_account = User.find_by(id: user.id)
@@ -28,4 +28,4 @@ s = Rufus::Scheduler.singleton
 
 
 
-end
+# end
