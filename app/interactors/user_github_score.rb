@@ -168,12 +168,6 @@ end
     Statistic.create(
       user_id: user.id,
       score: @total_stars_count.to_f,
-      score_type: "leaderboard_rank"
-    )
-
-    Statistic.create(
-      user_id: user.id,
-      score: @total_stars_count.to_f,
       score_type: "gh_stars"
     )
     Statistic.create(
