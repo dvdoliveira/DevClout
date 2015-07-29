@@ -1,1 +1,4 @@
 DevClout provides a unique score to evaluate your developer skills and influence on Github and StackOverflow. You can compare your score with friends, know your ranking among them, quickly find their strengths and find areas you can improve to become a better developer.
+
+
+{<img src="https://badges.gitter.im/Join%20Chat.svg" alt="Join the chat at https://gitter.im/dvdoliveira/DevStack">}[https://gitter.im/dvdoliveira/DevStack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge]
