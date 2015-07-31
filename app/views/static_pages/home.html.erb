@@ -1,3 +1,8 @@
+<% if current_user %>
+<script type="text/javascript">
+  window.location.href="/profile" 
+</script>
+<%end%>
 <% provide(:title, "Home") %>
 <div class="homepage-hero-module <%= controller_name%> <%= action_name %>">
         <div class="video-container">
