@@ -1,5 +1,4 @@
-DevClout
-===============
+= DevClout
 
 DevClout provides a unique score to evaluate the skills and influence of developers on Github and StackOverflow. The [DevClout] [1] project was created as a final project to Lighthouse Labs's Web Development Bootcamp. 
 
@@ -9,11 +8,11 @@ With this tool developers can:
 - know their rankings among them 
 - see where they stand on the leaderboard
 
-## Development
+== Development
 
 This project was created using the following tools:
 
-- Back-End
+- *Back-End*
   * Ruby 2.2.2
   * Ruby on Rails 4.2.3
   * PostgreSQL 9.0.~ 
@@ -24,22 +23,22 @@ This project was created using the following tools:
       * HTTParty
       * Rails Interactor
 
-- Front-End
+- *Front-End*
   * Javascript
   * jQuery
   * Chart.js
   * Foundation CSS
   * Video from [Coverr] [2]
 
-- Public APIs
+- *Public* *APIs*
   * GitHub
   * StackOverflow
   * Twitter
 
-- Hosting
+- *Hosting*
   * Heroku
 
-## Live Demo
+== Live Demo
 
 The live demo of this project can be found at the following address: 
 
