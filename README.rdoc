@@ -1,1 +1,50 @@
-DevClout provides a unique score to evaluate your developer skills and influence on Github and StackOverflow. You can compare your score with friends, know your ranking among them, quickly find their strengths and find areas you can improve to become a better developer.
+DevClout
+===============
+
+DevClout provides a unique score to evaluate the skills and influence of developers on Github and StackOverflow. The [DevClout] [1] project was created as a final project to Lighthouse Labs's Web Development Bootcamp. 
+
+With this tool developers can: 
+
+- compare their score with friends
+- know their rankings among them 
+- see where they stand on the leaderboard
+
+## Development
+
+This project was created using the following tools:
+
+- Back-End
+  * Ruby 2.2.2
+  * Ruby on Rails 4.2.3
+  * PostgreSQL 9.0.~ 
+  - GEMs
+      * Omniauth
+      * Rufus-scheduler
+      * Octokit
+      * HTTParty
+      * Rails Interactor
+
+- Front-End
+  * Javascript
+  * jQuery
+  * Chart.js
+  * Foundation CSS
+  * Video from [Coverr] [2]
+
+- Public APIs
+  * GitHub
+  * StackOverflow
+  * Twitter
+
+- Hosting
+  * Heroku
+
+## Live Demo
+
+The live demo of this project can be found at the following address: 
+
+https://www.devclout.com/
+
+
+[1]: http://www.devclout.com
+[2]: http://coverr.co
